@@ -1,5 +1,13 @@
+html {
+  position: relative;
+}
+
 body {
-  padding-top: 60px;
+  margin-bottom: 60px;
+}
+
+body > .container {
+  padding: 60px 15px 0
 }
 
 .footer {
@@ -16,4 +24,12 @@ body {
   margin: 9px 0;
   overflow: hidden;
   background-color: #e5e5e5;
+}
+
+ul.header > li.list-group-item > a {
+  margin-left: 20px;
+}
+
+ul.header > li.list-group-item > a > i.fa::before{
+  padding-right: 5px;
 }

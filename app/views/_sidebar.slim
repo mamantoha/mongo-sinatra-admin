@@ -1,15 +1,16 @@
-div class="well sidebar-nav"
-  ul class="nav nav-list"
+div class="well"
+  ul class="list-group"
     - @db.databases.each do |db|
-      li class="nav-header" role="buton" data-toggle="collapse" href="#toggle_#{db}" aria-expanded="false" aria-control="toggle_#{db}"
+      li class="list-group-item" role="button" data-toggle="collapse" href="#toggle_#{db}" aria-expanded="false" aria-control="toggle_#{db}"
         = db
         i class="fa fa-chevron-down pull-right"
-      li
+      li class="list-group-item"
         a href="/db/#{db}"
-          i class="fa fa-folder-open" View Database
-      ul class="collapse navbav-list" id="toggle_#{db}"
+          i class="fa fa-folder-open"
+            | View Database
+      ul class="collapse list-group header" id="toggle_#{db}"
         - @db.collections[db].each do |collection|
-          li
+          li class="list-group-item"
             a href="/db/#{db}/#{collection}"
               i class="fa fa-list-alt"
                 = collection
