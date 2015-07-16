@@ -17,6 +17,11 @@ module MongoAdmin
         @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == [username, password]
       end
 
+      def current_page
+        page = params[:page] || 1
+        [page.to_i, 1].max
+      end
+
     end
   end
 end

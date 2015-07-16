@@ -14,6 +14,18 @@ ol class="breadcrumb"
 div.page-header
   h1 Viewing Collection: #{@collection_name}
 
+nav
+  ul class="pagination"
+    li class="#{current_page < 2 ? 'disabled' : ''}"
+      a href="/db/#{@db_name}/#{@collection_name}?page=#{current_page - 1}" aria-label="Previous"
+        span aria-hidden="true" &laquo;
+    - @pages.times do |page|
+      li class="#{current_page == page + 1 ? 'disabled' : ''}"
+        a href="/db/#{@db_name}/#{@collection_name}?page=#{page + 1}" = page + 1
+    li class="#{current_page > @pages - 1 ? 'disabled' : ''}"
+      a href="/db/#{@db_name}/#{@collection_name}?page=#{current_page + 1}" aria-label="Next"
+        span aria-hidden="true" &raquo;
+
 - @documents.each_with_index do |document, index|
   div.row
     div.col-md-11
