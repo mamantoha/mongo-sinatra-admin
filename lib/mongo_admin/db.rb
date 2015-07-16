@@ -35,7 +35,6 @@ module MongoAdmin
 
     # update database list
     def update_databases!
-      puts "update_databases!"
       databases = []
 
       @client.list_databases.each do |database|
@@ -52,8 +51,6 @@ module MongoAdmin
 
     # update the collection list
     def update_collections!(db_name)
-      puts "update_collections!"
-
       host = @config.mongodb.host || 'localhost'
       port = @config.mongodb.port || 27017
 

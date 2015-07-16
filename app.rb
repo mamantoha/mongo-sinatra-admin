@@ -11,7 +11,7 @@ require_relative 'lib/mongo_admin/db'
 
 module MongoAdmin
   class App < Sinatra::Base
-    # Mongo::Logger.logger.level = Logger::WARN
+    Mongo::Logger.logger.level = Logger::WARN
 
     configure do
       set :logging, true
