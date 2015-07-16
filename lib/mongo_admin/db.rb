@@ -13,7 +13,7 @@ module MongoAdmin
       @databases = []
       @collections = {}
 
-      @admin_db = @client = connect!
+      @admin_db = @client = connect
 
       update_databases!
 
@@ -22,16 +22,16 @@ module MongoAdmin
       end
     end
 
-    private
-
-    def connect!
+    def connect(database = 'admin')
       host = @config.mongodb.host || 'localhost'
       port = @config.mongodb.port || 27017
 
-      client = Mongo::Client.new("mongodb://#{host}:#{port}") # databse 'admin' is default
+      client = Mongo::Client.new("mongodb://#{host}:#{port}", database: database)
 
       return client
     end
+
+    private
 
     # update database list
     def update_databases!

@@ -1,6 +1,109 @@
 ol class="breadcrumb"
-  li class="active"
-    a href="#"  Home
+  li class="active" Home
 div.page-header
   h1 Mongo Sinatra Admin
 h2 Server Status
+table class="table table-bordered table-striped table-hover"
+  tr
+    td class="col-md-2"
+      strong Hostname
+    td class="col-md-3"
+      = @info['host']
+    td class="col-md-2"
+      strong MongoDB Version
+    td class="col-md-3"
+      = @info['version']
+  tr
+    td class="col-md-2"
+      strong Uptime
+    td class="col-md-3"
+      = @info['uptime']
+    td class="col-md-2"
+      strong Sever Time
+    td class="col-md-3"
+      = @info['localTime']
+
+  tr
+    td colspan="4" &nbsp;
+
+  tr
+    td class="col-md-2"
+      strong Current Connections
+    td class="col-md-3"
+      = @info['connections']['current']
+    td class="col-md-2"
+      strong Available Connections
+    td class="col-md-3"
+      = @info['connections']['available']
+  tr
+    td class="col-md-2"
+      strong Active Clients
+    td class="col-md-3"
+      = @info['globalLock']['activeClients']['total']
+    td class="col-md-2"
+      strong Queued Operations
+    td class="col-md-3"
+      = @info['globalLock']['currentQueue']['total']
+  tr
+    td class="col-md-2"
+      strong Clients Reading
+    td class="col-md-3"
+      = @info['globalLock']['activeClients']['readers']
+    td class="col-md-2"
+      strong Clients Writing
+    td class="col-md-3"
+      = @info['globalLock']['activeClients']['writers']
+  tr
+    td class="col-md-2"
+      strong Read Lock Queue
+    td class="col-md-3"
+      = @info['globalLock']['currentQueue']['readers']
+    td class="col-md-2"
+      strong Write Lock Queue
+    td class="col-md-3"
+      = @info['globalLock']['currentQueue']['writers']
+
+  tr
+    td colspan="4" &nbsp;
+
+  tr
+    td class="col-md-2"
+      strong Disk Flushes
+    td class="col-md-3"
+      = @info['backgroundFlushing']['flushes']
+    td class="col-md-2"
+      strong Last Flush
+    td class="col-md-3"
+      = @info['backgroundFlushing']['last_finished']
+  tr
+    td class="col-md-2"
+      strong Time Spent Flushing
+    td class="col-md-3"
+      = @info['backgroundFlushing']['total_ms']
+    td class="col-md-2"
+      strong Average Flush Time
+    td class="col-md-3"
+      = @info['backgroundFlushing']['average_ms']
+
+  tr
+    td colspan="4" &nbsp;
+
+  tr
+    td class="col-md-2"
+      strong Total Inserts
+    td class="col-md-3"
+      = @info['opcounters']['insert']
+    td class="col-md-2"
+      strong Total Queries
+    td class="col-md-3"
+      = @info['opcounters']['query']
+  tr
+    td class="col-md-2"
+      strong Total Updates
+    td class="col-md-3"
+      = @info['opcounters']['update']
+    td class="col-md-2"
+      strong Total Deletes
+    td class="col-md-3"
+      = @info['opcounters']['delete']
+

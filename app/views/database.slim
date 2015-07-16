@@ -1,1 +1,45 @@
-h1 #database
+ol class="breadcrumb"
+  li
+    a href="/" Home
+  li class="active" = @db_name
+
+div.page-header
+  h1 Viewing Database: #{@db_name}
+
+div.stats
+  h2 Database Stats
+  table class="table table-bordered table-striped"
+    tr
+      td class="col-md-2"
+        strong Collections (including system.namespaces)
+      td class="col-md-3" = @stats['collections']
+    tr
+      td
+        strong Data Size
+      td= @stats['dataSize']
+    tr
+      td
+        strong Storage Size
+      td= @stats['storageSize']
+    tr
+      td
+        strong File Size (on disk)
+      td= @stats['fileSize']
+
+h2 Collections
+table class="table table-bordered table-striped table-condensed"
+  - @collections.each do |collection|
+    tr
+      td class="col-md-2"
+        a href="/db/#{@db_name}/#{collection}" class="btn btn-success btn-block"
+          i class="fa fa-list-alt" View
+      td class="col-md-2"
+        a href="/db/#{@db_name}/export/#{collection}" class="btn btn-warning btn-block" disabled="disabled"
+          i class="fa fa-download" Export
+      td
+        h4
+          a href="/db/#{@db_name}/#{collection}" = collection
+      td class="col-md-2"
+        a href="/db/#{@db_name}/#{collection}" class="btn btn-danger btn-block" disabled="disabled"
+          i class="fa fa-download" Delete
+
