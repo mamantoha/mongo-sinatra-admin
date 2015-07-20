@@ -32,6 +32,20 @@ module MongoAdmin
       redirect "/db/#{db_name}/#{collection_name}/#{document_id}"
     end
 
+    delete '/db/:database/:collection/:id' do
+      db_name         = params['database']
+      collection_name = params['collection']
+      document_id     = params['id']
+      document        = params['document']
+
+      database = @db.connect(db_name)
+      collection = database[collection_name]
+
+      document = collection.find({_id: document_id}).delete_one
+
+      redirect "/db/#{db_name}/#{collection_name}"
+    end
+
   end
 end
 

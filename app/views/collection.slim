@@ -45,11 +45,13 @@ nav
 
     div.col-md-1
       div
-        a class="btn btn-primary btn-sm" href="/db/#{@db_name}/#{@collection_name}/#{document["_id"]}"
+        a class="btn btn-primary btn-sm" href="/db/#{@db_name}/#{@collection_name}/#{document['_id']}"
           i class="fa fa-edit"
       div
-        button class="btn btn-danger btn-sm" disabled="disabled"
-          i class="fa fa-remove"
+        form method="POST" action="/db/#{@db_name}/#{@collection_name}/#{document['_id']}"
+          input type="hidden" name="_method" value="delete"
+          button type="submit" class="btn btn-danger btn-sm"
+            i class="fa fa-remove"
 
 javascript:
   $('.pagination .disabled a, .pagination .active a').on('click', function(e) {
