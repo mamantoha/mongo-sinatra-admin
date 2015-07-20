@@ -29,6 +29,8 @@ module MongoAdmin
 
       document = collection.find({_id: document_id}).replace_one(document)
 
+      flash[:info] = 'Document successfully updated.'
+
       redirect "/db/#{db_name}/#{collection_name}/#{document_id}"
     end
 
@@ -42,6 +44,8 @@ module MongoAdmin
       collection = database[collection_name]
 
       document = collection.find({_id: document_id}).delete_one
+
+      flash[:info] = 'Document successfully removed.'
 
       redirect "/db/#{db_name}/#{collection_name}"
     end

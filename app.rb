@@ -2,6 +2,7 @@ require 'json'
 require 'logger'
 
 require 'sinatra/base'
+require 'sinatra/flash'
 require 'slim'
 require 'mongo'
 require 'hashie/mash'
@@ -27,8 +28,14 @@ module MongoAdmin
 
       @db = DB.new(settings.config_file)
     end
+
+    enable :sessions
+
+    register Sinatra::Flash
   end
 end
+
+require_relative 'lib/sinatra-flash'
 
 require_relative 'app/helpers'
 

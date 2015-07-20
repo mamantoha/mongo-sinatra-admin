@@ -32,6 +32,9 @@ html
               a href="#" About
 
     div.container
+      - if flash
+        == styled_flash
+
       div.row
         div.col-md-3
           == slim :_sidebar
