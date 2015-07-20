@@ -19,6 +19,7 @@ module MongoAdmin
       set :public_dir, 'public'
       set :root, (settings.root || File.dirname(__FILE__))
       set :config_file, JSON.load(File.open('config.json'))
+      set :method_override, true
     end
 
     before do

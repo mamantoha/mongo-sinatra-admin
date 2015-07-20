@@ -1,1 +1,35 @@
-h1 #document
+script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/codemirror.min.js"
+link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/codemirror.min.css"
+script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/mode/javascript/javascript.min.js"
+link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/theme/rubyblue.css"
+link rel="stylesheet" href="/codemirror_overwrite.css"
+
+ol class="breadcrumb"
+  li
+    a href="/" Home
+  li
+    a href="/db/#{@db_name}" = @db_name
+  li
+    a href="/db/#{@db_name}/#{@collection_name}" = @collection_name
+  li class="active" = @document_id
+
+div.page-header
+  h1 Viewing Document: #{@document_id}
+
+div
+  form method="POST" action="/db/#{@db_name}/#{@collection_name}/#{@document_id}"
+    input type="hidden" name="_method" value="put"
+    button type="submit" class="btn btn-success btn-large"
+      i class="fa fa-pencil"
+        | Save
+    textarea id="document" name="document" = JSON.pretty_generate(@document)
+
+  javascript:
+    var document = CodeMirror.fromTextArea(document.getElementById('document'), {
+      mode: { name: "javascript", json: true },
+      readOnly: false,
+      indentUnit: 2,
+      theme: "rubyblue",
+      lineNumbers: true
+    });
+

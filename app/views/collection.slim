@@ -42,11 +42,17 @@ nav
           lineNumbers: true
         });
 
-        $('.pagination .disabled a, .pagination .active a').on('click', function(e) {
-          e.preventDefault();
-        });
 
     div.col-md-1
-      button class="btn btn-danger btn-sm" disabled="disabled"
-        i class="fa fa-remove"
+      div
+        a class="btn btn-primary btn-sm" href="/db/#{@db_name}/#{@collection_name}/#{document["_id"]}"
+          i class="fa fa-edit"
+      div
+        button class="btn btn-danger btn-sm" disabled="disabled"
+          i class="fa fa-remove"
+
+javascript:
+  $('.pagination .disabled a, .pagination .active a').on('click', function(e) {
+    e.preventDefault();
+  });
 
