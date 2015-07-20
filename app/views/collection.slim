@@ -41,6 +41,11 @@ nav
           theme: "rubyblue",
           lineNumbers: true
         });
+
+        $('.pagination .disabled a, .pagination .active a').on('click', function(e) {
+          e.preventDefault();
+        });
+
     div.col-md-1
       button class="btn btn-danger btn-sm" disabled="disabled"
         i class="fa fa-remove"
