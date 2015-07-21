@@ -4,6 +4,9 @@ script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/mode/javascr
 link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/theme/rubyblue.css"
 link rel="stylesheet" href="/codemirror_overwrite.css"
 
+
+== slim :'collection/_confirm_deletion_document_modal'
+
 ol class="breadcrumb"
   li
     a href="/" Home
@@ -90,7 +93,7 @@ nav
       div
         form method="POST" action="/db/#{@db_name}/#{@collection_name}/#{document['_id']}"
           input type="hidden" name="_method" value="delete"
-          button type="submit" class="btn btn-danger btn-sm"
+          button type="submit" class="btn btn-danger btn-sm deleteDocumentButton" data-toggle="modal" data-target="confirmDeletionDocument" document-id="#{document['_id']}"
             i class="fa fa-remove"
 
 javascript:

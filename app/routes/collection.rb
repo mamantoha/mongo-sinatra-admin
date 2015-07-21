@@ -17,7 +17,7 @@ module MongoAdmin
       # Get all documents in a collection
       @documents = collection.find.skip(per_page * (current_page - 1)).limit(per_page)
 
-      slim :collection
+      slim :'collection/show'
     end
 
   end
