@@ -6,6 +6,12 @@ ol class="breadcrumb"
 div.page-header
   h1 Viewing Database: #{@db_name}
 
+form method="POST" action="/db/#{@db_name}"
+  input type="hidden" name="_method" value="delete"
+  button type="submit" class="btn btn-danger btn-lg"
+    i class="fa fa-remove"
+    | Drop Database
+
 div.stats
   h2 Database Stats
   table class="table table-bordered table-striped"

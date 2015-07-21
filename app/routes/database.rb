@@ -12,6 +12,16 @@ module MongoAdmin
       slim :database
     end
 
+    delete '/db/:database' do
+      db_name = params['database']
+
+      client = @db.connect(db_name)
+      client.database.drop
+
+      redirect '/'
+    end
+
+
   end
 end
 
