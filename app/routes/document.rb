@@ -16,8 +16,8 @@ module MongoAdmin
       # convert id string to mongodb object id
       @document_id = BSON::ObjectId.from_string(params[:id])
 
-      database = @db.connect(@db_name)
-      collection = database[@collection_name]
+      client = @db.connect(@db_name)
+      collection = client[@collection_name]
 
       @document = collection.find({_id: @document_id}).first # BSON::Document
 
@@ -38,8 +38,8 @@ module MongoAdmin
       # TODO: document is not valid
       document = JSON.load(document)
 
-      database = @db.connect(db_name)
-      collection = database[collection_name]
+      client = @db.connect(db_name)
+      collection = client[collection_name]
 
       result = collection.insert_one(document)
       result.n # => returns 1, because 1 document was inserted
@@ -64,8 +64,8 @@ module MongoAdmin
       # IMPORTANT! You can not change Object ID
       document.delete('_id')
 
-      database = @db.connect(db_name)
-      collection = database[collection_name]
+      client = @db.connect(db_name)
+      collection = client[collection_name]
 
       document = collection.find({_id: document_id}).replace_one(document)
 
@@ -80,8 +80,8 @@ module MongoAdmin
       collection_name = params['collection']
       document        = params['document']
 
-      database = @db.connect(db_name)
-      collection = database[collection_name]
+      client = @db.connect(db_name)
+      collection = client[collection_name]
 
       # convert id string to mongodb object id
       document_id = BSON::ObjectId.from_string(params[:id])

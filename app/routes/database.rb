@@ -5,11 +5,11 @@ module MongoAdmin
       @db_name = params['database']
       @collections = @db.collections[@db_name]
 
-      database = @db.connect(@db_name)
-      stats = database.command(dbStats: 1)
+      client = @db.connect(@db_name)
+      stats = client.command(dbStats: 1)
       @stats = stats.documents.first
 
-      slim :database
+      slim :'database/show'
     end
 
     delete '/db/:database' do
@@ -18,6 +18,7 @@ module MongoAdmin
       client = @db.connect(db_name)
       client.database.drop
 
+      flash[:info] = 'Database successfully removed.'
       redirect '/'
     end
 

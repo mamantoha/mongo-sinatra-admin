@@ -1,3 +1,5 @@
+== slim :'database/_confirm_deletion_modal'
+
 ol class="breadcrumb"
   li
     a href="/" Home
@@ -8,9 +10,9 @@ div.page-header
 
 form method="POST" action="/db/#{@db_name}"
   input type="hidden" name="_method" value="delete"
-  button type="submit" class="btn btn-danger btn-lg"
+  button type="submit" class="btn btn-danger btn-lg deleteButton" data-toggle="modal" data-target="confirmDeletion" database-name="#{@db_name}"
     i class="fa fa-remove"
-    | Drop Database
+      | Drom Database
 
 div.stats
   h2 Database Stats
@@ -48,4 +50,5 @@ table class="table table-bordered table-striped table-condensed"
       td class="col-md-2"
         a href="/db/#{@db_name}/#{collection}" class="btn btn-danger btn-block" disabled="disabled"
           i class="fa fa-download" Delete
+
 
