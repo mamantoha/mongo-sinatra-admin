@@ -8,31 +8,37 @@ ol class="breadcrumb"
 div.page-header
   h1 Viewing Database: #{@db_name}
 
+div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"
+  div class="panel panel-primary"
+    div class="panel-heading" role="tab" id="headingStats"
+      h4 class="panel-title"
+        a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseStats" aria-expanded="true" aria-controls="collapseStats"
+          | Database Stats
+    div id="collapseStats" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingStats"
+      div class="panel-body"
+        table class="table table-bordered table-striped"
+          tr
+            td class="col-md-2"
+              strong Collections (including system.namespaces)
+            td class="col-md-3" = @stats['collections']
+          tr
+            td
+              strong Data Size
+            td= number_to_human_size(@stats['dataSize'])
+          tr
+            td
+              strong Storage Size
+            td= number_to_human_size(@stats['storageSize'])
+          tr
+            td
+              strong File Size (on disk)
+            td= number_to_human_size(@stats['fileSize'])
+
 form method="POST" action="/db/#{@db_name}"
   input type="hidden" name="_method" value="delete"
   button type="submit" class="btn btn-danger btn-lg deleteButton" data-toggle="modal" data-target="confirmDeletion" database-name="#{@db_name}"
     i class="fa fa-remove"
       | Drom Database
-
-div.stats
-  h2 Database Stats
-  table class="table table-bordered table-striped"
-    tr
-      td class="col-md-2"
-        strong Collections (including system.namespaces)
-      td class="col-md-3" = @stats['collections']
-    tr
-      td
-        strong Data Size
-      td= number_to_human_size(@stats['dataSize'])
-    tr
-      td
-        strong Storage Size
-      td= number_to_human_size(@stats['storageSize'])
-    tr
-      td
-        strong File Size (on disk)
-      td= number_to_human_size(@stats['fileSize'])
 
 h2 Collections
 table class="table table-bordered table-striped table-condensed"
