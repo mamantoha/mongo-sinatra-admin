@@ -16,15 +16,15 @@ div.stats
     tr
       td
         strong Data Size
-      td= @stats['dataSize']
+      td= number_to_human_size(@stats['dataSize'])
     tr
       td
         strong Storage Size
-      td= @stats['storageSize']
+      td= number_to_human_size(@stats['storageSize'])
     tr
       td
         strong File Size (on disk)
-      td= @stats['fileSize']
+      td= number_to_human_size(@stats['fileSize'])
 
 h2 Collections
 table class="table table-bordered table-striped table-condensed"

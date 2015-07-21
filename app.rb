@@ -8,7 +8,10 @@ require 'mongo'
 require 'hashie/mash'
 require 'byebug'
 
+require 'action_view'
 require_relative 'lib/mongo_admin/db'
+
+include ActionView::Helpers::NumberHelper
 
 module MongoAdmin
   class App < Sinatra::Base

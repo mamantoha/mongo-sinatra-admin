@@ -14,6 +14,42 @@ ol class="breadcrumb"
 div.page-header
   h1 Viewing Collection: #{@collection_name}
 
+div.stats
+  h2 Collection Stats
+  table class="table table-bordered table-striped"
+    tr
+      td class="col-md-2"
+        strong Documents
+      td class="col-md-3" = @stats['count']
+    tr
+      td
+        strong Total doc size
+      td= number_to_human_size(@stats['size'])
+    tr
+      td
+        strong Averange doc size
+      td= number_to_human_size(@stats['avgObjSize'])
+    tr
+      td
+        strong Pre-allocated size
+      td= number_to_human_size(@stats['storageSize'])
+    tr
+      td
+        strong Indexes
+      td= @stats['nindexes']
+    tr
+      td
+        strong Total Index size
+      td= number_to_human_size(@stats['totalIndexSize'])
+    tr
+      td
+        strong Padding factor
+      td= @stats['paddingFactor']
+    tr
+      td
+        strong Extents
+      td= @stats['numExtents']
+
 a class="btn btn-success btn-lg" href="/db/#{@db_name}/#{@collection_name}/new"
   i class="fa fa-file"
   | New Document
