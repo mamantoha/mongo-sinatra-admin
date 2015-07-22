@@ -5,6 +5,8 @@ module MongoAdmin
       @db_name = params['database']
       @collection_name = params['collection']
 
+      @title = "Viewing Collection: #{@collection_name}"
+
       client = @db.connect(@db_name)
 
       stats = client.command(collStats: @collection_name)

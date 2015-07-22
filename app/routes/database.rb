@@ -5,6 +5,8 @@ module MongoAdmin
       @db_name = params['database']
       @collections = @db.collections[@db_name]
 
+      @title = "Viewing Database: #{@db_name}"
+
       client = @db.connect(@db_name)
       stats = client.command(dbStats: 1)
       @stats = stats.documents.first
@@ -21,7 +23,6 @@ module MongoAdmin
       flash[:info] = 'Database successfully removed.'
       redirect '/'
     end
-
 
   end
 end

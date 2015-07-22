@@ -16,6 +16,8 @@ module MongoAdmin
       # convert id string to mongodb object id
       @document_id = BSON::ObjectId.from_string(params[:id])
 
+      @title = "Viewing Document: #{@document_id}"
+
       client = @db.connect(@db_name)
       collection = client[@collection_name]
 
