@@ -34,3 +34,14 @@ ul.header > li.list-group-item > a {
 ul.header > li.list-group-item > a > i.fa::before{
   padding-right: 5px;
 }
+
+.panel-title a .fa-chevron:after {
+  font-family: FontAwesome;
+  content: "\f077";
+}
+
+.panel-title a.collapsed .fa-chevron:after {
+  font-family: FontAwesome;
+  content: "\f078";
+}
+
