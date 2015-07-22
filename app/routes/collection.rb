@@ -22,6 +22,21 @@ module MongoAdmin
       slim :'collection/show'
     end
 
+    # Create Collection
+    post '/db/:database' do
+      db_name = params['database']
+      collection_name = params['collection'].to_sym
+
+      client = @db.connect(db_name)
+      collection = client[collection_name]
+
+      # Force the collection to be created in the database.
+      collection.create
+
+      flash[:info] = 'Collection successfully created.'
+      redirect "/db/#{db_name}/#{collection_name}"
+    end
+
     # Drop Collection
     delete '/db/:database/:collection' do
       db_name = params['database']
