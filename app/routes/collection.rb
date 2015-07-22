@@ -53,10 +53,15 @@ module MongoAdmin
         redirect "/db/#{db_name}/#{source_collection_name}"
       end
 
-      @db.admin_db.command({
-        renameCollection: "#{db_name}.#{source_collection_name}",
-        to:               "#{db_name}.#{target_collection_name}"
-      })
+      begin
+        @db.admin_db.command({
+          renameCollection: "#{db_name}.#{source_collection_name}",
+          to:               "#{db_name}.#{target_collection_name}"
+        })
+      rescue Mongo::Error::OperationFailure => err
+        flash[:danger] = "MongoDB Error: `#{err.message}'"
+        redirect "/db/#{db_name}/#{source_collection_name}"
+      end
 
       flash[:info] = 'Collection successfully renamed.'
       redirect "/db/#{db_name}/#{target_collection_name}"
