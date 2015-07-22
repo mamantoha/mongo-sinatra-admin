@@ -37,8 +37,12 @@ module MongoAdmin
       collection_name = params['collection']
       document        = params['document']
 
-      # TODO: document is not valid
-      document = JSON.load(document)
+      begin
+        document = JSON.load(document)
+      rescue JSON::ParserError => err
+        flash[:danger] = "Document is not valid JSON."
+        redirect "/db/#{db_name}/#{collection_name}"
+      end
 
       client = @db.connect(db_name)
       collection = client[collection_name]
@@ -60,8 +64,12 @@ module MongoAdmin
       # convert id string to mongodb object id
       document_id = BSON::ObjectId.from_string(params[:id])
 
-      # TODO: document is not valid
-      document = JSON.load(document)
+      begin
+        document = JSON.load(document)
+      rescue JSON::ParserError => err
+        flash[:danger] = "Document is not valid JSON."
+        redirect "/db/#{db_name}/#{collection_name}/#{document_id}"
+      end
 
       # IMPORTANT! You can not change Object ID
       document.delete('_id')
