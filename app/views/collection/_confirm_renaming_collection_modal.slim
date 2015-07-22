@@ -1,0 +1,38 @@
+javascript:
+  $(document).ready(function() {
+
+    $('.renameCollectionButton').popover({ trigger: "hover", placement: "left", title: "Warning", content: "Are you sure you want to rename this collection?" });
+
+    $('.renameCollectionButton').on('click', function(event) {
+      event.preventDefault();
+      var target = $(this);
+
+      var parentForm = target.parents('form:first');
+
+      $('#collection-confirmation-input').attr('shouldbe', target.attr('collection-name'));
+      $('#modal-collection-name').text(target.attr('collection-name'));
+
+      $('#confirmCollectionRenaming').modal({ 'data-backdrop': 'static', 'data-keyboard': true })
+      .one('click', '#renameCollection', function() {
+        var input = $('#collection-confirmation-input');
+
+        parentForm.trigger('submit');
+      });
+    });
+  });
+
+div id="confirmCollectionRenaming" class="modal fade" role="dialog"
+  div.modal-dialog role="dialog"
+    div.modal-content
+      div.modal-header
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+        h4.modal-title Rename Collection
+      div.modal-body
+        p
+          | Be careful! You are about to rename '<strong><span id="modal-collection-name"></span></strong>' collection.
+          br
+          | Rename Collection is not compatible with sharded collections.
+      div.modal-footer
+        button type="button" class="btn btn-default" data-dismiss="modal" Close
+        button#renameCollection type="button" class="btn btn-danger" Rename

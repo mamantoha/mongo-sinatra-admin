@@ -27,6 +27,11 @@ module MongoAdmin
       db_name = params['database']
       collection_name = params['collection'].to_sym
 
+      unless /^[a-zA-Z_][a-zA-Z0-9\._]*$/ =~ collection_name
+        flash[:danger] = 'Collection names must begin with a letter or underscore, and can contain only letters, underscores, numbers or dots.'
+        redirect "/db/#{db_name}"
+      end
+
       client = @db.connect(db_name)
       collection = client[collection_name]
 
@@ -35,6 +40,26 @@ module MongoAdmin
 
       flash[:info] = 'Collection successfully created.'
       redirect "/db/#{db_name}/#{collection_name}"
+    end
+
+    # Rename Collection
+    put '/db/:database/:collection' do
+      db_name = params['database']
+      source_collection_name = params['collection']
+      target_collection_name = params['target_name']
+
+      unless /^[a-zA-Z_][a-zA-Z0-9\._]*$/ =~ target_collection_name
+        flash[:danger] = 'Collection names must begin with a letter or underscore, and can contain only letters, underscores, numbers or dots.'
+        redirect "/db/#{db_name}/#{source_collection_name}"
+      end
+
+      @db.admin_db.command({
+        renameCollection: "#{db_name}.#{source_collection_name}",
+        to:               "#{db_name}.#{target_collection_name}"
+      })
+
+      flash[:info] = 'Collection successfully renamed.'
+      redirect "/db/#{db_name}/#{target_collection_name}"
     end
 
     # Drop Collection

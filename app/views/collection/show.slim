@@ -4,8 +4,8 @@ script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/mode/javascr
 link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/theme/rubyblue.css"
 link rel="stylesheet" href="/codemirror_overwrite.css"
 
-
 == slim :'collection/_confirm_deletion_document_modal'
+== slim :'collection/_confirm_renaming_collection_modal'
 
 ol class="breadcrumb"
   li
@@ -58,6 +58,19 @@ div.page-header
               td
                 strong Extents
               td= @stats['numExtents']
+
+h2 Rename Collection
+form class="form-inline well" method="POST"
+  input type="hidden" name="_method" value="put"
+  div class="form-group"
+    label class="sr-only" for="collection" Collection Name
+    div class="input-group"
+      div class="input-group-addon" = "#{@db_name}."
+      input type="text" class="form-control" id="collection" name="target_name" placeholder="#{@collection_name}"
+    button type="submit" class="btn btn-primary renameCollectionButton" data-toggle="modal" data-target="confirmRenamingCollection" collection-name="#{@collection_name}"
+      i class="fa fa-folder-open"
+        | Rename Collection
+
 
 a class="btn btn-success btn-lg" href="/db/#{@db_name}/#{@collection_name}/new"
   i class="fa fa-file"
