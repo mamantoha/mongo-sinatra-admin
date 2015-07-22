@@ -1,4 +1,5 @@
-== slim :'database/_confirm_deletion_modal'
+== slim :'database/_confirm_database_deletion_modal'
+== slim :'database/_confirm_collection_deletion_modal'
 
 ol class="breadcrumb"
   li
@@ -36,7 +37,7 @@ div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true
 
 form method="POST" action="/db/#{@db_name}"
   input type="hidden" name="_method" value="delete"
-  button type="submit" class="btn btn-danger btn-lg deleteButton" data-toggle="modal" data-target="confirmDeletion" database-name="#{@db_name}"
+  button type="submit" class="btn btn-danger btn-lg deleteDatabaseButton" data-toggle="modal" data-target="confirmDatabaseDeletion" database-name="#{@db_name}"
     i class="fa fa-remove"
       | Drom Database
 
@@ -54,7 +55,11 @@ table class="table table-bordered table-striped table-condensed"
         h4
           a href="/db/#{@db_name}/#{collection}" = collection
       td class="col-md-2"
-        a href="/db/#{@db_name}/#{collection}" class="btn btn-danger btn-block" disabled="disabled"
-          i class="fa fa-download" Delete
+        form method="POST" action="/db/#{@db_name}/#{collection}"
+          input type="hidden" name="_method" value="delete"
+          button type="submit" class="btn btn-danger btn-block deleteCollectionButton" data-toggle="modal" data-target="confirmCollectionDeletion" collection-name="#{collection}"
+            i class="fa fa-remove"
+              | Delete
+
 
 

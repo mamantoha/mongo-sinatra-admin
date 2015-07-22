@@ -22,6 +22,20 @@ module MongoAdmin
       slim :'collection/show'
     end
 
+    # Drop Collection
+    delete '/db/:database/:collection' do
+      db_name = params['database']
+      collection_name = params['collection']
+
+      client = @db.connect(db_name)
+      collection = client[collection_name]
+
+      collection.drop
+
+      flash[:info] = 'Collection successfully removed.'
+      redirect "/db/#{db_name}"
+    end
+
   end
 end
 
