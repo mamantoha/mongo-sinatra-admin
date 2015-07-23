@@ -22,6 +22,22 @@ module MongoAdmin
         [page.to_i, 1].max
       end
 
+      # Check if Database exists
+      def check_database_exists(db, db_name)
+        unless db.collections.include?(db_name)
+          flash[:danger] = "Database <strong>#{db_name}</strong> does not exist."
+          redirect "/"
+        end
+      end
+
+      # Check if Collection exists
+      def check_collection_exists(db, db_name, collection_name)
+        unless db.collections[db_name].include?(collection_name)
+          flash[:danger] = "Collection <strong>#{collection_name}</strong> does not exist."
+          redirect "/db/#{db_name}"
+        end
+      end
+
     end
   end
 end

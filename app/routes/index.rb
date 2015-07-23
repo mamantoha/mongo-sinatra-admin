@@ -8,6 +8,10 @@ module MongoAdmin
       slim :index
     end
 
+    get '/error' do
+      slim :error, layout: false
+    end
+
   end
 end
 

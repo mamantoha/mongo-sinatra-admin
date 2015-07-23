@@ -26,10 +26,14 @@ module MongoAdmin
       set :method_override, true
     end
 
-    before do
+    before /^(?!\/(error))/ do
       protected!
 
-      @db = DB.new(settings.config_file)
+      begin
+        @db = DB.new(settings.config_file)
+      rescue => err
+        redirect '/error'
+      end
     end
 
     enable :sessions
