@@ -1,6 +1,25 @@
 module MongoAdmin
   class App < Sinatra::Base
 
+    # Export Collection
+    get '/db/:database/export/:collection' do
+      db_name = params['database']
+      collection_name = params['collection']
+
+      check_database_exists(@db, db_name)
+      check_collection_exists(@db, db_name, collection_name)
+
+      client = @db.connect(db_name)
+      collection = client[collection_name]
+
+      documents = collection.find
+      documents_json = documents.to_a
+
+      content_type 'application/json'
+      attachment "#{collection_name}.json"
+      json = JSON.pretty_generate(documents_json)
+    end
+
     get '/db/:database/:collection' do
       @db_name = params['database']
       @collection_name = params['collection']
