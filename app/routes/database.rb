@@ -23,7 +23,14 @@ module MongoAdmin
       check_database_exists(@db, db_name)
 
       client = @db.connect(db_name)
-      client.database.drop
+
+      begin
+        client.database.drop
+      rescue Mongo::Error::OperationFailure => err
+        flash[:danger] = "MongoDB Error: `#{err.message}'"
+        redirect "/"
+      end
+
 
       flash[:info] = 'Database successfully removed.'
       redirect '/'

@@ -9,12 +9,16 @@ javascript:
 
       var parentForm = target.parents('form:first');
 
+      /* debugger; */
+
       $('#collection-confirmation-input').attr('shouldbe', target.attr('collection-name'));
-      $('#modal-collection-name').text(target.attr('collection-name'));
+      $('#deletion-collection-name').text(target.attr('collection-name'));
 
       $('#confirmCollectionDeletion').modal({ 'data-backdrop': 'static', 'data-keyboard': true })
       .bind('click', '#delete', function() {
+        /* debugger; */
         var input = $('#collection-confirmation-input');
+        console.log(input.attr('shouldbe'));
 
         if (input.val().toLowerCase() === input.attr('shouldbe').toLowerCase() ) {
           parentForm.trigger('submit');
@@ -35,11 +39,15 @@ div id="confirmCollectionDeletion" class="modal fade" role="dialog"
         h4.modal-title Delete Collection
       div.modal-body
         p
-          | Be careful! You are about to delete whole '<strong><span id="modal-collection-name"></span></strong>' collection.
+          | Be careful! You are about to delete whole '<strong><span id="deletion-collection-name"></span></strong>' collection.
         p
           label for="collection-confirmation-input" Type the collection name to proceed.
           br
           input type="text" id="collection-confirmation-input" name="collection-confirmation-input" shouldbe="" value=""
       div.modal-footer
-        button type="button" class="btn btn-default" data-dismiss="modal" Close
-        button#delete type="button" class="btn btn-danger" Delete
+        button type="button" class="btn btn-default" data-dismiss="modal"
+          i class="fa fa-times"
+          | Close
+        button#delete type="button" class="btn btn-danger"
+          i class="fa fa-trash"
+          | Delete

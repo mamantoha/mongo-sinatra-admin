@@ -6,6 +6,7 @@ link rel="stylesheet" href="/codemirror_overwrite.css"
 
 == slim :'collection/_confirm_deletion_document_modal'
 == slim :'collection/_confirm_renaming_collection_modal'
+== slim :'database/_confirm_collection_deletion_modal'
 
 ol class="breadcrumb"
   li
@@ -69,13 +70,21 @@ form class="form-inline well" method="POST"
       div class="input-group-addon" = "#{@db_name}."
       input type="text" class="form-control" id="collection" name="target_name" placeholder="#{@collection_name}"
     button type="submit" class="btn btn-primary renameCollectionButton" data-toggle="modal" data-target="confirmRenamingCollection" collection-name="#{@collection_name}"
-      i class="fa fa-folder-open"
+      i class="fa fa-pencil"
         | Rename Collection
 
+div class="row"
+  div class="col-md-3"
+    a class="btn btn-success btn-block btn-lg" href="/db/#{@db_name}/#{@collection_name}/new"
+      i class="fa fa-file"
+      | New Document
 
-a class="btn btn-success btn-lg" href="/db/#{@db_name}/#{@collection_name}/new"
-  i class="fa fa-file"
-  | New Document
+  div class="col-md-3"
+    form method="POST" action="/db/#{@db_name}/#{@collection_name}"
+      input type="hidden" name="_method" value="delete"
+      button type="submit" class="btn btn-danger btn-block btn-lg deleteCollectionButton" data-toggle="modal" data-target="confirmCollectionDeletion" collection-name="#{@collection_name}"
+        i class="fa fa-trash"
+          | Delete Collection
 
 nav
   ul class="pagination"
@@ -107,14 +116,14 @@ nav
 
 
     div.col-md-1
-      div
+      div class="btn-vertical"
         a class="btn btn-primary btn-sm" href="/db/#{@db_name}/#{@collection_name}/#{document['_id']}"
-          i class="fa fa-edit"
-      div
+          i class="fa fa-pencil"
+      div class="btn-vertical"
         form method="POST" action="/db/#{@db_name}/#{@collection_name}/#{document['_id']}"
           input type="hidden" name="_method" value="delete"
           button type="submit" class="btn btn-danger btn-sm deleteDocumentButton" data-toggle="modal" data-target="confirmDeletionDocument" document-id="#{document['_id']}"
-            i class="fa fa-remove"
+            i class="fa fa-trash"
 
 javascript:
   $('.pagination .disabled a, .pagination .active a').on('click', function(e) {

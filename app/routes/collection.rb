@@ -40,8 +40,13 @@ module MongoAdmin
       client = @db.connect(db_name)
       collection = client[collection_name]
 
-      # Force the collection to be created in the database.
-      collection.create
+      begin
+        # Force the collection to be created in the database.
+        collection.create
+      rescue Mongo::Error::OperationFailure => err
+        flash[:danger] = "MongoDB Error: `#{err.message}'"
+        redirect "/db/#{db_name}"
+      end
 
       flash[:info] = 'Collection successfully created.'
       redirect "/db/#{db_name}/#{collection_name}"
@@ -81,12 +86,17 @@ module MongoAdmin
       collection_name = params['collection']
 
       check_database_exists(@db, db_name)
-      check_collection_exists(@db, db_name, source_collection_name)
+      check_collection_exists(@db, db_name, collection_name)
 
       client = @db.connect(db_name)
       collection = client[collection_name]
 
-      collection.drop
+      begin
+        collection.drop
+      rescue Mongo::Error::OperationFailure => err
+        flash[:danger] = "MongoDB Error: `#{err.message}'"
+        redirect "/db/#{db_name}"
+      end
 
       flash[:info] = 'Collection successfully removed.'
       redirect "/db/#{db_name}"

@@ -45,3 +45,6 @@ ul.header > li.list-group-item > a > i.fa::before{
   content: "\f078";
 }
 
+.btn-vertical {
+  margin-bottom: 2px;
+}

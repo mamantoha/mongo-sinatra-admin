@@ -10,7 +10,7 @@ javascript:
       var parentForm = target.parents('form:first');
 
       $('#collection-confirmation-input').attr('shouldbe', target.attr('collection-name'));
-      $('#modal-collection-name').text(target.attr('collection-name'));
+      $('#renaming-collection-name').text(target.attr('collection-name'));
 
       $('#confirmCollectionRenaming').modal({ 'data-backdrop': 'static', 'data-keyboard': true })
       .one('click', '#renameCollection', function() {
@@ -30,9 +30,13 @@ div id="confirmCollectionRenaming" class="modal fade" role="dialog"
         h4.modal-title Rename Collection
       div.modal-body
         p
-          | Be careful! You are about to rename '<strong><span id="modal-collection-name"></span></strong>' collection.
+          | Be careful! You are about to rename '<strong><span id="renaming-collection-name"></span></strong>' collection.
           br
           | Rename Collection is not compatible with sharded collections.
       div.modal-footer
-        button type="button" class="btn btn-default" data-dismiss="modal" Close
-        button#renameCollection type="button" class="btn btn-danger" Rename
+        button type="button" class="btn btn-default" data-dismiss="modal"
+          i class="fa fa-times"
+          | Close
+        button#renameCollection type="button" class="btn btn-primary"
+          i class="fa fa-pencil"
+          | Rename

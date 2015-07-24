@@ -7,7 +7,7 @@ javascript:
 
       var parentForm = target.parents('form:first');
 
-      $('#modal-document-id').text(target.attr('document-id'));
+      $('#deletion-document-id').text(target.attr('document-id'));
 
       $('#confirmDeletionDocument').modal({ 'data-backdrop': 'static', 'data-keyboard': true })
       .one('click', '#deleteDocument', function() {
@@ -25,7 +25,7 @@ div id="confirmDeletionDocument" class="modal fade" role="dialog"
         h4.modal-title Detele Document
       div.modal-body
         p
-          | Be careful! You are about to delete document with id '<strong><span id="modal-document-id"></span></strong>'.
+          | Be careful! You are about to delete document with id '<strong><span id="deletion-document-id"></span></strong>'.
       div.modal-footer
         button type="button" class="btn btn-default" data-dismiss="modal" Close
         button#deleteDocument type="button" class="btn btn-danger" Delete

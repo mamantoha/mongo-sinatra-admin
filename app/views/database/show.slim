@@ -36,6 +36,12 @@ div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true
               strong File Size (on disk)
             td= number_to_human_size(@stats['fileSize'])
 
+form class="well" method="POST" action="/db/#{@db_name}"
+  input type="hidden" name="_method" value="delete"
+  button type="submit" class="btn btn-danger btn-lg deleteDatabaseButton" data-toggle="modal" data-target="confirmDatabaseDeletion" database-name="#{@db_name}"
+    i class="fa fa-trash"
+      | Drop Database
+
 h2 Create Collection
 form class="form-inline well" method="POST"
   div class="form-group"
@@ -44,14 +50,8 @@ form class="form-inline well" method="POST"
       div class="input-group-addon" = "#{@db_name}."
       input type="text" class="form-control" id="collection" name="collection" placeholder="Collection Name"
     button type="submit" class="btn btn-primary"
-      i class="fa fa-folder-open"
+      i class="fa fa-plus"
         | Create Collection
-
-form method="POST" action="/db/#{@db_name}"
-  input type="hidden" name="_method" value="delete"
-  button type="submit" class="btn btn-danger btn-lg deleteDatabaseButton" data-toggle="modal" data-target="confirmDatabaseDeletion" database-name="#{@db_name}"
-    i class="fa fa-remove"
-      | Drom Database
 
 h2 Collections
 table class="table table-bordered table-striped table-condensed"
@@ -70,5 +70,5 @@ table class="table table-bordered table-striped table-condensed"
         form method="POST" action="/db/#{@db_name}/#{collection}"
           input type="hidden" name="_method" value="delete"
           button type="submit" class="btn btn-danger btn-block deleteCollectionButton" data-toggle="modal" data-target="confirmCollectionDeletion" collection-name="#{collection}"
-            i class="fa fa-remove"
+            i class="fa fa-trash"
               | Delete
