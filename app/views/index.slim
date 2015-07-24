@@ -17,7 +17,7 @@ table class="table table-bordered table-striped table-hover"
     td class="col-md-2"
       strong Uptime
     td class="col-md-3"
-      = @info['uptime']
+      = distance_of_time_in_words(@info['uptime'])
     td class="col-md-2"
       strong Sever Time
     td class="col-md-3"
@@ -79,11 +79,11 @@ table class="table table-bordered table-striped table-hover"
     td class="col-md-2"
       strong Time Spent Flushing
     td class="col-md-3"
-      = @info['backgroundFlushing']['total_ms']
+      | #{@info['backgroundFlushing']['total_ms']} ms
     td class="col-md-2"
       strong Average Flush Time
     td class="col-md-3"
-      = @info['backgroundFlushing']['average_ms']
+      | #{@info['backgroundFlushing']['average_ms']} ms
 
   tr
     td colspan="4" &nbsp;

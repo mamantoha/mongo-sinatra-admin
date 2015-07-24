@@ -12,6 +12,7 @@ require 'action_view'
 require_relative 'lib/mongo_admin/db'
 
 include ActionView::Helpers::NumberHelper
+include ActionView::Helpers::DateHelper
 
 module MongoAdmin
   class App < Sinatra::Base
