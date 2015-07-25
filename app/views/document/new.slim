@@ -18,10 +18,12 @@ div.page-header
 
 div
   form method="POST" action="/db/#{@db_name}/#{@collection_name}"
-    button type="submit" class="btn btn-success btn-large"
-      i class="fa fa-pencil"
-        | Save
-    textarea id="document" name="document"= "{}"
+    div class="form-group edit-document"
+      textarea id="document" name="document"= "{}"
+    div.form-group
+      button type="submit" class="btn btn-success btn-large pull-right"
+        i class="fa fa-pencil"
+          | Save
 
   javascript:
     var document = CodeMirror.fromTextArea(document.getElementById('document'), {

@@ -101,7 +101,8 @@ nav
 - @documents.each_with_index do |document, index|
   div.row
     div.col-md-11
-      textarea readonly="readonly" id="doc_#{index}" name="doc_#{index}" = JSON.pretty_generate(document)
+      div.listDocument
+        textarea readonly="readonly" id="doc_#{index}" name="doc_#{index}" = JSON.pretty_generate(document)
       p
         | &nbsp;
 
