@@ -20,6 +20,11 @@ module MongoAdmin
     delete '/db/:database' do
       db_name = params['database']
 
+      if db_name == 'admin'
+        flash[:danger] = "Could not drop admin database"
+        redirect "/"
+      end
+
       check_database_exists(@db, db_name)
 
       client = @db.connect(db_name)

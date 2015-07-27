@@ -36,11 +36,12 @@ div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true
               strong File Size (on disk)
             td= number_to_human_size(@stats['fileSize'])
 
-form class="well" method="POST" action="/db/#{@db_name}"
-  input type="hidden" name="_method" value="delete"
-  button type="submit" class="btn btn-danger btn-lg deleteDatabaseButton" data-toggle="modal" data-target="confirmDatabaseDeletion" database-name="#{@db_name}"
-    i class="fa fa-trash"
-      | Drop Database
+- unless @db_name == 'admin'
+  form class="well" method="POST" action="/db/#{@db_name}"
+    input type="hidden" name="_method" value="delete"
+    button type="submit" class="btn btn-danger btn-lg deleteDatabaseButton" data-toggle="modal" data-target="confirmDatabaseDeletion" database-name="#{@db_name}"
+      i class="fa fa-trash"
+        | Drop Database
 
 h2 Create Collection
 form class="form-inline well" method="POST"
