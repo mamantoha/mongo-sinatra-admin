@@ -36,7 +36,7 @@ module MongoAdmin
       @stats = stats.documents.first
 
       per_page = settings.config_file['options']['documentsPerPage'] || 5
-      @pages = (@stats['count'].to_f / per_page).round
+      @pages = (@stats['count'].to_f / per_page).ceil
 
       # Get all documents in a collection
       @documents = collection.find.skip(per_page * (current_page - 1)).limit(per_page)
