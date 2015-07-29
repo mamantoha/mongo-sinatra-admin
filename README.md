@@ -1,6 +1,6 @@
 # mongo-sinatra-admin
 
-Web-based MongoDB admin inteface written with Ruby and Sinatra
+Web-based MongoDB admin interface written with Ruby and Sinatra
 
 > **WARNING**: This is a development version: Currently under heavy development.
 
