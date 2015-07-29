@@ -20,12 +20,11 @@ Click here for more screenshots:
 git clone git@github.com:mamantoha/mongo-sinatra-admin.git
 cd mongo-sinatra-admin/
 bundle install
-rackup
 ```
 
 ### To configure
 
-Copy or rename `config.json.example` into a new file.
+Copy or rename `config.json.example` into a new file. For development environment is `config_development.json`
 
 Fill in your MongoDB connection details, and any other options you want to change.
 

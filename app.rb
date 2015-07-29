@@ -9,6 +9,12 @@ require 'hashie/mash'
 require 'byebug'
 
 require 'action_view'
+
+ENV['RACK_ENV'] ||= 'development'
+
+require 'bundler'
+Bundler.require :default, ENV['RACK_ENV'].to_sym
+
 require_relative 'lib/mongo_admin/db'
 
 include ActionView::Helpers::NumberHelper
@@ -23,7 +29,7 @@ module MongoAdmin
       set :views, 'app/views'
       set :public_dir, 'public'
       set :root, (settings.root || File.dirname(__FILE__))
-      set :config_file, JSON.load(File.open('config.json'))
+      set :config_file, JSON.load(File.open("config_#{ENV['RACK_ENV']}.json"))
       set :method_override, true
     end
 

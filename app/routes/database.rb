@@ -36,7 +36,6 @@ module MongoAdmin
         redirect "/"
       end
 
-
       flash[:info] = 'Database successfully removed.'
       redirect '/'
     end

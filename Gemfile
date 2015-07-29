@@ -7,4 +7,8 @@ gem 'sinatra-flash'
 gem 'slim'
 gem 'hashie'
 
-gem 'byebug'
+group :test do
+  gem 'rspec'
+  gem 'rack-test'
+  gem 'byebug'
+end
