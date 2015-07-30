@@ -27,7 +27,7 @@ module MongoAdmin
         redirect "/db/#{@db_name}/#{@collection_name}"
       end
 
-      @title = "Viewing Document: #{@document_id}"
+      @title = I18n.t('viewing_document', document: @document_id)
 
       client = @db.connect(@db_name)
       collection = client[@collection_name]
@@ -37,7 +37,7 @@ module MongoAdmin
       if @document
         slim :'document/edit'
       else
-        flash[:danger] = 'Document not found.'
+        flash[:danger] = I18n.t('document_not_found')
         redirect "/db/#{@db_name}/#{@collection_name}"
       end
     end
@@ -54,7 +54,7 @@ module MongoAdmin
       begin
         document = JSON.load(document)
       rescue JSON::ParserError => err
-        flash[:danger] = "Document is not valid JSON."
+        flash[:danger] = I18n.t('document_invalid_json')
         redirect "/db/#{db_name}/#{collection_name}"
       end
 
@@ -65,7 +65,7 @@ module MongoAdmin
       result.n # => returns 1, because 1 document was inserted
       document_id = result.inserted_id
 
-      flash[:info] = 'New document successfully created.'
+      flash[:info] = I18n.t('document_created')
       redirect "/db/#{db_name}/#{collection_name}/#{document_id}"
     end
 
@@ -89,7 +89,7 @@ module MongoAdmin
       begin
         document_json = JSON.load(document_text)
       rescue JSON::ParserError => err
-        flash[:danger] = "Document is not valid JSON."
+        flash[:danger] = I18n.t('document_invalid_json')
         redirect "/db/#{db_name}/#{collection_name}/#{document_id}"
       end
 
@@ -103,10 +103,10 @@ module MongoAdmin
 
       if document.first
         document.replace_one(document_json)
-        flash[:info] = 'Document successfully updated.'
+        flash[:info] = I18n.t('document_updated')
         redirect "/db/#{db_name}/#{collection_name}/#{document_id}"
       else
-        flash[:danger] = 'Document not found.'
+        flash[:danger] = I18n.t('document_not_found')
         redirect "/db/#{db_name}/#{collection_name}"
       end
     end
@@ -134,10 +134,10 @@ module MongoAdmin
 
       if document.first
         document.delete_one
-        flash[:info] = 'Document successfully removed.'
+        flash[:info] = I18n.t('document_deleted')
         redirect "/db/#{db_name}/#{collection_name}"
       else
-        flash[:danger] = 'Document not found.'
+        flash[:danger] = I18n.t('document_not_found')
         redirect "/db/#{db_name}/#{collection_name}"
       end
 

@@ -6,6 +6,8 @@ require 'sinatra/flash'
 require 'slim'
 require 'mongo'
 require 'hashie/mash'
+require 'i18n'
+require 'i18n/backend/fallbacks'
 require 'byebug'
 
 require 'action_view'
@@ -31,6 +33,12 @@ module MongoAdmin
       set :root, (settings.root || File.dirname(__FILE__))
       set :config_file, JSON.load(File.open("config_#{ENV['RACK_ENV']}.json"))
       set :method_override, true
+
+      I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
+      I18n.default_locale = :en
+      I18n.load_path = Dir[File.join(settings.root, 'locales', '*.yml')]
+      I18n.backend.load_translations
+      I18n.enforce_available_locales = false
     end
 
     before /^(?!\/(error))/ do
@@ -44,6 +52,8 @@ module MongoAdmin
     end
 
     enable :sessions
+
+    use Rack::Locale
 
     register Sinatra::Flash
   end

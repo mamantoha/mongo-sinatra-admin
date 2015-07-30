@@ -1,25 +1,25 @@
 ol class="breadcrumb"
-  li class="active" Home
+  li class="active" = I18n.t('home')
 div.page-header
   h1 Mongo Sinatra Admin
-h2 Server Status
+h2 = I18n.t('server_status.server_status')
 table class="table table-bordered table-striped table-hover"
   tr
     td class="col-md-2"
-      strong Hostname
+      strong = I18n.t('server_status.hostname')
     td class="col-md-3"
       = @info['host']
     td class="col-md-2"
-      strong MongoDB Version
+      strong = I18n.t('server_status.mongodb_version')
     td class="col-md-3"
       = @info['version']
   tr
     td class="col-md-2"
-      strong Uptime
+      strong = I18n.t('server_status.uptime')
     td class="col-md-3"
       = distance_of_time_in_words(@info['uptime'])
     td class="col-md-2"
-      strong Sever Time
+      strong = I18n.t('server_status.server_time')
     td class="col-md-3"
       = @info['localTime']
 
@@ -28,38 +28,38 @@ table class="table table-bordered table-striped table-hover"
 
   tr
     td class="col-md-2"
-      strong Current Connections
+      strong = I18n.t('server_status.current_connections')
     td class="col-md-3"
       = @info['connections']['current']
     td class="col-md-2"
-      strong Available Connections
+      strong = I18n.t('server_status.available_connections')
     td class="col-md-3"
       = @info['connections']['available']
   tr
     td class="col-md-2"
-      strong Active Clients
+      strong = I18n.t('server_status.active_clients')
     td class="col-md-3"
       = @info['globalLock']['activeClients']['total']
     td class="col-md-2"
-      strong Queued Operations
+      strong = I18n.t('server_status.queued_operations')
     td class="col-md-3"
       = @info['globalLock']['currentQueue']['total']
   tr
     td class="col-md-2"
-      strong Clients Reading
+      strong = I18n.t('server_status.clients_reading')
     td class="col-md-3"
       = @info['globalLock']['activeClients']['readers']
     td class="col-md-2"
-      strong Clients Writing
+      strong = I18n.t('server_status.clients_writing')
     td class="col-md-3"
       = @info['globalLock']['activeClients']['writers']
   tr
     td class="col-md-2"
-      strong Read Lock Queue
+      strong = I18n.t('server_status.read_lock_queue')
     td class="col-md-3"
       = @info['globalLock']['currentQueue']['readers']
     td class="col-md-2"
-      strong Write Lock Queue
+      strong = I18n.t('server_status.write_lock_queue')
     td class="col-md-3"
       = @info['globalLock']['currentQueue']['writers']
 
@@ -68,20 +68,20 @@ table class="table table-bordered table-striped table-hover"
 
   tr
     td class="col-md-2"
-      strong Disk Flushes
+      strong = I18n.t('server_status.disk_flushes')
     td class="col-md-3"
       = @info['backgroundFlushing']['flushes']
     td class="col-md-2"
-      strong Last Flush
+      strong = I18n.t('server_status.last_flush')
     td class="col-md-3"
       = @info['backgroundFlushing']['last_finished']
   tr
     td class="col-md-2"
-      strong Time Spent Flushing
+      strong = I18n.t('server_status.time_spent_flushing')
     td class="col-md-3"
       | #{@info['backgroundFlushing']['total_ms']} ms
     td class="col-md-2"
-      strong Average Flush Time
+      strong = I18n.t('server_status.average_flush_time')
     td class="col-md-3"
       | #{@info['backgroundFlushing']['average_ms']} ms
 
@@ -90,20 +90,19 @@ table class="table table-bordered table-striped table-hover"
 
   tr
     td class="col-md-2"
-      strong Total Inserts
+      strong = I18n.t('server_status.total_inserts')
     td class="col-md-3"
       = @info['opcounters']['insert']
     td class="col-md-2"
-      strong Total Queries
+      strong = I18n.t('server_status.total_queries')
     td class="col-md-3"
       = @info['opcounters']['query']
   tr
     td class="col-md-2"
-      strong Total Updates
+      strong = I18n.t('server_status.total_updates')
     td class="col-md-3"
       = @info['opcounters']['update']
     td class="col-md-2"
-      strong Total Deletes
+      strong = I18n.t('server_status.total_deletes')
     td class="col-md-3"
       = @info['opcounters']['delete']
-

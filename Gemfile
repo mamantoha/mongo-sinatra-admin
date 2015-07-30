@@ -6,6 +6,8 @@ gem 'sinatra'
 gem 'sinatra-flash'
 gem 'slim'
 gem 'hashie'
+gem 'i18n'
+gem 'rack-contrib'
 
 group :test do
   gem 'rspec'

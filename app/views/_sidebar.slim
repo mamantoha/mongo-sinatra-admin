@@ -7,11 +7,11 @@ div class="well"
       li class="list-group-item"
         a href="/db/#{db}"
           i class="fa fa-folder-open"
-            | View Database
+          = I18n.t('view_database')
       ul class="collapse list-group header #{db == @db_name ? 'in' : ''}" id="toggle_#{db}"
         - @db.collections[db].each do |collection|
           li class="list-group-item"
             a href="/db/#{db}/#{collection}"
               i class="fa fa-list-alt"
-                = collection
+              = collection
       li class="divider-horizontal"

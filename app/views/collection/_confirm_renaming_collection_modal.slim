@@ -1,7 +1,7 @@
 javascript:
   $(document).ready(function() {
 
-    $('.renameCollectionButton').popover({ trigger: "hover", placement: "left", title: "Warning", content: "Are you sure you want to rename this collection?" });
+    $('.renameCollectionButton').popover({ trigger: "hover", placement: "left", title: "#{I18n.t('warning')}", content: "Are you sure you want to rename this collection?" });
 
     $('.renameCollectionButton').on('click', function(event) {
       event.preventDefault();
@@ -27,7 +27,7 @@ div id="confirmCollectionRenaming" class="modal fade" role="dialog"
       div.modal-header
         button type="button" class="close" data-dismiss="modal" aria-label="Close"
           span aria-hidden="true" &times;
-        h4.modal-title Rename Collection
+        h4.modal-title = I18n.t('rename_collection')
       div.modal-body
         p.text-danger
           | Be careful! You are about to rename '<strong><span id="renaming-collection-name"></span></strong>' collection.
@@ -36,7 +36,7 @@ div id="confirmCollectionRenaming" class="modal fade" role="dialog"
       div.modal-footer
         button type="button" class="btn btn-default" data-dismiss="modal"
           i class="fa fa-times"
-          | Close
+          = I18n.t('close')
         button#renameCollection type="button" class="btn btn-primary"
           i class="fa fa-pencil"
-          | Rename
+          = I18n.t('rename')

@@ -25,7 +25,7 @@ module MongoAdmin
       # Check if Database exists
       def check_database_exists(db, db_name)
         unless db.collections.include?(db_name)
-          flash[:danger] = "Database <strong>#{db_name}</strong> does not exist."
+          flash[:danger] = I18n.t('database_not_found', database: db_name)
           redirect "/"
         end
       end
@@ -33,7 +33,7 @@ module MongoAdmin
       # Check if Collection exists
       def check_collection_exists(db, db_name, collection_name)
         unless db.collections[db_name].include?(collection_name)
-          flash[:danger] = "Collection <strong>#{collection_name}</strong> does not exist."
+          flash[:danger] = I18n.t('collection_not_found', collection: collection_name)
           redirect "/db/#{db_name}"
         end
       end

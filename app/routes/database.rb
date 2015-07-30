@@ -8,7 +8,7 @@ module MongoAdmin
 
       @collections = @db.collections[@db_name]
 
-      @title = "Viewing Database: #{@db_name}"
+      @title = I18n.t('viewing_database', database: @db_name)
 
       client = @db.connect(@db_name)
       stats = client.command(dbStats: 1)
@@ -21,8 +21,8 @@ module MongoAdmin
       db_name = params['database']
 
       if db_name == 'admin'
-        flash[:danger] = "Could not drop admin database"
-        redirect "/"
+        flash[:danger] = I18n.t('could_not_drop_admin_database')
+        redirect '/'
       end
 
       check_database_exists(@db, db_name)
@@ -32,14 +32,13 @@ module MongoAdmin
       begin
         client.database.drop
       rescue Mongo::Error::OperationFailure => err
-        flash[:danger] = "MongoDB Error: `#{err.message}'"
-        redirect "/"
+        flash[:danger] = I18n.t('mongodb_error', message: err.message)
+        redirect '/'
       end
 
-      flash[:info] = 'Database successfully removed.'
+      flash[:info] = I18n.t('database_removed')
       redirect '/'
     end
 
   end
 end
-

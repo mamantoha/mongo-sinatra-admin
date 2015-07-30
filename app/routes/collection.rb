@@ -27,7 +27,7 @@ module MongoAdmin
       check_database_exists(@db, @db_name)
       check_collection_exists(@db, @db_name, @collection_name)
 
-      @title = "Viewing Collection: #{@collection_name}"
+      @title = I18n.t('viewing_collection', collection: @collection_name)
 
       client = @db.connect(@db_name)
       collection = client[@collection_name]
@@ -52,7 +52,7 @@ module MongoAdmin
       check_database_exists(@db, db_name)
 
       unless /^[a-zA-Z_][a-zA-Z0-9\._]*$/ =~ collection_name
-        flash[:danger] = 'Collection names must begin with a letter or underscore, and can contain only letters, underscores, numbers or dots.'
+        flash[:danger] = I18n.t('collection_validates_name_error')
         redirect "/db/#{db_name}"
       end
 
@@ -63,11 +63,11 @@ module MongoAdmin
         # Force the collection to be created in the database.
         collection.create
       rescue Mongo::Error::OperationFailure => err
-        flash[:danger] = "MongoDB Error: `#{err.message}'"
+        flash[:danger] = I18n.t('mongodb_error', message: err.message)
         redirect "/db/#{db_name}"
       end
 
-      flash[:info] = 'Collection successfully created.'
+      flash[:info] = I18n.t('collection_created')
       redirect "/db/#{db_name}/#{collection_name}"
     end
 
@@ -81,7 +81,7 @@ module MongoAdmin
       check_collection_exists(@db, db_name, source_collection_name)
 
       unless /^[a-zA-Z_][a-zA-Z0-9\._]*$/ =~ target_collection_name
-        flash[:danger] = 'Collection names must begin with a letter or underscore, and can contain only letters, underscores, numbers or dots.'
+        flash[:danger] = I18n.t('collection_validates_name_error')
         redirect "/db/#{db_name}/#{source_collection_name}"
       end
 
@@ -91,11 +91,11 @@ module MongoAdmin
           to:               "#{db_name}.#{target_collection_name}"
         })
       rescue Mongo::Error::OperationFailure => err
-        flash[:danger] = "MongoDB Error: `#{err.message}'"
+        flash[:danger] = I18n.t('mongodb_error', message: err.message)
         redirect "/db/#{db_name}/#{source_collection_name}"
       end
 
-      flash[:info] = 'Collection successfully renamed.'
+      flash[:info] = I18n.t('collection_renamed')
       redirect "/db/#{db_name}/#{target_collection_name}"
     end
 
@@ -113,11 +113,11 @@ module MongoAdmin
       begin
         collection.drop
       rescue Mongo::Error::OperationFailure => err
-        flash[:danger] = "MongoDB Error: `#{err.message}'"
+        flash[:danger] = I18n.t('mongodb_error', message: err.message)
         redirect "/db/#{db_name}"
       end
 
-      flash[:info] = 'Collection successfully removed.'
+      flash[:info] = I18n.t('collection_deleted')
       redirect "/db/#{db_name}"
     end
 

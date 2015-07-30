@@ -3,11 +3,11 @@
 
 ol class="breadcrumb"
   li
-    a href="/" Home
+    a href="/" = I18n.t('home')
   li class="active" = @db_name
 
 div.page-header
-  h1 Viewing Database: #{@db_name}
+  h1 = I18n.t('viewing_database', database: @db_name)
 
 div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"
   div class="panel panel-primary"
@@ -15,25 +15,25 @@ div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true
       h4 class="panel-title"
         a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseStats" aria-expanded="true" aria-controls="collapseStats"
           i class="fa fa-chevron fa-fw"
-          | Database Stats
+          = I18n.t('database_stats.database_stats')
     div id="collapseStats" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingStats"
       div class="panel-body"
         table class="table table-bordered table-striped"
           tr
             td class="col-md-2"
-              strong Collections (including system.namespaces)
+              strong = I18n.t('database_stats.collections')
             td class="col-md-3" = @stats['collections']
           tr
             td
-              strong Data Size
+              strong = I18n.t('database_stats.data_size')
             td= number_to_human_size(@stats['dataSize'])
           tr
             td
-              strong Storage Size
+              strong = I18n.t('database_stats.storage_size')
             td= number_to_human_size(@stats['storageSize'])
           tr
             td
-              strong File Size (on disk)
+              strong = I18n.t('database_stats.file_size')
             td= number_to_human_size(@stats['fileSize'])
 
 - unless @db_name == 'admin'
@@ -41,9 +41,9 @@ div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true
     input type="hidden" name="_method" value="delete"
     button type="submit" class="btn btn-danger btn-lg deleteDatabaseButton" data-toggle="modal" data-target="confirmDatabaseDeletion" database-name="#{@db_name}"
       i class="fa fa-trash"
-        | Drop Database
+      = I18n.t('drop_database')
 
-h2 Create Collection
+h2 = I18n.t('create_collection')
 form class="form-inline well" method="POST"
   div class="form-group"
     label class="sr-only" for="collection" Collection Name
@@ -52,18 +52,20 @@ form class="form-inline well" method="POST"
       input type="text" class="form-control" id="collection" name="collection" placeholder="Collection Name"
     button type="submit" class="btn btn-primary"
       i class="fa fa-plus"
-        | Create Collection
+      = I18n.t('create_collection')
 
-h2 Collections
+h2 = I18n.t('collections')
 table class="table table-bordered table-striped table-condensed"
   - @collections.each do |collection|
     tr
       td class="col-md-2"
         a href="/db/#{@db_name}/#{collection}" class="btn btn-success btn-block"
-          i class="fa fa-list-alt" View
+          i class="fa fa-list-alt"
+          = I18n.t('view')
       td class="col-md-2"
         a href="/db/#{@db_name}/export/#{collection}" class="btn btn-warning btn-block"
-          i class="fa fa-download" Export
+          i class="fa fa-download"
+          = I18n.t('export')
       td
         h4
           a href="/db/#{@db_name}/#{collection}" = collection
@@ -72,4 +74,4 @@ table class="table table-bordered table-striped table-condensed"
           input type="hidden" name="_method" value="delete"
           button type="submit" class="btn btn-danger btn-block deleteCollectionButton" data-toggle="modal" data-target="confirmCollectionDeletion" collection-name="#{collection}"
             i class="fa fa-trash"
-              | Delete
+            = I18n.t('delete')

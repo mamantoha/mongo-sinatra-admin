@@ -22,10 +22,10 @@ div id="confirmDeletionDocument" class="modal fade" role="dialog"
       div.modal-header
         button type="button" class="close" data-dismiss="modal" aria-label="Close"
           span aria-hidden="true" &times;
-        h4.modal-title Delete Document
+        h4.modal-title = I18n.t('delete_document')
       div.modal-body
         p.text-danger
           | Be careful! You are about to delete document with id '<strong><span id="deletion-document-id"></span></strong>'.
       div.modal-footer
-        button type="button" class="btn btn-default" data-dismiss="modal" Close
-        button#deleteDocument type="button" class="btn btn-danger" Delete
+        button type="button" class="btn btn-default" data-dismiss="modal" = I18n.t('close')
+        button#deleteDocument type="button" class="btn btn-danger" = I18n.t('delete')
