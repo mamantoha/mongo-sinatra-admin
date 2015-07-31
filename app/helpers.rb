@@ -38,6 +38,17 @@ module MongoAdmin
         end
       end
 
+      def set_locale
+        I18n.locale = settings.locale || I18n.default_locale
+      end
+
+      def available_locales
+        [
+          { name: I18n.t('locales.english'), locale: 'en'},
+          { name: 'Pseudolocalization', locale: 'fr'},
+        ]
+      end
+
     end
   end
 end

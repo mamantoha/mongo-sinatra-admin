@@ -33,6 +33,7 @@ module MongoAdmin
       set :root, (settings.root || File.dirname(__FILE__))
       set :config_file, JSON.load(File.open("config_#{ENV['RACK_ENV']}.json"))
       set :method_override, true
+      set :locale, I18n.default_locale
 
       I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
       I18n.default_locale = :en
@@ -41,8 +42,10 @@ module MongoAdmin
       I18n.enforce_available_locales = false
     end
 
-    before /^(?!\/(error))/ do
+    before /^(?!\/(error|locale))/ do
       protected!
+      set_locale
+      @locales = available_locales
 
       begin
         @db = DB.new(settings.config_file)
@@ -51,9 +54,11 @@ module MongoAdmin
       end
     end
 
+
+
     enable :sessions
 
-    use Rack::Locale
+    # use Rack::Locale
 
     register Sinatra::Flash
   end

@@ -7,7 +7,7 @@ div class="well"
       li class="list-group-item"
         a href="/db/#{db}"
           i class="fa fa-folder-open"
-          = I18n.t('view_database')
+          = I18n.t(:view_database)
       ul class="collapse list-group header #{db == @db_name ? 'in' : ''}" id="toggle_#{db}"
         - @db.collections[db].each do |collection|
           li class="list-group-item"

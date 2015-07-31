@@ -32,6 +32,16 @@ html
               a href="/" = I18n.t('home')
             li
               a href="#" = I18n.t('about')
+            li.dropdown
+              a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                = I18n.t('language')
+                span class="caret"
+              ul class="dropdown-menu"
+                - @locales.each do |locale|
+                  li
+                    form action="/locale" method="POST"
+                      input type="hidden" name="locale" value="#{locale[:locale]}"
+                      button type="submit" class="btn btn-link" = locale[:name]
 
     div.container
       - if flash

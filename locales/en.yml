@@ -9,6 +9,10 @@ en:
   warning: 'Warning'
   home: 'Home'
   about: 'About'
+  language: 'Language'
+  locales:
+    english: 'English'
+    ukrainian: 'Ukrainian'
   view_database: 'View Database'
   delete_database: "Delete Database"
   drop_database: 'Drop Database'
