@@ -46,14 +46,18 @@ module MongoAdmin
     post '/db/:database/:collection' do
       db_name = params['database']
       collection_name = params['collection']
-      document = params['document']
+      document_text = params['document']
 
       check_database_exists(@db, db_name)
       check_collection_exists(@db, db_name, collection_name)
 
       begin
-        document = JSON.load(document)
+        document_json = JSON.load(document_text)
       rescue JSON::ParserError => err
+        document_json = nil
+      end
+
+      unless document_json
         flash[:danger] = I18n.t('document_invalid_json')
         redirect "/db/#{db_name}/#{collection_name}"
       end
@@ -61,7 +65,7 @@ module MongoAdmin
       client = @db.connect(db_name)
       collection = client[collection_name]
 
-      result = collection.insert_one(document)
+      result = collection.insert_one(document_json)
       result.n # => returns 1, because 1 document was inserted
       document_id = result.inserted_id
 
@@ -89,6 +93,10 @@ module MongoAdmin
       begin
         document_json = JSON.load(document_text)
       rescue JSON::ParserError => err
+        document_json = nil
+      end
+
+      unless document_json
         flash[:danger] = I18n.t('document_invalid_json')
         redirect "/db/#{db_name}/#{collection_name}/#{document_id}"
       end

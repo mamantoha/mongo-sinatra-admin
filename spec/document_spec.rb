@@ -30,6 +30,15 @@ describe "Document" do
       end
     end
 
+    context 'when document is empty' do
+      it 'is not successful' do
+        post "/db/#{TEST_DB}/#{TEST_COLLECTION}", params = { document: '' }
+
+        expect(last_response.status).to eq 302
+        expect(last_request.session['flash']).to eq({:danger=>"Document is not valid JSON."})
+      end
+    end
+
   end
 
   describe "show" do
@@ -93,7 +102,6 @@ describe "Document" do
     let(:document) { collection.find.first }
 
     context 'when exists' do
-
       it 'is successful' do
         put "/db/#{TEST_DB}/#{TEST_COLLECTION}/#{document['_id']}", params = { document: { name: 'test' }.to_json }
 
@@ -114,6 +122,15 @@ describe "Document" do
     context 'when document is now valid json' do
       it 'is not successful' do
         put "/db/#{TEST_DB}/#{TEST_COLLECTION}/#{document['_id']}", params = { document: 'invalid json' }
+
+        expect(last_response.status).to eq 302
+        expect(last_request.session['flash']).to eq({:danger=>"Document is not valid JSON."})
+      end
+    end
+
+    context 'when document is empty' do
+      it 'is not successful' do
+        put "/db/#{TEST_DB}/#{TEST_COLLECTION}/#{document['_id']}", params = { document: '' }
 
         expect(last_response.status).to eq 302
         expect(last_request.session['flash']).to eq({:danger=>"Document is not valid JSON."})
