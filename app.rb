@@ -54,7 +54,9 @@ module MongoAdmin
       end
     end
 
-
+    after do
+      @db.client.close if @db
+    end
 
     enable :sessions
 

@@ -29,7 +29,7 @@ module MongoAdmin
 
       @title = I18n.t('viewing_document', document: @document_id)
 
-      client = @db.connect(@db_name)
+      client = @db.client.use(@db_name)
       collection = client[@collection_name]
 
       @document = collection.find({_id: @document_id}).first
@@ -62,7 +62,7 @@ module MongoAdmin
         redirect "/db/#{db_name}/#{collection_name}"
       end
 
-      client = @db.connect(db_name)
+      client = @db.client.use(db_name)
       collection = client[collection_name]
 
       result = collection.insert_one(document_json)
@@ -104,7 +104,7 @@ module MongoAdmin
       # IMPORTANT! You can not change Object ID
       document_json.delete('_id')
 
-      client = @db.connect(db_name)
+      client = @db.client.use(db_name)
       collection = client[collection_name]
 
       document = collection.find({_id: document_id})
@@ -135,7 +135,7 @@ module MongoAdmin
         redirect "/db/#{db_name}/#{collection_name}"
       end
 
-      client = @db.connect(db_name)
+      client = @db.client.use(db_name)
       collection = client[collection_name]
 
       document = collection.find({_id: document_id})

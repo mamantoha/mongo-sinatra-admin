@@ -1,7 +1,10 @@
 source 'https://rubygems.org'
 
 gem 'actionview'
-gem 'mongo'
+# FIXME use master branch until the changes are not in the gem
+# https://groups.google.com/forum/#!topic/mongodb-user/6IwxmpbGsxA
+# gem 'mongo'
+gem 'mongo', git: 'git@github.com:mongodb/mongo-ruby-driver.git', branch: 'master'
 gem 'puma'
 gem 'sinatra'
 gem 'sinatra-flash'

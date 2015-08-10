@@ -10,7 +10,7 @@ module MongoAdmin
 
       @title = I18n.t('viewing_database', database: @db_name)
 
-      client = @db.connect(@db_name)
+      client = @db.client.use(@db_name)
       stats = client.command(dbStats: 1)
       @stats = stats.documents.first
 
@@ -27,7 +27,7 @@ module MongoAdmin
 
       check_database_exists(@db, db_name)
 
-      client = @db.connect(db_name)
+      client = @db.client.use(db_name)
 
       begin
         client.database.drop

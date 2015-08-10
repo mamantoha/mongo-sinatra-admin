@@ -9,7 +9,7 @@ module MongoAdmin
       check_database_exists(@db, db_name)
       check_collection_exists(@db, db_name, collection_name)
 
-      client = @db.connect(db_name)
+      client = @db.client.use(db_name)
       collection = client[collection_name]
 
       documents = collection.find
@@ -29,7 +29,7 @@ module MongoAdmin
 
       @title = I18n.t('viewing_collection', collection: @collection_name)
 
-      client = @db.connect(@db_name)
+      client = @db.client.use(@db_name)
       collection = client[@collection_name]
 
       stats = client.command(collStats: @collection_name)
@@ -56,7 +56,7 @@ module MongoAdmin
         redirect "/db/#{db_name}"
       end
 
-      client = @db.connect(db_name)
+      client = @db.client.use(db_name)
       collection = client[collection_name]
 
       begin
@@ -86,7 +86,7 @@ module MongoAdmin
       end
 
       begin
-        @db.admin_db.command({
+        @db.client.command({
           renameCollection: "#{db_name}.#{source_collection_name}",
           to:               "#{db_name}.#{target_collection_name}"
         })
@@ -107,7 +107,7 @@ module MongoAdmin
       check_database_exists(@db, db_name)
       check_collection_exists(@db, db_name, collection_name)
 
-      client = @db.connect(db_name)
+      client = @db.client.use(db_name)
       collection = client[collection_name]
 
       begin
