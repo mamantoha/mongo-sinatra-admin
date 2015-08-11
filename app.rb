@@ -8,7 +8,7 @@ require 'mongo'
 require 'hashie/mash'
 require 'i18n'
 require 'i18n/backend/fallbacks'
-require 'byebug'
+require 'pry'
 
 require 'action_view'
 
