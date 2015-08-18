@@ -17,6 +17,11 @@ module MongoAdmin
       redirect back
     end
 
+    get '/about' do
+      slim :about
+    end
+
+
   end
 end
 
