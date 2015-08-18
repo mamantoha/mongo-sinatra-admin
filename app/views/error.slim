@@ -1,0 +1,48 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="viewport" content="width=device-width, initial-scale=1"
+
+    title= @title || 'Mongo Sinatra Admin'
+
+    link rel="icon" href="/favicon.png"
+
+    link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+    link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"
+    link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    link rel="stylesheet" href="/app.css"
+
+    script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"
+    script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+  body
+    nav class="navbar navbar-inverse navbar-fixed-top"
+      div.container
+        div class="navbar-header"
+          button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-targer="#navbar" aria-expanded="false" aria-controls="navbar"
+            span class="sr-only" Toggle navigation
+            span class="icon-bar"
+            span class="icon-bar"
+            span class="icon-bar"
+          a class="navbar-brand" href="#" Mongo Sinatra Admin
+        div#navbar class="collapse navbar-collapse"
+          ul class="nav navbar-nav"
+            li class="active"
+              a href="/" Home
+            li
+              a href="#" About
+
+    div.container
+      div.row
+        div class="col-md-12"
+          div.error-template
+            h1 Oops!
+            h2 Unknown error occurs
+            div.error-details
+              | Sorry, an error has occured, Requested page not found!
+    footer.footer
+      div.container
+        p class="text-muted"
+          | Company 2015
+
