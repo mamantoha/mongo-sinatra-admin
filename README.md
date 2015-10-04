@@ -37,3 +37,9 @@ rackup
 ### To use
 
 Visit `http://localhost:9292` or whatever URL/port you enterd into you config.
+
+### Run specs:
+
+```
+bundle exec rake specs
+```
