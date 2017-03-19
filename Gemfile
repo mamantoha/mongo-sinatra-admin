@@ -10,8 +10,8 @@ gem 'hashie'
 gem 'i18n'
 gem 'rack-contrib'
 
-group :development do
-  gem 'pry'
+group :developmenti, :test do
+  gem 'byebug'
 end
 
 group :test do

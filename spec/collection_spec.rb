@@ -40,7 +40,7 @@ describe "Collection" do
         post "/db/#{TEST_DB}", params = { collection: TEST_COLLECTION }
 
         expect(last_response.status).to eq 302
-        expect(last_request.session['flash']).to eq({:danger=>"MongoDB Error: `collection already exists ()'"})
+        expect(last_request.session['flash'][:danger]).to match(/MongoDB Error: `a collection '#{TEST_DB}.#{TEST_COLLECTION}' already exists \(\d+\)/)
       end
     end
 
@@ -82,7 +82,7 @@ describe "Collection" do
         put "/db/#{TEST_DB}/#{TEST_COLLECTION}", params = { target_name: 'new_test_collection' }
 
         expect(last_response.status).to eq 302
-        expect(last_request.session['flash']).to eq({:danger=>"MongoDB Error: `target namespace exists ()'"})
+        expect(last_request.session['flash'][:danger]).to match(/MongoDB Error: `target namespace exists \(\d+\)/)
       end
     end
 
