@@ -44,8 +44,8 @@ module MongoAdmin
 
       def available_locales
         [
-          { name: I18n.t('locales.english'), locale: 'en'},
-          { name: 'Pseudolocalization', locale: 'fr'},
+          { name: I18n.t('locales.english'), locale: 'en' },
+          { name: I18n.t('locales.pseudolocalization'), locale: 'en-ZZ' },
         ]
       end
 
