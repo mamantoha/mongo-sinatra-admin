@@ -48,3 +48,12 @@ ul.header > li.list-group-item > a > i.fa::before{
 .btn-vertical {
   margin-bottom: 2px;
 }
+
+.navbar-inverse .dropdown-menu-item:hover {
+  background: #e8e8e8;
+}
+
+.navbar-inverse .btn-link:hover {
+  color: #9d9d9d;
+  text-decoration: none;
+}
