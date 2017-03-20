@@ -9,9 +9,10 @@ gem 'slim'
 gem 'hashie'
 gem 'i18n'
 gem 'rack-contrib'
+gem 'rake'
 
 group :developmenti, :test do
-  gem 'byebug'
+  gem 'pry'
 end
 
 group :test do

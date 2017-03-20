@@ -28,6 +28,12 @@ Copy or rename `config.json.example` into a new file. For development environmen
 
 Fill in your MongoDB connection details, and any other options you want to change.
 
+Create pseudo localization locale and generate `locales/en-ZZ.yml`:
+
+```
+bundle exec rake i18n:export_pseudo_i18n
+```
+
 ### To run
 
 ```
