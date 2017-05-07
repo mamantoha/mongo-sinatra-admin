@@ -49,6 +49,10 @@ module MongoAdmin
         ]
       end
 
+      def format_time_in_seconds(seconds)
+        Time.at(seconds).utc.strftime("%H:%M:%S")
+      end
+
     end
   end
 end

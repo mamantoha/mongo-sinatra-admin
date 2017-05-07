@@ -8,6 +8,7 @@ require 'mongo'
 require 'hashie/mash'
 require 'i18n'
 require 'i18n/backend/fallbacks'
+require 'pry'
 
 require 'action_view'
 
@@ -41,7 +42,7 @@ module MongoAdmin
       I18n.enforce_available_locales = false
     end
 
-    before /(?!\/(error|locale))/ do
+    before  do
       protected!
       set_locale
       @locales = available_locales
