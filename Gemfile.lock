@@ -12,7 +12,7 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    bson (3.2.6)
+    bson (4.2.1)
     builder (3.2.3)
     coderay (1.1.1)
     concurrent-ruby (1.0.5)
@@ -25,8 +25,8 @@ GEM
     method_source (0.8.2)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
-    mongo (2.1.2)
-      bson (~> 3.0)
+    mongo (2.4.1)
+      bson (>= 4.2.1, < 5.0.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
     pry (0.10.4)
@@ -83,7 +83,7 @@ DEPENDENCIES
   actionview
   hashie
   i18n
-  mongo (~> 2.1.1)
+  mongo (~> 2.4)
   pry
   puma
   rack-contrib
