@@ -40,7 +40,7 @@ describe "Collection" do
         post "/db/#{TEST_DB}", params = { collection: TEST_COLLECTION }
 
         expect(last_response.status).to eq 302
-        expect(last_request.session['flash'][:danger]).to match(/MongoDB Error: `(.*) already exists \((\d+)\)/)
+        expect(last_request.session['flash'][:danger]).to match(/MongoDB Error: `(.*) already exists \((\d*)\)/)
       end
     end
 
