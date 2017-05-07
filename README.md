@@ -1,5 +1,7 @@
 # mongo-sinatra-admin
 
+[![Build Status][travis_badge]][travis]
+
 Web-based MongoDB admin interface written with Ruby and Sinatra
 
 > **WARNING**: This is a development version: Currently under heavy development.
@@ -49,3 +51,6 @@ Visit `http://localhost:9292` or whatever URL/port you enterd into you config.
 ```
 bundle exec rake specs
 ```
+
+[travis_badge]: http://img.shields.io/travis/mamantoha/mongo-sinatra-admin.svg?style=flat
+[travis]: https://travis-ci.org/mamantoha/mongo-sinatra-admin

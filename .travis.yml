@@ -1,0 +1,15 @@
+language: ruby
+
+services:
+  - mongodb
+
+bundler_args: --without development
+
+rvm:
+  - 2.4.1
+  - 2.3.3
+
+gemfile:
+  - Gemfile
+
+sudo: false
