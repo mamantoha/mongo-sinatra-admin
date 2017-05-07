@@ -26,18 +26,18 @@ module MongoAdmin
         update_collections!(db_name)
       end
 
-      return @client
+      @client
     end
 
     private
 
     def connect!(database = 'admin')
       host = @config.mongodb.host || 'localhost'
-      port = @config.mongodb.port || 27017
+      port = @config.mongodb.port || 27_017
 
       @client = Mongo::Client.new("mongodb://#{host}:#{port}", database: database)
 
-      return true
+      true
     end
 
     # update database list
@@ -53,7 +53,7 @@ module MongoAdmin
 
       @databases = databases.sort
 
-      return @databases
+      @databases
     end
 
     # update the collection list
@@ -66,8 +66,7 @@ module MongoAdmin
 
       db_client.close
 
-      return @collections
+      @collections
     end
-
   end
 end

@@ -1,6 +1,5 @@
 module MongoAdmin
   class App < Sinatra::Base
-
     # Export Collection
     get '/db/:database/export/:collection' do
       db_name = params['database']
@@ -86,10 +85,8 @@ module MongoAdmin
       end
 
       begin
-        @db.client.command({
-          renameCollection: "#{db_name}.#{source_collection_name}",
-          to:               "#{db_name}.#{target_collection_name}"
-        })
+        @db.client.command(renameCollection: "#{db_name}.#{source_collection_name}",
+                           to:               "#{db_name}.#{target_collection_name}")
       rescue Mongo::Error::OperationFailure => err
         flash[:danger] = I18n.t('mongodb_error', message: err.message)
         redirect "/db/#{db_name}/#{source_collection_name}"
@@ -120,7 +117,5 @@ module MongoAdmin
       flash[:info] = I18n.t('collection_deleted')
       redirect "/db/#{db_name}"
     end
-
   end
 end
-

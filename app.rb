@@ -42,7 +42,7 @@ module MongoAdmin
       I18n.enforce_available_locales = false
     end
 
-    before  do
+    before do
       protected!
       set_locale
       @locales = available_locales

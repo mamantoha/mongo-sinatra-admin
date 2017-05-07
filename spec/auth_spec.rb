@@ -1,9 +1,9 @@
 require_relative 'spec_helper'
 
-describe "Basic Auth" do
+describe 'Basic Auth' do
   context 'when useBasicAuth is disabled in config' do
     before do
-      app.config_file = {"mongodb"=>{"server"=>"localhost", "port"=>"27017"}, "useBasicAuth"=>false, "options"=>{"documentsPerPage"=>2}}
+      app.config_file = { 'mongodb' => { 'server' => 'localhost', 'port' => '27017' }, 'useBasicAuth' => false, 'options' => { 'documentsPerPage' => 2 } }
     end
 
     context 'get /' do
@@ -35,7 +35,7 @@ describe "Basic Auth" do
 
     context 'get / without proper credentials' do
       before do
-        authorize "invalid", "invalid"
+        authorize 'invalid', 'invalid'
         get '/'
       end
 
@@ -43,6 +43,5 @@ describe "Basic Auth" do
         expect(last_response.status).to eq 401
       end
     end
-
   end
 end

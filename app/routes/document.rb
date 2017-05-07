@@ -1,6 +1,5 @@
 module MongoAdmin
   class App < Sinatra::Base
-
     get '/db/:database/:collection/new' do
       @db_name = params['database']
       @collection_name = params['collection']
@@ -32,7 +31,7 @@ module MongoAdmin
       client = @db.client.use(@db_name)
       collection = client[@collection_name]
 
-      @document = collection.find({_id: @document_id}).first
+      @document = collection.find(_id: @document_id).first
 
       if @document
         slim :'document/edit'
@@ -107,7 +106,7 @@ module MongoAdmin
       client = @db.client.use(db_name)
       collection = client[collection_name]
 
-      document = collection.find({_id: document_id})
+      document = collection.find(_id: document_id)
 
       if document.first
         document.replace_one(document_json)
@@ -138,7 +137,7 @@ module MongoAdmin
       client = @db.client.use(db_name)
       collection = client[collection_name]
 
-      document = collection.find({_id: document_id})
+      document = collection.find(_id: document_id)
 
       if document.first
         document.delete_one
@@ -148,8 +147,6 @@ module MongoAdmin
         flash[:danger] = I18n.t('document_not_found')
         redirect "/db/#{db_name}/#{collection_name}"
       end
-
     end
   end
 end
-

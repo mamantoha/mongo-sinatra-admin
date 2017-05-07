@@ -1,6 +1,5 @@
 module MongoAdmin
   class App < Sinatra::Base
-
     get '/' do
       info = @db.client.command(serverStatus: 1)
 
@@ -20,8 +19,5 @@ module MongoAdmin
     get '/about' do
       slim :about
     end
-
-
   end
 end
-
