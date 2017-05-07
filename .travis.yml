@@ -1,5 +1,8 @@
 language: ruby
 
+services:
+  - mongodb
+
 bundler_args: --without development
 
 rvm:
