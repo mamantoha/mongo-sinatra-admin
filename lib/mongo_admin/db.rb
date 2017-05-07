@@ -1,13 +1,17 @@
 require 'mongo'
 
 module MongoAdmin
+  class Config < Hashie::Mash
+    disable_warnings
+  end
+
   class DB
     attr_reader :config
     attr_reader :client
     attr_reader :databases, :collections
 
     def initialize(config)
-      @config = Hashie::Mash.new(config)
+      @config = Config.new(config)
 
       @databases = []
       @collections = {}
