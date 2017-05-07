@@ -1,6 +1,7 @@
 # mongo-sinatra-admin
 
 [![Build Status][travis_badge]][travis]
+[![Code Climate][codeclimate_badge]][codeclimate]
 
 Web-based MongoDB admin interface written with Ruby and Sinatra
 
@@ -54,3 +55,6 @@ bundle exec rake specs
 
 [travis_badge]: http://img.shields.io/travis/mamantoha/mongo-sinatra-admin.svg?style=flat
 [travis]: https://travis-ci.org/mamantoha/mongo-sinatra-admin
+
+[codeclimate_badge]: http://img.shields.io/codeclimate/github/mamantoha/mongo-sinatra-admin.svg?style=flat
+[codeclimate]: https://codeclimate.com/github/mamantoha/mongo-sinatra-admin
