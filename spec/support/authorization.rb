@@ -5,8 +5,12 @@ TEST_DB = 'mongo_sinatra_test'.freeze
 TEST_COLLECTION = 'collection_test'.freeze
 
 # The seed addresses to be used when creating a client.
-ADDRESSES = ENV['MONGODB_ADDRESSES'] ? ENV['MONGODB_ADDRESSES'].split(',').freeze :
-  ['127.0.0.1:27017'].freeze
+ADDRESSES =
+  if ENV['MONGODB_ADDRESSES']
+    ENV['MONGODB_ADDRESSES'].split(',').freeze
+  else
+    ['127.0.0.1:27017'].freeze
+  end
 
 USERNAME = 'admin'.freeze
 PASSWORD = 'pass'.freeze

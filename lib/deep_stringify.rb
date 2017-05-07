@@ -1,4 +1,4 @@
-class Hash
+class Hash # :nodoc:
   def deep_stringify_hash!(marker = '&&&')
     keys.each do |key|
       new_key = key.to_s
@@ -25,7 +25,7 @@ class Hash
   end
 end
 
-class Array
+class Array # :nodoc:
   def deep_stringify_array!(marker = '&&&')
     each_with_index do |val, i|
       if val.is_a?(Hash)

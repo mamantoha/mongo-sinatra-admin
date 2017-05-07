@@ -23,7 +23,7 @@ include ActionView::Helpers::NumberHelper
 include ActionView::Helpers::DateHelper
 
 module MongoAdmin
-  class App < Sinatra::Base
+  class App < Sinatra::Base # :nodoc:
     Mongo::Logger.logger.level = Logger::WARN
 
     configure do
@@ -49,7 +49,7 @@ module MongoAdmin
 
       begin
         @db = DB.new(settings.config_file)
-      rescue => err
+      rescue
         redirect '/error'
       end
     end
@@ -66,7 +66,7 @@ module MongoAdmin
   end
 end
 
-require_relative 'lib/sinatra-flash'
+require_relative 'lib/sinatra_flash'
 
 require_relative 'app/helpers'
 

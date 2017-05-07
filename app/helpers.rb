@@ -1,5 +1,5 @@
 module MongoAdmin
-  class App < Sinatra::Base
+  class App < Sinatra::Base # :nodoc:
     helpers do
       def protected!
         return unless settings.config_file['useBasicAuth']
@@ -24,18 +24,18 @@ module MongoAdmin
 
       # Check if Database exists
       def check_database_exists(db, db_name)
-        unless db.collections.include?(db_name)
-          flash[:danger] = I18n.t('database_not_found', database: db_name)
-          redirect '/'
-        end
+        return if db.collections.include?(db_name)
+
+        flash[:danger] = I18n.t('database_not_found', database: db_name)
+        redirect '/'
       end
 
       # Check if Collection exists
       def check_collection_exists(db, db_name, collection_name)
-        unless db.collections[db_name].include?(collection_name)
-          flash[:danger] = I18n.t('collection_not_found', collection: collection_name)
-          redirect "/db/#{db_name}"
-        end
+        return if db.collections[db_name].include?(collection_name)
+
+        flash[:danger] = I18n.t('collection_not_found', collection: collection_name)
+        redirect "/db/#{db_name}"
       end
 
       def set_locale

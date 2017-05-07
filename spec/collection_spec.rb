@@ -36,7 +36,7 @@ describe 'Collection' do
 
     context 'when Collection already exists' do
       it 'should fail' do
-        post "/db/#{TEST_DB}", params = { collection: TEST_COLLECTION }
+        post "/db/#{TEST_DB}", collection: TEST_COLLECTION
 
         expect(last_response.status).to eq 302
         expect(last_request.session['flash'][:danger]).to match(/MongoDB Error: `(.*) already exists \((\d*)\)/)
@@ -45,7 +45,7 @@ describe 'Collection' do
 
     context 'when Collection name is not valid' do
       it 'should fail' do
-        post "/db/#{TEST_DB}", params = { collection: 'хуйня' }
+        post "/db/#{TEST_DB}", collection: 'хуйня'
 
         expect(last_response.status).to eq 302
         expect(last_request.session['flash']).to eq(danger: 'Collection names must begin with a letter or underscore, and can contain only letters, underscores, numbers or dots.')
@@ -54,7 +54,7 @@ describe 'Collection' do
 
     context 'when Collection not exists' do
       it 'should create new' do
-        post "/db/#{TEST_DB}", params = { collection: 'new_test_collection' }
+        post "/db/#{TEST_DB}", collection: 'new_test_collection'
 
         expect(last_response.status).to eq 302
         expect(last_request.session['flash']).to eq(info: 'Collection successfully created.')
@@ -77,7 +77,7 @@ describe 'Collection' do
 
     context 'when Collection name already taken' do
       it 'should fail' do
-        put "/db/#{TEST_DB}/#{TEST_COLLECTION}", params = { target_name: 'new_test_collection' }
+        put "/db/#{TEST_DB}/#{TEST_COLLECTION}", target_name: 'new_test_collection'
 
         expect(last_response.status).to eq 302
         expect(last_request.session['flash'][:danger]).to match(/MongoDB Error: `(.*)target namespace exists \(\d+\)/)
@@ -86,7 +86,7 @@ describe 'Collection' do
 
     context 'when Collection name is not valid' do
       it 'should fail' do
-        put "/db/#{TEST_DB}/#{TEST_COLLECTION}", params = { target_name: 'хуйня' }
+        put "/db/#{TEST_DB}/#{TEST_COLLECTION}", target_name: 'хуйня'
 
         expect(last_response.status).to eq 302
         expect(last_request.session['flash']).to eq(danger: 'Collection names must begin with a letter or underscore, and can contain only letters, underscores, numbers or dots.')
@@ -95,7 +95,7 @@ describe 'Collection' do
 
     context 'when Collection not exists' do
       it 'should rename' do
-        put "/db/#{TEST_DB}/#{TEST_COLLECTION}", params = { target_name: 'super_new_test_collection' }
+        put "/db/#{TEST_DB}/#{TEST_COLLECTION}", target_name: 'super_new_test_collection'
 
         expect(last_response.status).to eq 302
         expect(last_request.session['flash']).to eq(info: 'Collection successfully renamed.')

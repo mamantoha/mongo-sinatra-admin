@@ -30,7 +30,7 @@ namespace :i18n do
   task :export_pseudo_i18n do
     symbol = "\u221a"
     en_tokens = I18n.backend.send(:translations)[:en].deep_stringify_hash!
-    data = { 'en-ZZ' => en_tokens }.to_yaml.gsub(/&&&&&&/, "#{symbol}#{symbol}").gsub(/&&&&/, '').gsub(/&&&/, symbol).gsub(/(?<=\s)!ruby\/symbol /, ':')
+    data = { 'en-ZZ' => en_tokens }.to_yaml.gsub(/&&&&&&/, "#{symbol}#{symbol}").gsub(/&&&&/, '').gsub(/&&&/, symbol).gsub(%r{(?<=\s)!ruby\/symbol }, ':')
 
     File.open('locales/en-ZZ.yml', 'w+') do |f|
       f.write(data)

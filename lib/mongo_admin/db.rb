@@ -1,11 +1,11 @@
 require 'mongo'
 
 module MongoAdmin
-  class Config < Hashie::Mash
+  class Config < Hashie::Mash # :nodoc:
     disable_warnings
   end
 
-  class DB
+  class DB # :nodoc:
     attr_reader :config
     attr_reader :client
     attr_reader :databases, :collections

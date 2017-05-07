@@ -1,5 +1,5 @@
 module MongoAdmin
-  class App < Sinatra::Base
+  class App < Sinatra::Base # :nodoc:
     get '/db/:database/:collection/new' do
       @db_name = params['database']
       @collection_name = params['collection']
@@ -51,8 +51,8 @@ module MongoAdmin
       check_collection_exists(@db, db_name, collection_name)
 
       begin
-        document_json = JSON.load(document_text)
-      rescue JSON::ParserError => err
+        document_json = JSON.parse(document_text)
+      rescue JSON::ParserError
         document_json = nil
       end
 
@@ -90,8 +90,8 @@ module MongoAdmin
       end
 
       begin
-        document_json = JSON.load(document_text)
-      rescue JSON::ParserError => err
+        document_json = JSON.parse(document_text)
+      rescue JSON::ParserError
         document_json = nil
       end
 
@@ -142,11 +142,11 @@ module MongoAdmin
       if document.first
         document.delete_one
         flash[:info] = I18n.t('document_deleted')
-        redirect "/db/#{db_name}/#{collection_name}"
       else
         flash[:danger] = I18n.t('document_not_found')
-        redirect "/db/#{db_name}/#{collection_name}"
       end
+
+      redirect "/db/#{db_name}/#{collection_name}"
     end
   end
 end

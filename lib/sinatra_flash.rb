@@ -1,6 +1,6 @@
 module Sinatra
   module Flash
-    module Style
+    module Style # :nodoc:
       def styled_flash(key = :flash)
         return '' if flash(key).empty?
         id = (key == :flash ? 'flash' : "flash_#{key}")
