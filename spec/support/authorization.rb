@@ -6,10 +6,10 @@ TEST_COLLECTION = 'collection_test'.freeze
 
 # The seed addresses to be used when creating a client.
 ADDRESSES = ENV['MONGODB_ADDRESSES'] ? ENV['MONGODB_ADDRESSES'].split(',').freeze :
-  [ '127.0.0.1:27017' ].freeze
+  ['127.0.0.1:27017'].freeze
 
-USERNAME = 'admin'
-PASSWORD = 'pass'
+USERNAME = 'admin'.freeze
+PASSWORD = 'pass'.freeze
 
 CLIENT = Mongo::Client.new(ADDRESSES, database: TEST_DB)
 
@@ -17,8 +17,8 @@ module Authorization
   def self.included(context)
     context.let(:client) { CLIENT }
 
-    context.let(:config_file) {
-      {"mongodb"=>{"server"=>"localhost", "port"=>"27017"}, "useBasicAuth"=>true, "basicAuth"=>{"username"=>USERNAME, "password"=>PASSWORD}, "options"=>{"documentsPerPage"=>2}}
-    }
+    context.let(:config_file) do
+      { 'mongodb' => { 'server' => 'localhost', 'port' => '27017' }, 'useBasicAuth' => true, 'basicAuth' => { 'username' => USERNAME, 'password' => PASSWORD }, 'options' => { 'documentsPerPage' => 2 } }
+    end
   end
 end

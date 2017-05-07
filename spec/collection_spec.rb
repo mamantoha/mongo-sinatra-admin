@@ -1,8 +1,7 @@
 require_relative 'spec_helper'
 
-describe "Collection" do
-
-  describe "view" do
+describe 'Collection' do
+  describe 'view' do
     before do
       app.config_file = config_file
 
@@ -23,12 +22,12 @@ describe "Collection" do
         get "/db/#{TEST_DB}/invalid_collection"
 
         expect(last_response.status).to eq 302
-        expect(last_request.session['flash']).to eq({:danger => "Collection <strong>invalid_collection</strong> does not exist."})
+        expect(last_request.session['flash']).to eq(danger: 'Collection <strong>invalid_collection</strong> does not exist.')
       end
     end
   end
 
-  describe "create" do
+  describe 'create' do
     before do
       app.config_file = config_file
 
@@ -49,7 +48,7 @@ describe "Collection" do
         post "/db/#{TEST_DB}", params = { collection: 'хуйня' }
 
         expect(last_response.status).to eq 302
-        expect(last_request.session['flash']).to eq({:danger=>"Collection names must begin with a letter or underscore, and can contain only letters, underscores, numbers or dots."})
+        expect(last_request.session['flash']).to eq(danger: 'Collection names must begin with a letter or underscore, and can contain only letters, underscores, numbers or dots.')
       end
     end
 
@@ -58,16 +57,15 @@ describe "Collection" do
         post "/db/#{TEST_DB}", params = { collection: 'new_test_collection' }
 
         expect(last_response.status).to eq 302
-        expect(last_request.session['flash']).to eq({:info=>"Collection successfully created."})
+        expect(last_request.session['flash']).to eq(info: 'Collection successfully created.')
 
         follow_redirect!
-        expect(last_response.body).to include("Viewing Collection: new_test_collection")
+        expect(last_response.body).to include('Viewing Collection: new_test_collection')
       end
     end
-
   end
 
-  describe "rename" do
+  describe 'rename' do
     before do
       app.config_file = config_file
 
@@ -91,7 +89,7 @@ describe "Collection" do
         put "/db/#{TEST_DB}/#{TEST_COLLECTION}", params = { target_name: 'хуйня' }
 
         expect(last_response.status).to eq 302
-        expect(last_request.session['flash']).to eq({:danger=>"Collection names must begin with a letter or underscore, and can contain only letters, underscores, numbers or dots."})
+        expect(last_request.session['flash']).to eq(danger: 'Collection names must begin with a letter or underscore, and can contain only letters, underscores, numbers or dots.')
       end
     end
 
@@ -100,16 +98,15 @@ describe "Collection" do
         put "/db/#{TEST_DB}/#{TEST_COLLECTION}", params = { target_name: 'super_new_test_collection' }
 
         expect(last_response.status).to eq 302
-        expect(last_request.session['flash']).to eq({:info=>"Collection successfully renamed."})
+        expect(last_request.session['flash']).to eq(info: 'Collection successfully renamed.')
 
         follow_redirect!
-        expect(last_response.body).to include("Viewing Collection: super_new_test_collection")
+        expect(last_response.body).to include('Viewing Collection: super_new_test_collection')
       end
     end
-
   end
 
-  describe "delete" do
+  describe 'delete' do
     before do
       app.config_file = config_file
 
@@ -125,7 +122,7 @@ describe "Collection" do
         expect(client.database.collection_names).not_to include(TEST_COLLECTION)
 
         expect(last_response.status).to eq 302
-        expect(last_request.session['flash']).to eq({:info=>"Collection successfully removed."})
+        expect(last_request.session['flash']).to eq(info: 'Collection successfully removed.')
       end
     end
 
@@ -134,9 +131,8 @@ describe "Collection" do
         delete "/db/#{TEST_DB}/invalid_collection"
 
         expect(last_response.status).to eq 302
-        expect(last_request.session['flash']).to eq({:danger=>"Collection <strong>invalid_collection</strong> does not exist."})
+        expect(last_request.session['flash']).to eq(danger: 'Collection <strong>invalid_collection</strong> does not exist.')
       end
     end
-
   end
 end

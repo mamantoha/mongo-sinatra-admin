@@ -1,6 +1,5 @@
 module MongoAdmin
   class App < Sinatra::Base
-
     get '/db/:database' do
       @db_name = params['database']
 
@@ -39,6 +38,5 @@ module MongoAdmin
       flash[:info] = I18n.t('database_removed')
       redirect '/'
     end
-
   end
 end

@@ -1,8 +1,7 @@
 require_relative 'spec_helper'
 
-describe "Database" do
-
-  describe "view" do
+describe 'Database' do
+  describe 'view' do
     before do
       app.config_file = config_file
       authorize USERNAME, PASSWORD
@@ -19,15 +18,15 @@ describe "Database" do
 
     context 'when not exists' do
       it 'is not successful' do
-        get "/db/invalid_database"
+        get '/db/invalid_database'
 
         expect(last_response.status).to eq 302
-        expect(last_request.session['flash']).to eq({:danger => "Database <strong>invalid_database</strong> does not exist."})
+        expect(last_request.session['flash']).to eq(danger: 'Database <strong>invalid_database</strong> does not exist.')
       end
     end
   end
 
-  describe "delete" do
+  describe 'delete' do
     before do
       app.config_file = config_file
       authorize USERNAME, PASSWORD
@@ -42,18 +41,17 @@ describe "Database" do
         expect(client.database_names).not_to include(TEST_DB)
 
         expect(last_response.status).to eq 302
-        expect(last_request.session['flash']).to eq({:info=>"Database successfully removed."})
+        expect(last_request.session['flash']).to eq(info: 'Database successfully removed.')
       end
     end
 
     context 'when not exists' do
       it 'is not successful' do
-        delete "/db/invalid_database"
+        delete '/db/invalid_database'
 
         expect(last_response.status).to eq 302
-        expect(last_request.session['flash']).to eq({:danger=>"Database <strong>invalid_database</strong> does not exist."})
+        expect(last_request.session['flash']).to eq(danger: 'Database <strong>invalid_database</strong> does not exist.')
       end
     end
-
   end
 end

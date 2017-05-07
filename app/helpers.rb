@@ -26,7 +26,7 @@ module MongoAdmin
       def check_database_exists(db, db_name)
         unless db.collections.include?(db_name)
           flash[:danger] = I18n.t('database_not_found', database: db_name)
-          redirect "/"
+          redirect '/'
         end
       end
 
@@ -45,15 +45,13 @@ module MongoAdmin
       def available_locales
         [
           { name: I18n.t('locales.english'), locale: 'en' },
-          { name: I18n.t('locales.pseudolocalization'), locale: 'en-ZZ' },
+          { name: I18n.t('locales.pseudolocalization'), locale: 'en-ZZ' }
         ]
       end
 
       def format_time_in_seconds(seconds)
-        Time.at(seconds).utc.strftime("%H:%M:%S")
+        Time.at(seconds).utc.strftime('%H:%M:%S')
       end
-
     end
   end
 end
-

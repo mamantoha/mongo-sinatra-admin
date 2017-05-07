@@ -1,4 +1,4 @@
-require "rack/test"
+require 'rack/test'
 
 ENV['RACK_ENV'] = 'test'
 
