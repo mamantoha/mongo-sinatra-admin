@@ -1,5 +1,5 @@
 module MongoAdmin
-  class App < Sinatra::Base
+  class App < Sinatra::Base # :nodoc:
     # Export Collection
     get '/db/:database/export/:collection' do
       db_name = params['database']
@@ -16,7 +16,7 @@ module MongoAdmin
 
       content_type 'application/json'
       attachment "#{collection_name}.json"
-      json = JSON.pretty_generate(documents_json)
+      JSON.pretty_generate(documents_json)
     end
 
     get '/db/:database/:collection' do

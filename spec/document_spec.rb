@@ -10,7 +10,7 @@ describe 'Document' do
 
     context 'when document is ok' do
       it 'is successful' do
-        post "/db/#{TEST_DB}/#{TEST_COLLECTION}", params = { document: { name: 'test' }.to_json }
+        post "/db/#{TEST_DB}/#{TEST_COLLECTION}", document: { name: 'test' }.to_json
 
         expect(last_response.status).to eq 302
         expect(last_request.session['flash']).to eq(info: 'New document successfully created.')
@@ -22,7 +22,7 @@ describe 'Document' do
 
     context 'when document is now valid json' do
       it 'is not successful' do
-        post "/db/#{TEST_DB}/#{TEST_COLLECTION}", params = { document: 'invalid json' }
+        post "/db/#{TEST_DB}/#{TEST_COLLECTION}", document: 'invalid json'
 
         expect(last_response.status).to eq 302
         expect(last_request.session['flash']).to eq(danger: 'Document is not valid JSON.')
@@ -31,7 +31,7 @@ describe 'Document' do
 
     context 'when document is empty' do
       it 'is not successful' do
-        post "/db/#{TEST_DB}/#{TEST_COLLECTION}", params = { document: '' }
+        post "/db/#{TEST_DB}/#{TEST_COLLECTION}", document: ''
 
         expect(last_response.status).to eq 302
         expect(last_request.session['flash']).to eq(danger: 'Document is not valid JSON.')
@@ -100,7 +100,7 @@ describe 'Document' do
 
     context 'when exists' do
       it 'is successful' do
-        put "/db/#{TEST_DB}/#{TEST_COLLECTION}/#{document['_id']}", params = { document: { name: 'test' }.to_json }
+        put "/db/#{TEST_DB}/#{TEST_COLLECTION}/#{document['_id']}", document: { name: 'test' }.to_json
 
         expect(last_response.status).to eq 302
         expect(last_request.session['flash']).to eq(info: 'Document successfully updated.')
@@ -109,7 +109,7 @@ describe 'Document' do
 
     context 'when ObjectId is invalid' do
       it 'is not successful' do
-        put "/db/#{TEST_DB}/#{TEST_COLLECTION}/invalid_id", params = { document: { name: 'test' }.to_json }
+        put "/db/#{TEST_DB}/#{TEST_COLLECTION}/invalid_id", document: { name: 'test' }.to_json
 
         expect(last_response.status).to eq 302
         expect(last_request.session['flash']).to eq('danger' => "'invalid_id' is an invalid ObjectId.")
@@ -118,7 +118,7 @@ describe 'Document' do
 
     context 'when document is now valid json' do
       it 'is not successful' do
-        put "/db/#{TEST_DB}/#{TEST_COLLECTION}/#{document['_id']}", params = { document: 'invalid json' }
+        put "/db/#{TEST_DB}/#{TEST_COLLECTION}/#{document['_id']}", document: 'invalid json'
 
         expect(last_response.status).to eq 302
         expect(last_request.session['flash']).to eq(danger: 'Document is not valid JSON.')
@@ -127,7 +127,7 @@ describe 'Document' do
 
     context 'when document is empty' do
       it 'is not successful' do
-        put "/db/#{TEST_DB}/#{TEST_COLLECTION}/#{document['_id']}", params = { document: '' }
+        put "/db/#{TEST_DB}/#{TEST_COLLECTION}/#{document['_id']}", document: ''
 
         expect(last_response.status).to eq 302
         expect(last_request.session['flash']).to eq(danger: 'Document is not valid JSON.')
@@ -140,7 +140,7 @@ describe 'Document' do
       end
 
       it 'is not successful' do
-        put "/db/#{TEST_DB}/#{TEST_COLLECTION}/#{document['_id']}", params = { document: { name: 'test' }.to_json }
+        put "/db/#{TEST_DB}/#{TEST_COLLECTION}/#{document['_id']}", document: { name: 'test' }.to_json
 
         expect(last_response.status).to eq 302
         expect(last_request.session['flash']).to eq(danger: 'Document not found.')

@@ -1,5 +1,5 @@
 module MongoAdmin
-  class App < Sinatra::Base
+  class App < Sinatra::Base # :nodoc:
     get '/db/:database' do
       @db_name = params['database']
 

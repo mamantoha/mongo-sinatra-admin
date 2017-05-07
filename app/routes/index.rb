@@ -1,5 +1,5 @@
 module MongoAdmin
-  class App < Sinatra::Base
+  class App < Sinatra::Base # :nodoc:
     get '/' do
       info = @db.client.command(serverStatus: 1)
 
