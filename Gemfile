@@ -7,7 +7,7 @@ gem 'mongo', '~> 2.4'
 gem 'puma'
 gem 'rack-contrib'
 gem 'rake'
-gem 'sinatra', '~> 2.0', '>= 2.0.0'
+gem 'sinatra', '~> 2.0'
 gem 'sinatra-flash'
 gem 'slim'
 
