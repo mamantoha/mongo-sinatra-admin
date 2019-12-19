@@ -6,8 +6,7 @@ services:
 bundler_args: --without development
 
 rvm:
-  - 2.4.1
-  - 2.3.3
+  - 2.6.5
 
 gemfile:
   - Gemfile
