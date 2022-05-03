@@ -29,7 +29,8 @@ GEM
     minitest (5.15.0)
     mongo (2.4.1)
       bson (>= 4.2.1, < 5.0.0)
-    mustermann (1.0.3)
+    mustermann (1.1.1)
+      ruby2_keywords (~> 0.0.1)
     nio4r (2.5.8)
     nokogiri (1.13.4)
       mini_portile2 (~> 2.8.0)
@@ -44,7 +45,7 @@ GEM
     rack (2.2.3)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
-    rack-protection (2.0.2)
+    rack-protection (2.2.0)
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -67,10 +68,11 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
-    sinatra (2.0.2)
+    ruby2_keywords (0.0.5)
+    sinatra (2.2.0)
       mustermann (~> 1.0)
-      rack (~> 2.0)
-      rack-protection (= 2.0.2)
+      rack (~> 2.2)
+      rack-protection (= 2.2.0)
       tilt (~> 2.0)
     sinatra-flash (0.3.0)
       sinatra (>= 1.0.0)
@@ -98,7 +100,7 @@ DEPENDENCIES
   rack-test
   rake
   rspec
-  sinatra (~> 2.0)
+  sinatra (~> 2.2)
   sinatra-flash
   slim
 
