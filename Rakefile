@@ -29,7 +29,8 @@ namespace :i18n do
   desc 'Create pseudo localization locale and generate locales/en-ZZ.yml. Texts are based on :en with checkmarks.'
   task :export_pseudo_i18n do
     symbol = "\u221a"
-    en_tokens = I18n.backend.send(:translations)[:en].deep_stringify_hash!
+    en_tokens = I18n.backend.send(:translations)[:en].deep_stringify_keys
+    en_tokens.deep_stringify_hash!
     data = { 'en-ZZ' => en_tokens }.to_yaml.gsub(/&&&&&&/, "#{symbol}#{symbol}").gsub(/&&&&/, '').gsub(/&&&/, symbol).gsub(%r{(?<=\s)!ruby\/symbol }, ':')
 
     File.open('locales/en-ZZ.yml', 'w+') do |f|
