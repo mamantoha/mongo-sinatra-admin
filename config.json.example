@@ -11,7 +11,7 @@
   "basicAuth": {
     "username": "admin",
     "password": "pass"
-  }
+  },
 
   "options": {
     "documentsPerPage": 5
