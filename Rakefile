@@ -37,9 +37,7 @@ namespace :i18n do
       %r{(?<=\s)!ruby/symbol }, ':'
     )
 
-    File.open('locales/en-ZZ.yml', 'w+') do |f|
-      f.write(data)
-    end
+    File.write('locales/en-ZZ.yml', data)
   end
 end
 

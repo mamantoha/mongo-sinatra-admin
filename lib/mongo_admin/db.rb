@@ -25,8 +25,6 @@ module MongoAdmin
       @databases.each do |db_name|
         update_collections!(db_name)
       end
-
-      @client
     end
 
     private
