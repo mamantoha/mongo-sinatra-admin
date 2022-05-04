@@ -24,3 +24,6 @@ Metrics/PerceivedComplexity:
 
 Style/AsciiComments:
   Enabled: false
+
+Style/MixinUsage:
+  Enabled: false
