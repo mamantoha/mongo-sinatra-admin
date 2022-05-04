@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MongoAdmin
   class App < Sinatra::Base # :nodoc:
     # Export Collection
@@ -50,7 +52,7 @@ module MongoAdmin
 
       check_database_exists(@db, db_name)
 
-      unless /^[a-zA-Z_][a-zA-Z0-9\._]*$/ =~ collection_name
+      unless /^[a-zA-Z_][a-zA-Z0-9._]*$/ =~ collection_name
         flash[:danger] = I18n.t('collection_validates_name_error')
         redirect "/db/#{db_name}"
       end
@@ -61,8 +63,8 @@ module MongoAdmin
       begin
         # Force the collection to be created in the database.
         collection.create
-      rescue Mongo::Error::OperationFailure => err
-        flash[:danger] = I18n.t('mongodb_error', message: err.message)
+      rescue Mongo::Error::OperationFailure => e
+        flash[:danger] = I18n.t('mongodb_error', message: e.message)
         redirect "/db/#{db_name}"
       end
 
@@ -79,16 +81,16 @@ module MongoAdmin
       check_database_exists(@db, db_name)
       check_collection_exists(@db, db_name, source_collection_name)
 
-      unless /^[a-zA-Z_][a-zA-Z0-9\._]*$/ =~ target_collection_name
+      unless /^[a-zA-Z_][a-zA-Z0-9._]*$/ =~ target_collection_name
         flash[:danger] = I18n.t('collection_validates_name_error')
         redirect "/db/#{db_name}/#{source_collection_name}"
       end
 
       begin
         @db.client.command(renameCollection: "#{db_name}.#{source_collection_name}",
-                           to:               "#{db_name}.#{target_collection_name}")
-      rescue Mongo::Error::OperationFailure => err
-        flash[:danger] = I18n.t('mongodb_error', message: err.message)
+                           to: "#{db_name}.#{target_collection_name}")
+      rescue Mongo::Error::OperationFailure => e
+        flash[:danger] = I18n.t('mongodb_error', message: e.message)
         redirect "/db/#{db_name}/#{source_collection_name}"
       end
 
@@ -109,8 +111,8 @@ module MongoAdmin
 
       begin
         collection.drop
-      rescue Mongo::Error::OperationFailure => err
-        flash[:danger] = I18n.t('mongodb_error', message: err.message)
+      rescue Mongo::Error::OperationFailure => e
+        flash[:danger] = I18n.t('mongodb_error', message: e.message)
         redirect "/db/#{db_name}"
       end
 

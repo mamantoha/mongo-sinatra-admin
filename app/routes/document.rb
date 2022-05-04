@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MongoAdmin
   class App < Sinatra::Base # :nodoc:
     get '/db/:database/:collection/new' do
@@ -21,8 +23,8 @@ module MongoAdmin
       # convert id string to mongodb object id
       begin
         @document_id = BSON::ObjectId.from_string(params[:id])
-      rescue => err
-        flash['danger'] = err.message
+      rescue StandardError => e
+        flash['danger'] = e.message
         redirect "/db/#{@db_name}/#{@collection_name}"
       end
 
@@ -84,8 +86,8 @@ module MongoAdmin
       # convert id string to mongodb object id
       begin
         document_id = BSON::ObjectId.from_string(params[:id])
-      rescue => err
-        flash['danger'] = err.message
+      rescue StandardError => e
+        flash['danger'] = e.message
         redirect "/db/#{db_name}/#{collection_name}"
       end
 
@@ -129,8 +131,8 @@ module MongoAdmin
       # convert id string to mongodb object id
       begin
         document_id = BSON::ObjectId.from_string(params[:id])
-      rescue => err
-        flash['danger'] = err.message
+      rescue StandardError => e
+        flash['danger'] = e.message
         redirect "/db/#{db_name}/#{collection_name}"
       end
 

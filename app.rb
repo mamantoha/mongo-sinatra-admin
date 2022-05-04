@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'logger'
 
@@ -31,11 +33,11 @@ module MongoAdmin
       set :views, 'app/views'
       set :public_dir, 'public'
       set :root, (settings.root || File.dirname(__FILE__))
-      set :config_file, JSON.load(File.open("config_#{ENV['RACK_ENV']}.json"))
+      set :config_file, JSON.parse(File.read("config_#{ENV['RACK_ENV']}.json"))
       set :method_override, true
       set :locale, I18n.default_locale
 
-      I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
+      I18n::Backend::Simple.include I18n::Backend::Fallbacks
       I18n.default_locale = :en
       I18n.load_path = Dir[File.join(settings.root, 'locales', '*.yml')]
       I18n.backend.load_translations
@@ -49,13 +51,13 @@ module MongoAdmin
 
       begin
         @db = DB.new(settings.config_file)
-      rescue
+      rescue StandardError
         redirect '/error'
       end
     end
 
     after do
-      @db.client.close if @db
+      @db&.client&.close
     end
 
     enable :sessions

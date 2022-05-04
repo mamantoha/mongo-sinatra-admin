@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MongoAdmin
   class App < Sinatra::Base # :nodoc:
     get '/' do

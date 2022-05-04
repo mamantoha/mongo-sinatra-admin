@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rspec/core/rake_task'
 require_relative 'app'
 require_relative 'lib/deep_stringify'
@@ -15,7 +17,7 @@ task 'routes' do
     list.each do |item|
       source = item[0].source
       item[1].each do |s|
-        source.sub!(/\(.+?\)/, ':' + s)
+        source.sub!(/\(.+?\)/, ":#{s}")
       end
       source.gsub!(/(\\A|\\z)/, '')
       routes << source
@@ -31,7 +33,9 @@ namespace :i18n do
     symbol = "\u221a"
     en_tokens = I18n.backend.send(:translations)[:en].deep_stringify_keys
     en_tokens.deep_stringify_hash!
-    data = { 'en-ZZ' => en_tokens }.to_yaml.gsub(/&&&&&&/, "#{symbol}#{symbol}").gsub(/&&&&/, '').gsub(/&&&/, symbol).gsub(%r{(?<=\s)!ruby\/symbol }, ':')
+    data = { 'en-ZZ' => en_tokens }.to_yaml.gsub(/&&&&&&/, "#{symbol}#{symbol}").gsub(/&&&&/, '').gsub(/&&&/, symbol).gsub(
+      %r{(?<=\s)!ruby/symbol }, ':'
+    )
 
     File.open('locales/en-ZZ.yml', 'w+') do |f|
       f.write(data)

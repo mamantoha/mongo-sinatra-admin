@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 require_relative 'spec_helper'
 
 describe 'Basic Auth' do
   context 'when useBasicAuth is disabled in config' do
     before do
-      app.config_file = { 'mongodb' => { 'server' => 'localhost', 'port' => '27017' }, 'useBasicAuth' => false, 'options' => { 'documentsPerPage' => 2 } }
+      app.config_file = { 'mongodb' => { 'server' => 'localhost', 'port' => '27017' }, 'useBasicAuth' => false,
+                          'options' => { 'documentsPerPage' => 2 } }
     end
 
     context 'get /' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Hash # :nodoc:
   def deep_stringify_hash!(marker = '&&&')
     keys.each do |key|
@@ -9,7 +11,7 @@ class Hash # :nodoc:
       elsif val.is_a?(Array)
         val.deep_stringify_array!(marker)
       elsif !(val.is_a?(Symbol) || val.nil?)
-        self[new_key] = marker + val.to_s.tr("\n", ' ') + marker unless skip_key?(new_key) # force quotes on all entries and escape linefeeds
+        self[new_key] = marker + val.to_s.tr("\n", ' ') + marker unless skip_key?(new_key)
       end
     end
     self

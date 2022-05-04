@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MongoAdmin
   class App < Sinatra::Base # :nodoc:
     get '/db/:database' do
@@ -30,8 +32,8 @@ module MongoAdmin
 
       begin
         client.database.drop
-      rescue Mongo::Error::OperationFailure => err
-        flash[:danger] = I18n.t('mongodb_error', message: err.message)
+      rescue Mongo::Error::OperationFailure => e
+        flash[:danger] = I18n.t('mongodb_error', message: e.message)
         redirect '/'
       end
 

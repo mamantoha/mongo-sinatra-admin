@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'mongo'
 
 module MongoAdmin
@@ -6,9 +8,7 @@ module MongoAdmin
   end
 
   class DB # :nodoc:
-    attr_reader :config
-    attr_reader :client
-    attr_reader :databases, :collections
+    attr_reader :config, :client, :databases, :collections
 
     def initialize(config)
       @config = Config.new(config)
@@ -48,6 +48,7 @@ module MongoAdmin
         db_name = database[:name]
         # 'local' is a special database, ignore it
         next if db_name == 'local'
+
         databases << db_name
       end
 
