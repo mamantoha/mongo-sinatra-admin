@@ -1,42 +1,63 @@
 javascript:
-  $(document).ready(function() {
+  document.addEventListener('DOMContentLoaded', function() {
 
-    $('.renameCollectionButton').popover({ trigger: "hover", placement: "left", title: "#{I18n.t('warning')}", content: "Are you sure you want to rename this collection?" });
+    var renameButtons = document.querySelectorAll('.renameCollectionButton');
+    renameButtons.forEach(function(btn) {
+      btn.addEventListener('click', function(event) {
+        event.preventDefault();
 
-    $('.renameCollectionButton').on('click', function(event) {
-      event.preventDefault();
-      var target = $(this);
+        // Store the form reference
+        var parentForm = btn.closest('form'); // Finds the closest parent form element
 
-      var parentForm = target.parents('form:first');
+        var collectionName = btn.getAttribute('collection-name');
+        var modalElement = document.getElementById('confirmCollectionRenaming');
+        var modal = new bootstrap.Modal(modalElement, {
+          backdrop: 'static',
+          keyboard: true
+        });
 
-      $('#collection-confirmation-input').attr('shouldbe', target.attr('collection-name'));
-      $('#renaming-collection-name').text(target.attr('collection-name'));
+        document.getElementById('renaming-collection-name').textContent = collectionName;
 
-      $('#confirmCollectionRenaming').modal({ 'data-backdrop': 'static', 'data-keyboard': true })
-      .one('click', '#renameCollection', function() {
-        var input = $('#collection-confirmation-input');
+        // Reset any previous click listeners to avoid multiple submissions
+        var confirmButton = modalElement.querySelector('#renameCollection');
+        var newConfirmButton = confirmButton.cloneNode(true);
+        confirmButton.parentNode.replaceChild(newConfirmButton, confirmButton);
 
-        parentForm.trigger('submit');
+        // Add click event listener to the new confirmation button
+        newConfirmButton.addEventListener('click', function() {
+          if (parentForm) {
+            parentForm.submit(); // Submit the form
+          } else {
+            // Optionally handle the case where the form is not found
+            console.error('Form not found!');
+          }
+        });
+
+        modal.show();
       });
     });
+
   });
 
-div id="confirmCollectionRenaming" class="modal fade" role="dialog"
-  div.modal-dialog role="dialog"
+div#confirmCollectionRenaming.modal.fade[tabindex="-1" role="dialog" aria-labelledby="renameCollectionModalLabel" aria-hidden="true"]
+  div.modal-dialog[role="document"]
     div.modal-content
       div.modal-header
-        button type="button" class="close" data-dismiss="modal" aria-label="Close"
-          span aria-hidden="true" &times;
-        h4.modal-title = I18n.t('rename_collection')
+        button.close[type="button" data-bs-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"] &times;
+        h4#renameCollectionModalLabel.modal-title = I18n.t('rename_collection')
       div.modal-body
         p.text-danger
-          | Be careful! You are about to rename '<strong><span id="renaming-collection-name"></span></strong>' collection.
+          ' Be careful! You are about to rename '
+          strong
+            span#renaming-collection-name
+          ' collection.'
         p
           | Rename Collection is not compatible with sharded collections.
       div.modal-footer
-        button type="button" class="btn btn-default" data-dismiss="modal"
-          i class="bi bi-x"
+        button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
+          i.bi.bi-x
           = I18n.t('close')
-        button#renameCollection type="button" class="btn btn-primary"
-          i class="bi bi-pen"
+        button#renameCollection.btn.btn-primary[type="button"]
+          i.bi.bi-pen
           = I18n.t('rename')
