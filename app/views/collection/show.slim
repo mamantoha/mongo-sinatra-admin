@@ -24,7 +24,6 @@ div#accordion.accordion[role="tablist" aria-multiselectable="true"]
   div.accordion-item
     h2#headingStats.accordion-header[role="tab"]
       button.accordion-button.collapsed[data-bs-toggle="collapse" data-bs-target="#collapseStats" aria-expanded="false" aria-controls="collapseStats"]
-        i.bi.bi-chevron-down.fa-fw
         = I18n.t('collection_stats.collection_stats')
     div#collapseStats.accordion-collapse.collapse[role="tabpanel" aria-labelledby="headingStats"]
       div.accordion-body
@@ -90,14 +89,14 @@ div.row
         = I18n.t('delete_collection')
 
 nav
-  ul class="pagination"
-    li class="#{current_page < 2 ? 'disabled' : ''}"
+  ul.pagination
+    li.page-item class="#{current_page < 2 ? 'disabled' : ''}"
       a href="/db/#{@db_name}/#{@collection_name}?page=#{current_page - 1}" aria-label="Previous"
         span aria-hidden="true" &laquo;
     - @pages.times do |page|
-      li class="#{current_page == page + 1 ? 'disabled' : ''}"
+      li.page-item class="#{current_page == page + 1 ? 'disabled' : ''}"
         a href="/db/#{@db_name}/#{@collection_name}?page=#{page + 1}" = page + 1
-    li class="#{current_page > @pages - 1 ? 'disabled' : ''}"
+    li.page-item class="#{current_page > @pages - 1 ? 'disabled' : ''}"
       a href="/db/#{@db_name}/#{@collection_name}?page=#{current_page + 1}" aria-label="Next"
         span aria-hidden="true" &raquo;
 
