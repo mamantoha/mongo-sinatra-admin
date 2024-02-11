@@ -4,14 +4,16 @@ script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/mode/javascr
 link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/theme/rubyblue.css"
 link rel="stylesheet" href="/codemirror_overwrite.css"
 
-ol class="breadcrumb"
-  li
-    a href="/" = I18n.t('home')
-  li
-    a href="/db/#{@db_name}" = @db_name
-  li
-    a href="/db/#{@db_name}/#{@collection_name}" = @collection_name
-  li class="active" = @document_id
+nav[aria-label="breadcrumb"]
+  ol.breadcrumb
+    li.breadcrumb-item
+      a href="/" = I18n.t('home')
+    li.breadcrumb-item
+      a href="/db/#{@db_name}" = @db_name
+    li.breadcrumb-item
+      a href="/db/#{@db_name}/#{@collection_name}" = @collection_name
+    li.breadcrumb-item.active aria-current="page"
+      = @document_id
 
 div.page-header
   h1 = I18n.t('viewing_document', document: @document_id)
@@ -23,7 +25,7 @@ div
       textarea id="document" name="document" = JSON.pretty_generate(@document)
     div.form-group
       button type="submit" class="btn btn-success btn-large pull-right"
-        i class="fa fa-pencil"
+        i class="bi bi-pen"
         = I18n.t('save')
 
   javascript:
@@ -34,4 +36,3 @@ div
       theme: "rubyblue",
       lineNumbers: true
     });
-
