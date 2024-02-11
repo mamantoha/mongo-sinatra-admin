@@ -1,77 +1,79 @@
 == slim :'database/_confirm_database_deletion_modal'
 == slim :'database/_confirm_collection_deletion_modal'
 
-ol class="breadcrumb"
-  li
-    a href="/" = I18n.t('home')
-  li class="active" = @db_name
+nav[aria-label="breadcrumb"]
+  ol.breadcrumb
+    li.breadcrumb-item
+      a href="/" = I18n.t('home')
+    li.breadcrumb-item.active aria-current="page"
+      = @db_name
 
 div.page-header
   h1 = I18n.t('viewing_database', database: @db_name)
 
-div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"
-  div class="panel panel-primary"
-    div class="panel-heading" role="tab" id="headingStats"
-      h4 class="panel-title"
-        a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseStats" aria-expanded="true" aria-controls="collapseStats"
-          i class="fa fa-chevron fa-fw"
-          = I18n.t('database_stats.database_stats')
-    div id="collapseStats" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingStats"
-      div class="panel-body"
-        table class="table table-bordered table-striped"
-          tr
-            td class="col-md-2"
-              strong = I18n.t('database_stats.collections')
-            td class="col-md-3" = @stats['collections']
-          tr
-            td
-              strong = I18n.t('database_stats.data_size')
-            td= number_to_human_size(@stats['dataSize'])
-          tr
-            td
-              strong = I18n.t('database_stats.storage_size')
-            td= number_to_human_size(@stats['storageSize'])
-          tr
-            td
-              strong = I18n.t('database_stats.file_size')
-            td= number_to_human_size(@stats['fileSize'])
+div#accordion.accordion[role="tablist" aria-multiselectable="true"]
+  div.card
+    h2#headingStats.card-header[role="tab"]
+      button.accordion-button[collapsed="true" data-bs-toggle="collapse" data-bs-target="#collapseStats" aria-expanded="true" aria-controls="collapseStats"]
+        = I18n.t('database_stats.database_stats')
+    div#collapseStats.accordion-collapse.collapse.show[role="tabpanel" aria-labelledby="headingStats"]
+      div.card-body
+        table.table.table-bordered.table-striped
+          tbody
+            tr
+              td.col-md-2
+                strong = I18n.t('database_stats.collections')
+              td.col-md-3 = @stats['collections']
+            tr
+              td
+                strong = I18n.t('database_stats.data_size')
+              td = number_to_human_size(@stats['dataSize'])
+            tr
+              td
+                strong = I18n.t('database_stats.storage_size')
+              td = number_to_human_size(@stats['storageSize'])
+            tr
+              td
+                strong = I18n.t('database_stats.file_size')
+              td = number_to_human_size(@stats['fileSize'])
 
 - unless @db_name == 'admin'
-  form class="well" method="POST" action="/db/#{@db_name}"
-    input type="hidden" name="_method" value="delete"
-    button type="submit" class="btn btn-danger btn-lg deleteDatabaseButton" data-toggle="modal" data-target="confirmDatabaseDeletion" database-name="#{@db_name}"
-      i class="fa fa-trash"
+  form.well[method="POST" action="/db/#{@db_name}"]
+    input[type="hidden" name="_method" value="delete"]
+    button.btn.btn-danger.btn-lg.deleteDatabaseButton[type="submit" data-bs-toggle="modal" data-bs-target="#confirmDatabaseDeletion" database-name="#{@db_name}"]
+      i.bi.bi-trash
       = I18n.t('drop_database')
 
 h2 = I18n.t('create_collection')
-form class="form-inline well" method="POST"
-  div class="form-group"
-    label class="sr-only" for="collection" Collection Name
-    div class="input-group"
-      div class="input-group-addon" = "#{@db_name}."
-      input type="text" class="form-control" id="collection" name="collection" placeholder="Collection Name"
-    button type="submit" class="btn btn-primary"
-      i class="fa fa-plus"
+form.form-inline.well[method="POST"]
+  div.form-group
+    label.sr-only[for="collection"] Collection Name
+    div.input-group
+      span.input-group-text = "#{@db_name}."
+      input.form-control[type="text" id="collection" name="collection" placeholder="Collection Name"]
+    button.btn.btn-primary[type="submit"]
+      i.bi.bi-plus
       = I18n.t('create_collection')
 
 h2 = I18n.t('collections')
-table class="table table-bordered table-striped table-condensed"
-  - @collections.each do |collection|
-    tr
-      td class="col-md-2"
-        a href="/db/#{@db_name}/#{collection}" class="btn btn-success btn-block"
-          i class="fa fa-list-alt"
-          = I18n.t('view')
-      td class="col-md-2"
-        a href="/db/#{@db_name}/export/#{collection}" class="btn btn-warning btn-block"
-          i class="fa fa-download"
-          = I18n.t('export')
-      td
-        h4
-          a href="/db/#{@db_name}/#{collection}" = collection
-      td class="col-md-2"
-        form method="POST" action="/db/#{@db_name}/#{collection}"
-          input type="hidden" name="_method" value="delete"
-          button type="submit" class="btn btn-danger btn-block deleteCollectionButton" data-toggle="modal" data-target="confirmCollectionDeletion" collection-name="#{collection}"
-            i class="fa fa-trash"
-            = I18n.t('delete')
+table.table.table-bordered.table-striped.table-condensed
+  tbody
+    - @collections.each do |collection|
+      tr
+        td.col-md-2
+          a.btn.btn-success.btn-block[href="/db/#{@db_name}/#{collection}"]
+            i.bi.bi-list
+            = I18n.t('view')
+        td.col-md-2
+          a.btn.btn-warning.btn-block[href="/db/#{@db_name}/export/#{collection}"]
+            i.bi.bi-download
+            = I18n.t('export')
+        td
+          h4
+            a[href="/db/#{@db_name}/#{collection}"] = collection
+        td.col-md-2
+          form[method="POST" action="/db/#{@db_name}/#{collection}"]
+            input[type="hidden" name="_method" value="delete"]
+            button.btn.btn-danger.btn-block.deleteCollectionButton[type="submit" data-bs-toggle="modal" data-bs-target="#confirmCollectionDeletion" collection-name="#{collection}"]
+              i.bi.bi-trash
+              = I18n.t('delete')
