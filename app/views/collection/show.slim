@@ -8,26 +8,28 @@ link rel="stylesheet" href="/codemirror_overwrite.css"
 == slim :'collection/_confirm_renaming_collection_modal'
 == slim :'database/_confirm_collection_deletion_modal'
 
-ol class="breadcrumb"
-  li
-    a href="/" = I18n.t('home')
-  li
-    a href="/db/#{@db_name}" = @db_name
-  li class="active" = @collection_name
+nav[aria-label="breadcrumb"]
+  ol.breadcrumb
+    li.breadcrumb-item
+      a href="/" = I18n.t('home')
+    li.breadcrumb-item
+      a href="/db/#{@db_name}" = @db_name
+    li.breadcrumb-item.active aria-current="page"
+      = @collection_name
 
 div.page-header
-  h1  = I18n.t('viewing_collection', collection: @collection_name)
+  h1 = I18n.t('viewing_collection', collection: @collection_name)
 
-  div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"
-    div class="panel panel-primary"
-      div class="panel-heading" role="tab" id="headingStats"
-        h4 class="panel-title"
-          a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseStats" aria-expanded="true" aria-controls="collapseStats"
-            i class="fa fa-chevron fa-fw"
-            = I18n.t('collection_stats.collection_stats')
-      div id="collapseStats" class="panel-collapse collapsed collapse" role="tabpanel" aria-labelledby="headingStats"
-        div class="panel-body"
-          table class="table table-bordered table-striped"
+div#accordion.accordion[role="tablist" aria-multiselectable="true"]
+  div.accordion-item
+    h2#headingStats.accordion-header[role="tab"]
+      button.accordion-button.collapsed[data-bs-toggle="collapse" data-bs-target="#collapseStats" aria-expanded="false" aria-controls="collapseStats"]
+        i.bi.bi-chevron-down.fa-fw
+        = I18n.t('collection_stats.collection_stats')
+    div#collapseStats.accordion-collapse.collapse[role="tabpanel" aria-labelledby="headingStats"]
+      div.accordion-body
+        table.table.table-bordered.table-striped
+          tbody
             tr
               td class="col-md-2"
                 strong = I18n.t('collection_stats.documents')
@@ -61,19 +63,20 @@ div.page-header
                 strong = I18n.t('collection_stats.extents')
               td= @stats['numExtents']
 
+
 h2 = I18n.t('rename_collection')
-form class="form-inline well" method="POST"
-  input type="hidden" name="_method" value="put"
-  div class="form-group"
-    label class="sr-only" for="collection" Collection Name
-    div class="input-group"
-      div class="input-group-addon" = "#{@db_name}."
-      input type="text" class="form-control" id="collection" name="target_name" placeholder="#{@collection_name}"
-    button type="submit" class="btn btn-primary renameCollectionButton" data-toggle="modal" data-target="confirmRenamingCollection" collection-name="#{@collection_name}"
-      i class="fa fa-pencil"
+form.form-inline.well[method="POST"]
+  input[type="hidden" name="_method" value="put"]
+  div.form-group
+    label.sr-only[for="collection"] Collection Name
+    div.input-group
+      span.input-group-text = "#{@db_name}."
+      input.form-control[type="text" id="collection" name="target_name" placeholder=@collection_name]
+    button.btn.btn-primary.renameCollectionButton[type="submit" data-bs-toggle="modal" data-bs-target="#confirmRenamingCollection" collection-name=@collection_name]
+      i.bi.bi-pencil
       = I18n.t('rename_collection')
 
-div class="row"
+div.row
   div class="col-md-3"
     a class="btn btn-success btn-block btn-lg" href="/db/#{@db_name}/#{@collection_name}/new"
       i class="fa fa-file"
