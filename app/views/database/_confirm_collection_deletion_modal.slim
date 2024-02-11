@@ -1,8 +1,5 @@
 javascript:
   $(document).ready(function() {
-
-    $('.deleteCollectionButton').popover({ trigger: "hover", placement: "left", title: "#{I18n.t('warning')}", content: "Are you sure you want to delete this collection? All document will be deleted." });
-
     $('.deleteCollectionButton').on('click', function(event) {
       event.preventDefault();
       var target = $(this);
