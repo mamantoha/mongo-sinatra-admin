@@ -64,14 +64,15 @@ div#accordion.accordion[role="tablist" aria-multiselectable="true"]
 
 
 h2 = I18n.t('rename_collection')
-form.form-inline.well[method="POST"]
+
+form#renameCollectionForm.form-inline.well[method="POST"]
   input[type="hidden" name="_method" value="put"]
   div.form-group
     label.sr-only[for="collection"] Collection Name
     div.input-group
       span.input-group-text = "#{@db_name}."
       input.form-control[type="text" id="collection" name="target_name" placeholder=@collection_name]
-    button.btn.btn-primary.renameCollectionButton[type="button" collection-name=@collection_name]
+    button.btn.btn-primary[type="submit"]
       i.bi.bi-pencil
       = I18n.t('rename_collection')
 

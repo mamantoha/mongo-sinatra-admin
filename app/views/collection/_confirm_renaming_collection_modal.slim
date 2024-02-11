@@ -1,42 +1,31 @@
 javascript:
   document.addEventListener('DOMContentLoaded', function() {
-
-    var renameButtons = document.querySelectorAll('.renameCollectionButton');
-    renameButtons.forEach(function(btn) {
-      btn.addEventListener('click', function(event) {
-        event.preventDefault();
-
-        // Store the form reference
-        var parentForm = btn.closest('form'); // Finds the closest parent form element
-
-        var collectionName = btn.getAttribute('collection-name');
-        var modalElement = document.getElementById('confirmCollectionRenaming');
-        var modal = new bootstrap.Modal(modalElement, {
-          backdrop: 'static',
-          keyboard: true
-        });
-
-        document.getElementById('renaming-collection-name').textContent = collectionName;
-
-        // Reset any previous click listeners to avoid multiple submissions
-        var confirmButton = modalElement.querySelector('#renameCollection');
-        var newConfirmButton = confirmButton.cloneNode(true);
-        confirmButton.parentNode.replaceChild(newConfirmButton, confirmButton);
-
-        // Add click event listener to the new confirmation button
-        newConfirmButton.addEventListener('click', function() {
-          if (parentForm) {
-            parentForm.submit(); // Submit the form
-          } else {
-            // Optionally handle the case where the form is not found
-            console.error('Form not found!');
-          }
-        });
-
-        modal.show();
-      });
+    var form = document.getElementById('renameCollectionForm');
+    var modalElement = document.getElementById('confirmCollectionRenaming');
+    var modal = new bootstrap.Modal(modalElement, {
+      backdrop: 'static',
+      keyboard: false
     });
 
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form from submitting immediately
+
+      // Display the collection name in the modal
+      var collectionName = form.querySelector('input[name="target_name"]').value;
+      document.getElementById('renaming-collection-name').textContent = collectionName;
+
+      // Reset any previous click listeners to avoid multiple submissions
+      var confirmButton = modalElement.querySelector('#renameCollection');
+      var newConfirmButton = confirmButton.cloneNode(true);
+      confirmButton.parentNode.replaceChild(newConfirmButton, confirmButton);
+
+      // Add click event listener to the new confirmation button
+      newConfirmButton.addEventListener('click', function() {
+        form.submit(); // Submit the form after confirmation
+      });
+
+      modal.show(); // Show the confirmation modal
+    });
   });
 
 div#confirmCollectionRenaming.modal.fade[tabindex="-1" role="dialog" aria-labelledby="renameCollectionModalLabel" aria-hidden="true"]
