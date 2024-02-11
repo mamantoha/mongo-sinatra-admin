@@ -90,15 +90,15 @@ div.row
 
 nav
   ul.pagination
-    li.page-item class="#{current_page < 2 ? 'disabled' : ''}"
-      a href="/db/#{@db_name}/#{@collection_name}?page=#{current_page - 1}" aria-label="Previous"
-        span aria-hidden="true" &laquo;
+    li.page-item[class=(current_page < 2 ? 'disabled' : '')]
+      a.page-link[href="/db/#{@db_name}/#{@collection_name}?page=#{current_page - 1}" aria-label="Previous"]
+        span[aria-hidden="true"] &laquo;
     - @pages.times do |page|
-      li.page-item class="#{current_page == page + 1 ? 'disabled' : ''}"
-        a href="/db/#{@db_name}/#{@collection_name}?page=#{page + 1}" = page + 1
-    li.page-item class="#{current_page > @pages - 1 ? 'disabled' : ''}"
-      a href="/db/#{@db_name}/#{@collection_name}?page=#{current_page + 1}" aria-label="Next"
-        span aria-hidden="true" &raquo;
+      li.page-item[class=(current_page == page + 1 ? 'active' : '')]
+        a.page-link[href="/db/#{@db_name}/#{@collection_name}?page=#{page + 1}"] = page + 1
+    li.page-item[class=(current_page >= @pages ? 'disabled' : '')]
+      a.page-link[href="/db/#{@db_name}/#{@collection_name}?page=#{current_page + 1}" aria-label="Next"]
+        span[aria-hidden="true"] &raquo;
 
 - @documents.each_with_index do |document, index|
   div.row
