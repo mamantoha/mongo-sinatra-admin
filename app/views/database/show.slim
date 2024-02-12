@@ -45,12 +45,10 @@ div#accordion.accordion[role="tablist" aria-multiselectable="true"]
       = I18n.t('drop_database')
 
 h2 = I18n.t('create_collection')
-form.form-inline.well[method="POST"]
-  div.form-group
-    label.sr-only[for="collection"] Collection Name
-    div.input-group
-      span.input-group-text = "#{@db_name}."
-      input.form-control[type="text" id="collection" name="collection" placeholder="Collection Name"]
+form.form-inline[method="POST"]
+  .input-group.mb-3
+    .input-group-text = "#{@db_name}."
+    input.form-control#collection type="text" name="collection" placeholder="Collection Name" aria-label="Collection's name"
     button.btn.btn-primary[type="submit"]
       i.bi.bi-plus
       = I18n.t('create_collection')
