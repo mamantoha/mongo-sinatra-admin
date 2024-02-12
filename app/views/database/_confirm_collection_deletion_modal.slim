@@ -39,8 +39,8 @@ div#confirmCollectionDeletion.modal.fade[tabindex="-1" role="dialog"]
   div.modal-dialog
     div.modal-content
       div.modal-header
+        h5#confirmCollectionDeletionLabel.modal-title = I18n.t('delete_collection')
         button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-      h4#confirmCollectionDeletionLabel.modal-title = I18n.t('delete_collection')
       div.modal-body
         p.text-danger
           | Be careful! You are about to delete the whole '<strong><span id="deletion-collection-name"></span></strong>' collection.

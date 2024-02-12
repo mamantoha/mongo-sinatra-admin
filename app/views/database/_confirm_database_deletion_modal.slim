@@ -40,8 +40,8 @@ div#confirmDatabaseDeletion.modal.fade[tabindex="-1" role="dialog" aria-labelled
   div.modal-dialog[role="document"]
     div.modal-content
       div.modal-header
+        h5#confirmDatabaseDeletionLabel.modal-title = I18n.t('delete_database')
         button type="button" class="btn-close" data-bs-dismiss="modal" aria-label=("Close")
-      h4#confirmDatabaseDeletionLabel.modal-title = I18n.t('delete_database')
       div.modal-body
         p.text-danger
           | Be careful! You are about to delete the whole '<strong><span id="deletion-database-name"></span></strong>' database.

@@ -32,9 +32,9 @@ div#confirmCollectionRenaming.modal.fade[tabindex="-1" role="dialog" aria-labell
   div.modal-dialog[role="document"]
     div.modal-content
       div.modal-header
+        h5#renameCollectionModalLabel.modal-title = I18n.t('rename_collection')
         button.close[type="button" data-bs-dismiss="modal" aria-label="Close"]
           span[aria-hidden="true"] &times;
-        h4#renameCollectionModalLabel.modal-title = I18n.t('rename_collection')
       div.modal-body
         p.text-danger
           ' Be careful! You are about to rename collection
