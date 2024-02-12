@@ -20,7 +20,7 @@ nav[aria-label="breadcrumb"]
 div.page-header
   h1 = I18n.t('viewing_collection', collection: @collection_name)
 
-div#accordion.accordion[role="tablist" aria-multiselectable="true"]
+div.accordion[role="tablist" aria-multiselectable="true"]
   div.accordion-item
     h2#headingStats.accordion-header[role="tab"]
       button.accordion-button.collapsed[data-bs-toggle="collapse" data-bs-target="#collapseStats" aria-expanded="false" aria-controls="collapseStats"]
@@ -63,18 +63,18 @@ div#accordion.accordion[role="tablist" aria-multiselectable="true"]
               td= @stats['numExtents']
 
 
+
 h2 = I18n.t('rename_collection')
 
 form#renameCollectionForm.form-inline.well[method="POST"]
   input[type="hidden" name="_method" value="put"]
-  div.form-group
-    label.sr-only[for="collection"] Collection Name
-    div.input-group
-      span.input-group-text = "#{@db_name}."
-      input.form-control[type="text" id="collection" name="target_name" placeholder=@collection_name]
+  .input-group.mb-3
+    .input-group-text = "#{@db_name}."
+    input.form-control#collection type="text" name="target_name" placeholder=@collection_name aria-label="Collection's name"
     button.btn.btn-primary[type="submit"]
       i.bi.bi-pencil
       = I18n.t('rename_collection')
+
 
 div.row
   div class="col-md-3"
