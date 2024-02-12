@@ -5,8 +5,8 @@
         button.accordion-button.collapsed[role="button" data-bs-toggle="collapse" data-bs-target="##{db}" aria-expanded="false" aria-controls="#{db}"]
           = db
       div[id="#{db}" class="accordion-collapse collapse" aria-labelledby="heading#{db}" data-bs-parent="#dbAccordion"]
-        div.accordion-body
-          ul.list-group
+        div.accordion-body.p-0
+          ul.list-group.list-group-flush
             li.list-group-item
               a href="/db/#{db}"
                 i.bi.bi-folder2-open
