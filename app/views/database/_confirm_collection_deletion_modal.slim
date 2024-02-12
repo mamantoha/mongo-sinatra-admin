@@ -1,50 +1,57 @@
 javascript:
-  $(document).ready(function() {
-    $('.deleteCollectionButton').on('click', function(event) {
-      event.preventDefault();
-      var target = $(this);
+  document.addEventListener('DOMContentLoaded', function() {
+    const deleteButtons = document.querySelectorAll('.deleteCollectionButton');
+    const modalElement = document.getElementById('confirmCollectionDeletion');
+    const modal = new bootstrap.Modal(modalElement, {
+      backdrop: 'static',
+      keyboard: false
+    });
 
-      var parentForm = target.parents('form:first');
+    // Function to open modal and set up necessary attributes
+    function setupModalForCollection(collectionName) {
+      document.getElementById('collection-confirmation-input').setAttribute('shouldbe', collectionName);
+      document.getElementById('deletion-collection-name').textContent = collectionName;
+      modal.show();
+    }
 
-      /* debugger; */
-
-      $('#collection-confirmation-input').attr('shouldbe', target.attr('collection-name'));
-      $('#deletion-collection-name').text(target.attr('collection-name'));
-
-      $('#confirmCollectionDeletion').modal({ 'data-backdrop': 'static', 'data-keyboard': true })
-      .bind('click', '#delete', function() {
-        /* debugger; */
-        var input = $('#collection-confirmation-input');
-        console.log(input.attr('shouldbe'));
-
-        if (input.val().toLowerCase() === input.attr('shouldbe').toLowerCase() ) {
-          parentForm.trigger('submit');
-        } else {
-          /* console.log("Wrong Collection name"); */
-        }
-
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const collectionName = this.getAttribute('collection-name');
+        setupModalForCollection(collectionName);
       });
+    });
+
+    // Separate event listener for the delete confirmation
+    document.getElementById('deleteCollection').addEventListener('click', function() {
+      const input = document.getElementById('collection-confirmation-input');
+      const shouldbe = input.getAttribute('shouldbe').toLowerCase();
+      if (input.value.toLowerCase() === shouldbe) {
+        // Find the form related to the currently set collection name
+        Array.from(deleteButtons).find(button => button.getAttribute('collection-name').toLowerCase() === shouldbe).form.submit();
+      } else {
+        // Optionally handle the incorrect input case
+        console.log("Incorrect collection name");
+      }
     });
   });
 
-div id="confirmCollectionDeletion" class="modal fade" role="dialog"
-  div.modal-dialog role="dialog"
+div#confirmCollectionDeletion.modal.fade[tabindex="-1" role="dialog"]
+  div.modal-dialog
     div.modal-content
       div.modal-header
-        button type="button" class="close" data-dismiss="modal" aria-label="Close"
-          span aria-hidden="true" &times;
-        h4.modal-title = I18n.t('delete_collection')
+        button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      h4#confirmCollectionDeletionLabel.modal-title = I18n.t('delete_collection')
       div.modal-body
         p.text-danger
-          | Be careful! You are about to delete whole '<strong><span id="deletion-collection-name"></span></strong>' collection.
+          | Be careful! You are about to delete the whole '<strong><span id="deletion-collection-name"></span></strong>' collection.
         p
           label for="collection-confirmation-input" Type the collection name to proceed.
           br
           input type="text" id="collection-confirmation-input" name="collection-confirmation-input" shouldbe="" value=""
       div.modal-footer
-        button type="button" class="btn btn-default" data-dismiss="modal"
-          i class="bi bi-x"
+        button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          i.bi.bi-x-lg
           = I18n.t('close')
-        button#delete type="button" class="btn btn-danger"
-          i class="bi bi-trash"
+        button#deleteCollection type="button" class="btn btn-danger"
+          i.bi.bi-trash-fill
           = I18n.t('delete')

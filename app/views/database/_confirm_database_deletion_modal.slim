@@ -1,28 +1,38 @@
 javascript:
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.deleteDatabaseButton').forEach(button => {
-      button.addEventListener('click', function (event) {
-        event.preventDefault();
+  document.addEventListener('DOMContentLoaded', function() {
+    const deleteButtons = document.querySelectorAll('.deleteDatabaseButton');
+    const modalElement = document.getElementById('confirmDatabaseDeletion');
+    const modal = new bootstrap.Modal(modalElement, {
+      backdrop: 'static',
+      keyboard: false
+    });
+
+    // Function to open modal and set up necessary attributes for database
+    function setupModalForDatabase(dbName) {
+      document.getElementById('database-confirmation-input').setAttribute('shouldbe', dbName);
+      document.getElementById('deletion-database-name').textContent = dbName;
+      modal.show();
+    }
+
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent form submission
         const dbName = this.getAttribute('data-database-name');
-
-        document.getElementById('database-confirmation-input').setAttribute('shouldbe', dbName);
-        document.getElementById('deletion-database-name').textContent = dbName;
-
-        var modal = new bootstrap.Modal(document.getElementById('confirmDatabaseDeletion'), {
-          backdrop: 'static',
-          keyboard: true
-        });
-        modal.show();
-
-        document.getElementById('delete').addEventListener('click', function () {
-          const input = document.getElementById('database-confirmation-input');
-          if (input.value.toLowerCase() === input.getAttribute('shouldbe').toLowerCase()) {
-            button.form.submit();
-          } else {
-            // Optionally handle the incorrect input case
-          }
-        }, { once: true });
+        setupModalForDatabase(dbName);
       });
+    });
+
+    // Dedicated event listener for the delete confirmation
+    document.getElementById('deleteDatabase').addEventListener('click', function() {
+      const input = document.getElementById('database-confirmation-input');
+      const shouldbe = input.getAttribute('shouldbe').toLowerCase();
+      if (input.value.toLowerCase() === shouldbe) {
+        // Find and submit the form for the current database
+        Array.from(deleteButtons).find(button => button.getAttribute('data-database-name').toLowerCase() === shouldbe).form.submit();
+      } else {
+        // Optionally, handle the incorrect input case
+        console.log("Incorrect database name");
+      }
     });
   });
 
@@ -43,6 +53,6 @@ div#confirmDatabaseDeletion.modal.fade[tabindex="-1" role="dialog" aria-labelled
         button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
           i.bi.bi-x-lg
           = I18n.t('close')
-        button#delete type="button" class="btn btn-danger"
+        button#deleteDatabase type="button" class="btn btn-danger"
           i.bi.bi-trash-fill
           = I18n.t('delete')

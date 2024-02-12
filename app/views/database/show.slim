@@ -72,6 +72,6 @@ table.table.table-bordered.table-striped.table-condensed
         td.col-md-2
           form[method="POST" action="/db/#{@db_name}/#{collection}"]
             input[type="hidden" name="_method" value="delete"]
-            button.btn.btn-danger.btn-block.deleteCollectionButton[type="submit" data-bs-toggle="modal" data-bs-target="#confirmCollectionDeletion" collection-name="#{collection}"]
+            button.btn.btn-danger.deleteCollectionButton[type="button" collection-name="#{collection}"]
               i.bi.bi-trash
               = I18n.t('delete')
