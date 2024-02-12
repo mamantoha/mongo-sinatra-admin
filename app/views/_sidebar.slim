@@ -1,14 +1,15 @@
 div class="well"
   ul class="list-group"
     - @db.databases.each do |db|
-      li class="list-group-item" role="button" data-bs-toggle="collapse" href="#toggle_#{db}" aria-expanded="false" aria-control="toggle_#{db}"
+      li class="list-group-item d-flex justify-content-between align-items-center" role="button" data-bs-toggle="collapse" href="#toggle_#{db}" aria-expanded="false" aria-control="toggle_#{db}"
         = db
-        i class="fa fa-chevron-down pull-right"
+        span.badge.bg-primary.rounded-pill
+          = @db.collections[db].size
       li class="list-group-item"
         a href="/db/#{db}"
           i.bi.bi-folder2-open
           = I18n.t(:view_database)
-      ul class="collapse list-group header #{db == @db_name ? 'in' : ''}" id="toggle_#{db}"
+      ul class="collapse list-group header #{db == @db_name ? 'show' : ''}" id="toggle_#{db}"
         - @db.collections[db].each do |collection|
           li class="list-group-item"
             a href="/db/#{db}/#{collection}"
