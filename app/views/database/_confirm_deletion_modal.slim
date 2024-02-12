@@ -1,0 +1,48 @@
+javascript:
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.deleteDatabaseButton').forEach(button => {
+      button.addEventListener('click', function (event) {
+        event.preventDefault();
+        const dbName = this.getAttribute('data-database-name');
+
+        document.getElementById('database-confirmation-input').setAttribute('shouldbe', dbName);
+        document.getElementById('deletion-database-name').textContent = dbName;
+
+        var modal = new bootstrap.Modal(document.getElementById('confirmDatabaseDeletion'), {
+          backdrop: 'static',
+          keyboard: true
+        });
+        modal.show();
+
+        document.getElementById('delete').addEventListener('click', function () {
+          const input = document.getElementById('database-confirmation-input');
+          if (input.value.toLowerCase() === input.getAttribute('shouldbe').toLowerCase()) {
+            button.form.submit();
+          } else {
+            // Optionally handle the incorrect input case
+          }
+        }, { once: true });
+      });
+    });
+  });
+
+div#confirmDatabaseDeletion.modal.fade[tabindex="-1" role="dialog" aria-labelledby="confirmDatabaseDeletionLabel" aria-hidden="true"]
+  div.modal-dialog[role="document"]
+    div.modal-content
+      div.modal-header
+        button type="button" class="btn-close" data-bs-dismiss="modal" aria-label=("Close")
+      h4#confirmDatabaseDeletionLabel.modal-title = I18n.t('delete_database')
+      div.modal-body
+        p.text-danger
+          | Be careful! You are about to delete the whole '<strong><span id="deletion-database-name"></span></strong>' database.
+        p
+          label for="database-confirmation-input" Type the database name to proceed.
+          br
+          input type="text" id="database-confirmation-input" name="database-confirmation-input" shouldbe="" value=""
+      div.modal-footer
+        button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          i.bi.bi-x-lg
+          = I18n.t('close')
+        button#delete type="button" class="btn btn-danger"
+          i.bi.bi-trash-fill
+          = I18n.t('delete')

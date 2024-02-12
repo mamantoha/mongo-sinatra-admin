@@ -1,4 +1,4 @@
-== slim :'database/_confirm_database_deletion_modal'
+== slim :'database/_confirm_deletion_modal'
 == slim :'database/_confirm_collection_deletion_modal'
 
 nav[aria-label="breadcrumb"]
@@ -38,10 +38,10 @@ div#accordion.accordion[role="tablist" aria-multiselectable="true"]
               td = number_to_human_size(@stats['fileSize'])
 
 - unless @db_name == 'admin'
-  form.well[method="POST" action="/db/#{@db_name}"]
+  form.bg-light.p-3[method="POST" action="/db/#{@db_name}"]
     input[type="hidden" name="_method" value="delete"]
-    button.btn.btn-danger.btn-lg.deleteDatabaseButton[type="submit" data-bs-toggle="modal" data-bs-target="#confirmDatabaseDeletion" database-name="#{@db_name}"]
-      i.bi.bi-trash
+    button.btn.btn-danger.btn-lg.deleteDatabaseButton[type="submit" data-database-name="#{@db_name}"]
+      i.bi.bi-trash-fill
       = I18n.t('drop_database')
 
 h2 = I18n.t('create_collection')
