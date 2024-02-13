@@ -63,7 +63,7 @@ nav[aria-label="breadcrumb"]
 
 h2 = I18n.t('rename_collection')
 
-form#renameCollectionForm.form-inline.well[method="POST"]
+form#renameCollectionForm.form-inline[method="POST"]
   input[type="hidden" name="_method" value="put"]
   .input-group.mb-3
     .input-group-text = "#{@db_name}."
