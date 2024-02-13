@@ -1,13 +1,14 @@
 div
   ul.list-group
     - settings.db.databases.each do |db|
-      li.list-group-item.list-group-item-primary.d-flex.justify-content-between.align-items-center role="button" data-bs-toggle="collapse" href="#toggle_#{db}" aria-expanded="false" aria-control="toggle_#{db}"
-        = db
+      li.list-group-item.list-group-item-primary.d-flex.justify-content-between.align-items-start role="button" data-bs-toggle="collapse" href="#toggle_#{db}" aria-expanded="false" aria-control="toggle_#{db}"
+        div
+          i.bi.bi-database.me-1
+          = db
         span.badge.bg-primary.rounded-pill
           = settings.db.collections[db].size
       li.list-group-item
         a.text-decoration-none href="/db/#{db}"
-          i.bi.bi-database.me-1
           = I18n.t(:view_database)
       ul.collapse.list-group.header class="#{db == @db_name ? 'show' : ''}" id="toggle_#{db}"
         - settings.db.collections[db].each do |collection|
