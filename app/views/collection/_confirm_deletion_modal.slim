@@ -1,0 +1,40 @@
+javascript:
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.deleteCollectionButton').forEach(function(button) {
+      button.addEventListener('click', function(event) {
+        event.preventDefault();
+        const collectionName = button.getAttribute('collection-name');
+        const modalElement = document.getElementById('confirmDeletionDocument');
+        const modal = new bootstrap.Modal(modalElement, {
+          backdrop: 'static',
+          keyboard: true
+        });
+
+        modalElement.querySelector('#deletion-document-id').textContent = collectionName;
+
+        modalElement.querySelector('#deleteDocument').addEventListener('click', function() {
+          button.form.submit();
+        });
+
+        modal.show();
+      });
+    });
+  });
+
+div#confirmDeletionDocument.modal.fade[tabindex="-1" role="dialog" aria-labelledby="confirmDeletionDocumentLabel" aria-hidden="true"]
+  div.modal-dialog[role="document"]
+    div.modal-content
+      div.modal-header
+        h5#confirmDeletionDocumentLabel.modal-title = I18n.t('delete_document')
+        button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      div.modal-body
+        p.text-danger
+          ' Be careful! You are about to delete document with id '
+          strong
+            span#deletion-document-id
+          ' .'
+      div.modal-footer
+        button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
+          = I18n.t('close')
+        button#deleteDocument.btn.btn-danger[type="button"]
+          = I18n.t('delete')

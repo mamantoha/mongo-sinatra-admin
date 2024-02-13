@@ -1,7 +1,9 @@
-ol class="breadcrumb"
-  li
-    a href="/" = I18n.t('home')
-  li class="active" = I18n.t('about')
+nav[aria-label="breadcrumb"]
+  ol.breadcrumb
+    li.breadcrumb-item
+      a href="/" = I18n.t('home')
+    li.breadcrumb-item.active aria-current="page"
+      = I18n.t('about')
 
 div.page-header
   h1 =  I18n.t('about')

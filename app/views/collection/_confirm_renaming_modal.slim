@@ -1,0 +1,50 @@
+javascript:
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('renameCollectionForm');
+    var modalElement = document.getElementById('confirmCollectionRenaming');
+    var modal = new bootstrap.Modal(modalElement, {
+      backdrop: 'static',
+      keyboard: false
+    });
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form from submitting immediately
+
+      // Display the collection name in the modal
+      var collectionName = form.querySelector('input[name="target_name"]').value;
+      document.getElementById('renaming-collection-name').textContent = collectionName;
+
+      // Reset any previous click listeners to avoid multiple submissions
+      var confirmButton = modalElement.querySelector('#renameCollection');
+      var newConfirmButton = confirmButton.cloneNode(true);
+      confirmButton.parentNode.replaceChild(newConfirmButton, confirmButton);
+
+      // Add click event listener to the new confirmation button
+      newConfirmButton.addEventListener('click', function() {
+        form.submit(); // Submit the form after confirmation
+      });
+
+      modal.show(); // Show the confirmation modal
+    });
+  });
+
+div#confirmCollectionRenaming.modal.fade[tabindex="-1" role="dialog" aria-labelledby="renameCollectionModalLabel" aria-hidden="true"]
+  div.modal-dialog[role="document"]
+    div.modal-content
+      div.modal-header
+        h5#renameCollectionModalLabel.modal-title = I18n.t('rename_collection')
+        button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      div.modal-body
+        p.text-danger
+          ' Be careful! You are about to rename collection
+          strong
+            span#renaming-collection-name
+        p
+          | Rename Collection is not compatible with sharded collections.
+      div.modal-footer
+        button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
+          i.bi.bi-x
+          = I18n.t('close')
+        button#renameCollection.btn.btn-primary[type="button"]
+          i.bi.bi-pen
+          = I18n.t('rename')

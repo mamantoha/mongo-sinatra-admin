@@ -1,49 +1,58 @@
 javascript:
-  $(document).ready(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    const deleteButtons = document.querySelectorAll('.deleteDatabaseButton');
+    const modalElement = document.getElementById('confirmDatabaseDeletion');
+    const modal = new bootstrap.Modal(modalElement, {
+      backdrop: 'static',
+      keyboard: false
+    });
 
-    $('.deleteDatabaseButton').popover({ trigger: "hover", placement: "left", title: "#{I18n.t('warning')}", content: "Are you sure you want to delete this database? All collections will be deleted." });
+    // Function to open modal and set up necessary attributes for database
+    function setupModalForDatabase(dbName) {
+      document.getElementById('database-confirmation-input').setAttribute('shouldbe', dbName);
+      document.getElementById('deletion-database-name').textContent = dbName;
+      modal.show();
+    }
 
-    $('.deleteDatabaseButton').on('click', function(event) {
-      event.preventDefault();
-      var target = $(this);
-
-      var parentForm = target.parents('form:first');
-
-      $('#database-confirmation-input').attr('shouldbe', target.attr('database-name'));
-      $('#deletion-database-name').text(target.attr('database-name'));
-
-      $('#confirmDatabaseDeletion').modal({ 'data-backdrop': 'static', 'data-keyboard': true })
-      .bind('click', '#delete', function() {
-        var input = $('#database-confirmation-input');
-
-        if (input.val().toLowerCase() === input.attr('shouldbe').toLowerCase() ) {
-          parentForm.trigger('submit');
-        } else {
-          /* console.log("Wrong Database name"); */
-        }
-
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent form submission
+        const dbName = this.getAttribute('data-database-name');
+        setupModalForDatabase(dbName);
       });
+    });
+
+    // Dedicated event listener for the delete confirmation
+    document.getElementById('deleteDatabase').addEventListener('click', function() {
+      const input = document.getElementById('database-confirmation-input');
+      const shouldbe = input.getAttribute('shouldbe').toLowerCase();
+      if (input.value.toLowerCase() === shouldbe) {
+        // Find and submit the form for the current database
+        Array.from(deleteButtons).find(button => button.getAttribute('data-database-name').toLowerCase() === shouldbe).form.submit();
+      } else {
+        // Optionally, handle the incorrect input case
+        console.log("Incorrect database name");
+      }
     });
   });
 
-div id="confirmDatabaseDeletion" class="modal fade" role="dialog"
-  div.modal-dialog role="dialog"
+div#confirmDatabaseDeletion.modal.fade[tabindex="-1" role="dialog" aria-labelledby="confirmDatabaseDeletionLabel" aria-hidden="true"]
+  div.modal-dialog[role="document"]
     div.modal-content
       div.modal-header
-        button type="button" class="close" data-dismiss="modal" aria-label="Close"
-          span aria-hidden="true" &times;
-        h4.modal-title = I18n.t('delete_database')
+        h5#confirmDatabaseDeletionLabel.modal-title = I18n.t('delete_database')
+        button type="button" class="btn-close" data-bs-dismiss="modal" aria-label=("Close")
       div.modal-body
-        p class="text-danger"
-          | Be careful! You are about to delete whole '<strong><span id="deletion-database-name"></span></strong>' database.
+        p.text-danger
+          | Be careful! You are about to delete the whole '<strong><span id="deletion-database-name"></span></strong>' database.
         p
           label for="database-confirmation-input" Type the database name to proceed.
           br
           input type="text" id="database-confirmation-input" name="database-confirmation-input" shouldbe="" value=""
       div.modal-footer
-        button type="button" class="btn btn-default" data-dismiss="modal"
-          i class="fa fa-times"
+        button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          i.bi.bi-x-lg
           = I18n.t('close')
-        button#delete type="button" class="btn btn-danger"
-          i class="fa fa-trash"
+        button#deleteDatabase type="button" class="btn btn-danger"
+          i.bi.bi-trash-fill
           = I18n.t('delete')
