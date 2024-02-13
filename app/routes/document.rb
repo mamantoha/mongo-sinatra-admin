@@ -6,8 +6,8 @@ module MongoAdmin
       @db_name = params['database']
       @collection_name = params['collection']
 
-      check_database_exists(@db, @db_name)
-      check_collection_exists(@db, @db_name, @collection_name)
+      check_database_exists(settings.db, @db_name)
+      check_collection_exists(settings.db, @db_name, @collection_name)
 
       slim :'document/new'
     end
@@ -17,8 +17,8 @@ module MongoAdmin
       @db_name = params['database']
       @collection_name = params['collection']
 
-      check_database_exists(@db, @db_name)
-      check_collection_exists(@db, @db_name, @collection_name)
+      check_database_exists(settings.db, @db_name)
+      check_collection_exists(settings.db, @db_name, @collection_name)
 
       # convert id string to mongodb object id
       begin
@@ -30,7 +30,7 @@ module MongoAdmin
 
       @title = I18n.t('viewing_document', document: @document_id)
 
-      client = @db.client.use(@db_name)
+      client = settings.db.client.use(@db_name)
       collection = client[@collection_name]
 
       @document = collection.find(_id: @document_id).first
@@ -49,8 +49,8 @@ module MongoAdmin
       collection_name = params['collection']
       document_text = params['document']
 
-      check_database_exists(@db, db_name)
-      check_collection_exists(@db, db_name, collection_name)
+      check_database_exists(settings.db, db_name)
+      check_collection_exists(settings.db, db_name, collection_name)
 
       begin
         document_json = JSON.parse(document_text)
@@ -63,7 +63,7 @@ module MongoAdmin
         redirect "/db/#{db_name}/#{collection_name}"
       end
 
-      client = @db.client.use(db_name)
+      client = settings.db.client.use(db_name)
       collection = client[collection_name]
 
       result = collection.insert_one(document_json)
@@ -80,8 +80,8 @@ module MongoAdmin
       collection_name = params['collection']
       document_text = params['document'] # from a form
 
-      check_database_exists(@db, db_name)
-      check_collection_exists(@db, db_name, collection_name)
+      check_database_exists(settings.db, db_name)
+      check_collection_exists(settings.db, db_name, collection_name)
 
       # convert id string to mongodb object id
       begin
@@ -105,7 +105,7 @@ module MongoAdmin
       # IMPORTANT! You can not change Object ID
       document_json.delete('_id')
 
-      client = @db.client.use(db_name)
+      client = settings.db.client.use(db_name)
       collection = client[collection_name]
 
       document = collection.find(_id: document_id)
@@ -125,8 +125,8 @@ module MongoAdmin
       db_name         = params['database']
       collection_name = params['collection']
 
-      check_database_exists(@db, db_name)
-      check_collection_exists(@db, db_name, collection_name)
+      check_database_exists(settings.db, db_name)
+      check_collection_exists(settings.db, db_name, collection_name)
 
       # convert id string to mongodb object id
       begin
@@ -136,7 +136,7 @@ module MongoAdmin
         redirect "/db/#{db_name}/#{collection_name}"
       end
 
-      client = @db.client.use(db_name)
+      client = settings.db.client.use(db_name)
       collection = client[collection_name]
 
       document = collection.find(_id: document_id)

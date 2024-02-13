@@ -7,10 +7,10 @@ module MongoAdmin
       db_name = params['database']
       collection_name = params['collection']
 
-      check_database_exists(@db, db_name)
-      check_collection_exists(@db, db_name, collection_name)
+      check_database_exists(settings.db, db_name)
+      check_collection_exists(settings.db, db_name, collection_name)
 
-      client = @db.client.use(db_name)
+      client = settings.db.client.use(db_name)
       collection = client[collection_name]
 
       documents = collection.find
@@ -25,12 +25,12 @@ module MongoAdmin
       @db_name = params['database']
       @collection_name = params['collection']
 
-      check_database_exists(@db, @db_name)
-      check_collection_exists(@db, @db_name, @collection_name)
+      check_database_exists(settings.db, @db_name)
+      check_collection_exists(settings.db, @db_name, @collection_name)
 
       @title = I18n.t('viewing_collection', collection: @collection_name)
 
-      client = @db.client.use(@db_name)
+      client = settings.db.client.use(@db_name)
       collection = client[@collection_name]
 
       stats = client.command(collStats: @collection_name)
@@ -50,19 +50,20 @@ module MongoAdmin
       db_name = params['database']
       collection_name = params['collection'].to_sym
 
-      check_database_exists(@db, db_name)
+      check_database_exists(settings.db, db_name)
 
       unless /^[a-zA-Z_][a-zA-Z0-9._]*$/ =~ collection_name
         flash[:danger] = I18n.t('collection_validates_name_error')
         redirect "/db/#{db_name}"
       end
 
-      client = @db.client.use(db_name)
+      client = settings.db.client.use(db_name)
       collection = client[collection_name]
 
       begin
         # Force the collection to be created in the database.
         collection.create
+        settings.db.update_collections!(db_name)
       rescue Mongo::Error::OperationFailure => e
         flash[:danger] = I18n.t('mongodb_error', message: e.message)
         redirect "/db/#{db_name}"
@@ -78,8 +79,8 @@ module MongoAdmin
       source_collection_name = params['collection']
       target_collection_name = params['target_name']
 
-      check_database_exists(@db, db_name)
-      check_collection_exists(@db, db_name, source_collection_name)
+      check_database_exists(settings.db, db_name)
+      check_collection_exists(settings.db, db_name, source_collection_name)
 
       unless /^[a-zA-Z_][a-zA-Z0-9._]*$/ =~ target_collection_name
         flash[:danger] = I18n.t('collection_validates_name_error')
@@ -87,8 +88,11 @@ module MongoAdmin
       end
 
       begin
-        @db.client.command(renameCollection: "#{db_name}.#{source_collection_name}",
-                           to: "#{db_name}.#{target_collection_name}")
+        settings.db.client.command(
+          renameCollection: "#{db_name}.#{source_collection_name}",
+          to: "#{db_name}.#{target_collection_name}"
+        )
+        settings.db.update_collections!(db_name)
       rescue Mongo::Error::OperationFailure => e
         flash[:danger] = I18n.t('mongodb_error', message: e.message)
         redirect "/db/#{db_name}/#{source_collection_name}"
@@ -103,14 +107,15 @@ module MongoAdmin
       db_name = params['database']
       collection_name = params['collection']
 
-      check_database_exists(@db, db_name)
-      check_collection_exists(@db, db_name, collection_name)
+      check_database_exists(settings.db, db_name)
+      check_collection_exists(settings.db, db_name, collection_name)
 
-      client = @db.client.use(db_name)
+      client = settings.db.client.use(db_name)
       collection = client[collection_name]
 
       begin
         collection.drop
+        settings.db.update_collections!(db_name)
       rescue Mongo::Error::OperationFailure => e
         flash[:danger] = I18n.t('mongodb_error', message: e.message)
         redirect "/db/#{db_name}"

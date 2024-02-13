@@ -33,9 +33,11 @@ module MongoAdmin
       set :views, 'app/views'
       set :public_dir, 'public'
       set :root, (settings.root || File.dirname(__FILE__))
-      set :config_file, JSON.parse(File.read("config_#{ENV['RACK_ENV']}.json"))
       set :method_override, true
       set :locale, I18n.default_locale
+
+      set :config_file, JSON.parse(File.read("config_#{ENV['RACK_ENV']}.json"))
+      set :db, MongoAdmin::DB.new(config_file)
 
       I18n::Backend::Simple.include I18n::Backend::Fallbacks
       I18n.default_locale = :en
@@ -48,16 +50,6 @@ module MongoAdmin
       protected!
       set_locale
       @locales = available_locales
-
-      begin
-        @db = DB.new(settings.config_file)
-      rescue StandardError
-        redirect '/error'
-      end
-    end
-
-    after do
-      @db&.client&.close
     end
 
     enable :sessions

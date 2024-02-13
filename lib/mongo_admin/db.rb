@@ -27,17 +27,6 @@ module MongoAdmin
       end
     end
 
-    private
-
-    def connect!(database = 'admin')
-      host = @config.mongodb.host || 'localhost'
-      port = @config.mongodb.port || 27_017
-
-      @client = Mongo::Client.new("mongodb://#{host}:#{port}", database: database)
-
-      true
-    end
-
     # update database list
     def update_databases!
       databases = []
@@ -66,6 +55,17 @@ module MongoAdmin
       db_client.close
 
       @collections
+    end
+
+    private
+
+    def connect!(database = 'admin')
+      host = @config.mongodb.host || 'localhost'
+      port = @config.mongodb.port || 27_017
+
+      @client = Mongo::Client.new("mongodb://#{host}:#{port}", database: database)
+
+      true
     end
   end
 end

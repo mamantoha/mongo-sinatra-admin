@@ -3,7 +3,7 @@
 module MongoAdmin
   class App < Sinatra::Base # :nodoc:
     get '/' do
-      info = @db.client.command(serverStatus: 1)
+      info = settings.db.client.command(serverStatus: 1)
 
       @info = info.documents.first
       slim :index
