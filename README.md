@@ -1,7 +1,7 @@
 # mongo-sinatra-admin
 
-[![Build Status][travis_badge]][travis]
-[![Code Climate][codeclimate_badge]][codeclimate]
+[![Ruby](https://github.com/mamantoha/mongo-sinatra-admin/actions/workflows/ruby.yml/badge.svg)](https://github.com/mamantoha/mongo-sinatra-admin/actions/workflows/ruby.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/87358a550b5db859316f/maintainability)](https://codeclimate.com/github/mamantoha/mongo-sinatra-admin/maintainability)
 
 Web-based MongoDB admin interface written with Ruby and Sinatra
 
@@ -52,9 +52,3 @@ Visit `http://localhost:9292` or whatever URL/port you enterd into you config.
 ```
 bundle exec rake specs
 ```
-
-[travis_badge]: http://img.shields.io/travis/mamantoha/mongo-sinatra-admin.svg?style=flat
-[travis]: https://travis-ci.org/mamantoha/mongo-sinatra-admin
-
-[codeclimate_badge]: http://img.shields.io/codeclimate/github/mamantoha/mongo-sinatra-admin.svg?style=flat
-[codeclimate]: https://codeclimate.com/github/mamantoha/mongo-sinatra-admin
