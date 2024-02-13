@@ -3,12 +3,12 @@
 require_relative 'spec_helper'
 
 describe 'Database' do
-  describe 'view' do
-    before do
-      app.config_file = config_file
-      authorize USERNAME, PASSWORD
-    end
+  before do
+    app.config_file = config_file
+    authorize USERNAME, PASSWORD
+  end
 
+  describe 'view' do
     context 'when exists' do
       it 'is successful' do
         get "/db/#{TEST_DB}"
@@ -29,11 +29,6 @@ describe 'Database' do
   end
 
   describe 'delete' do
-    before do
-      app.config_file = config_file
-      authorize USERNAME, PASSWORD
-    end
-
     context 'when exists' do
       it 'is successful' do
         expect(client.database_names).to include(TEST_DB)

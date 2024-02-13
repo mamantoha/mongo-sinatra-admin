@@ -3,13 +3,13 @@
 require_relative 'spec_helper'
 
 describe 'Collection' do
+  before do
+    app.config_file = config_file
+
+    authorize USERNAME, PASSWORD
+  end
+
   describe 'view' do
-    before do
-      app.config_file = config_file
-
-      authorize USERNAME, PASSWORD
-    end
-
     context 'when exists' do
       it 'is successful' do
         get "/db/#{TEST_DB}/#{TEST_COLLECTION}"
@@ -30,12 +30,6 @@ describe 'Collection' do
   end
 
   describe 'create' do
-    before do
-      app.config_file = config_file
-
-      authorize USERNAME, PASSWORD
-    end
-
     context 'when Collection already exists' do
       it 'should fail' do
         post "/db/#{TEST_DB}", collection: TEST_COLLECTION
@@ -70,12 +64,8 @@ describe 'Collection' do
 
   describe 'rename' do
     before do
-      app.config_file = config_file
-
       collection = client['new_test_collection']
       collection.create
-
-      authorize USERNAME, PASSWORD
     end
 
     context 'when Collection name already taken' do
@@ -111,12 +101,6 @@ describe 'Collection' do
   end
 
   describe 'delete' do
-    before do
-      app.config_file = config_file
-
-      authorize USERNAME, PASSWORD
-    end
-
     context 'when exists' do
       it 'should delete it' do
         expect(client.database.collection_names).to include(TEST_COLLECTION)

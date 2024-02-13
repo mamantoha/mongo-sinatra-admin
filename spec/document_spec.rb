@@ -3,13 +3,13 @@
 require_relative 'spec_helper'
 
 describe 'Document' do
+  before do
+    app.config_file = config_file
+
+    authorize USERNAME, PASSWORD
+  end
+
   describe 'create' do
-    before do
-      app.config_file = config_file
-
-      authorize USERNAME, PASSWORD
-    end
-
     context 'when document is ok' do
       it 'is successful' do
         post "/db/#{TEST_DB}/#{TEST_COLLECTION}", document: { name: 'test' }.to_json
@@ -43,11 +43,8 @@ describe 'Document' do
 
   describe 'show' do
     before do
-      app.config_file = config_file
       collection = client[TEST_COLLECTION]
       collection.insert_one(name: 'test name')
-
-      authorize USERNAME, PASSWORD
     end
 
     context 'when exists' do
@@ -90,11 +87,8 @@ describe 'Document' do
 
   describe 'update' do
     before do
-      app.config_file = config_file
       collection = client[TEST_COLLECTION]
       collection.insert_one(name: 'test name')
-
-      authorize USERNAME, PASSWORD
     end
 
     let(:collection) { client[TEST_COLLECTION] }
@@ -152,11 +146,8 @@ describe 'Document' do
 
   describe 'destroy' do
     before do
-      app.config_file = config_file
       collection = client[TEST_COLLECTION]
       collection.insert_one(name: 'test name')
-
-      authorize USERNAME, PASSWORD
     end
 
     let(:collection) { client[TEST_COLLECTION] }
