@@ -40,7 +40,7 @@ javascript:
     .modal-content
       .modal-header
         h5#confirmCollectionDeletionLabel.modal-title = I18n.t('delete_collection')
-        button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+        button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"
       .modal-body
         p.text-danger
           | Be careful! You are about to delete the whole '<strong><span id="deletion-collection-name"></span></strong>' collection.
@@ -49,9 +49,9 @@ javascript:
           br
           input type="text" id="collection-confirmation-input" name="collection-confirmation-input" shouldbe="" value=""
       .modal-footer
-        button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+        button.btn.btn-secondary type="button" data-bs-dismiss="modal"
           i.bi.bi-x-lg
           = I18n.t('close')
-        button#deleteCollection type="button" class="btn btn-danger"
+        button.btn.btn-danger#deleteCollection type="button"
           i.bi.bi-trash-fill
           = I18n.t('delete')

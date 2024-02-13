@@ -29,9 +29,9 @@ nav[aria-label="breadcrumb"]
         table.table.table-bordered.table-striped
           tbody
             tr
-              td class="col-md-2"
+              td.col-md-2
                 strong = I18n.t('collection_stats.documents')
-              td class="col-md-3" = @stats['count']
+              td.col-md-3 = @stats['count']
             tr
               td
                 strong = I18n.t('collection_stats.total_doc_size')
@@ -74,8 +74,8 @@ form#renameCollectionForm.form-inline.well[method="POST"]
 
 .row.bg-light.p-3
   .col-md-3
-    a class="btn btn-success btn-block btn-lg" href="/db/#{@db_name}/#{@collection_name}/new"
-      i class="bi bi-file-plus"
+    a.btn.btn-success.btn-block.btn-lg href="/db/#{@db_name}/#{@collection_name}/new"
+      i.bi.bi-file-plus
       = I18n.t('new_document')
 
   .col-md-3
@@ -116,14 +116,14 @@ nav
 
 
     .col-md-1
-      div class="btn-vertical"
-        a class="btn btn-primary btn-sm" href="/db/#{@db_name}/#{@collection_name}/#{document['_id']}"
-          i class="bi bi-pen"
-      div class="btn-vertical"
+      .btn-vertical
+        a.btn.btn-primary.btn-sm href="/db/#{@db_name}/#{@collection_name}/#{document['_id']}"
+          i.bi.bi-pen
+      .btn-vertical
         form method="POST" action="/db/#{@db_name}/#{@collection_name}/#{document['_id']}"
           input type="hidden" name="_method" value="delete"
-          button type="submit" class="btn btn-danger btn-sm deleteDocumentButton" document-id="#{document['_id']}"
-            i class="bi bi-trash"
+          button.btn.btn-danger.btn-sm.deleteDocumentButton type="submit" document-id="#{document['_id']}"
+            i.bi.bi-trash
 
 javascript:
   $('.pagination .disabled a, .pagination .active a').on('click', function(e) {

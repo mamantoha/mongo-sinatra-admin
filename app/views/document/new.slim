@@ -20,11 +20,11 @@ nav[aria-label="breadcrumb"]
 
 div
   form method="POST" action="/db/#{@db_name}/#{@collection_name}"
-    div class="form-group edit-document"
+    .form-group.edit-document
       textarea id="document" name="document"= "{}"
     .form-group
-      button type="submit" class="btn btn-success btn-large pull-right"
-        i class="bi bi-file-plus"
+      button.btn.btn-success.btn-large.pull-right type="submit"
+        i.bi.bi-file-plus
         = I18n.t('create')
 
   javascript:
