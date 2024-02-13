@@ -6,13 +6,13 @@ div
         span.badge.bg-primary.rounded-pill
           = settings.db.collections[db].size
       li.list-group-item
-        a href="/db/#{db}"
-          i.bi.bi-folder2-open
+        a.text-decoration-none href="/db/#{db}"
+          i.bi.bi-database.me-1
           = I18n.t(:view_database)
       ul.collapse.list-group.header class="#{db == @db_name ? 'show' : ''}" id="toggle_#{db}"
         - settings.db.collections[db].each do |collection|
           li.list-group-item
-            a href="/db/#{db}/#{collection}"
-              i.bi.bi-list
+            a.text-decoration-none href="/db/#{db}/#{collection}"
+              i.bi.bi-table.me-1
               = collection
       li.divider-horizontal
