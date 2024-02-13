@@ -54,6 +54,7 @@ module MongoAdmin
 
       unless /^[a-zA-Z_][a-zA-Z0-9._]*$/ =~ collection_name
         flash[:danger] = I18n.t('collection_validates_name_error')
+
         redirect "/db/#{db_name}"
       end
 
@@ -66,10 +67,12 @@ module MongoAdmin
         settings.db.update_collections!(db_name)
       rescue Mongo::Error::OperationFailure => e
         flash[:danger] = I18n.t('mongodb_error', message: e.message)
+
         redirect "/db/#{db_name}"
       end
 
       flash[:info] = I18n.t('collection_created')
+
       redirect "/db/#{db_name}/#{collection_name}"
     end
 
@@ -84,6 +87,7 @@ module MongoAdmin
 
       unless /^[a-zA-Z_][a-zA-Z0-9._]*$/ =~ target_collection_name
         flash[:danger] = I18n.t('collection_validates_name_error')
+
         redirect "/db/#{db_name}/#{source_collection_name}"
       end
 
@@ -95,10 +99,12 @@ module MongoAdmin
         settings.db.update_collections!(db_name)
       rescue Mongo::Error::OperationFailure => e
         flash[:danger] = I18n.t('mongodb_error', message: e.message)
+
         redirect "/db/#{db_name}/#{source_collection_name}"
       end
 
       flash[:info] = I18n.t('collection_renamed')
+
       redirect "/db/#{db_name}/#{target_collection_name}"
     end
 
@@ -118,10 +124,12 @@ module MongoAdmin
         settings.db.update_collections!(db_name)
       rescue Mongo::Error::OperationFailure => e
         flash[:danger] = I18n.t('mongodb_error', message: e.message)
+
         redirect "/db/#{db_name}"
       end
 
       flash[:info] = I18n.t('collection_deleted')
+
       redirect "/db/#{db_name}"
     end
   end

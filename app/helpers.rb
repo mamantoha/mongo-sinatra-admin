@@ -29,6 +29,7 @@ module MongoAdmin
         return if db.collections.include?(db_name)
 
         flash[:danger] = I18n.t('database_not_found', database: db_name)
+
         redirect '/'
       end
 
@@ -37,6 +38,7 @@ module MongoAdmin
         return if db.collections[db_name].include?(collection_name)
 
         flash[:danger] = I18n.t('collection_not_found', collection: collection_name)
+
         redirect "/db/#{db_name}"
       end
 

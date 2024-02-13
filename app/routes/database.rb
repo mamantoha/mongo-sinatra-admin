@@ -24,6 +24,7 @@ module MongoAdmin
 
       if db_name == 'admin'
         flash[:danger] = I18n.t('could_not_drop_admin_database')
+
         redirect '/'
       end
 
@@ -36,10 +37,12 @@ module MongoAdmin
         settings.db.update_databases!
       rescue Mongo::Error::OperationFailure => e
         flash[:danger] = I18n.t('mongodb_error', message: e.message)
+
         redirect '/'
       end
 
       flash[:info] = I18n.t('database_removed')
+
       redirect '/'
     end
   end

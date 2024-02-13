@@ -15,6 +15,7 @@ module MongoAdmin
 
     post '/locale' do
       settings.locale = params[:locale] || I18n.default_locale
+
       redirect back
     end
 
