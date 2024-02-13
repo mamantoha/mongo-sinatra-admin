@@ -14,7 +14,7 @@ nav[aria-label="breadcrumb"]
 .accordion[role="tablist" aria-multiselectable="true"]
   .accordion-item
     h2#headingStats.accordion-header[role="tab"]
-      button.accordion-button[collapsed="true" data-bs-toggle="collapse" data-bs-target="#collapseStats" aria-expanded="true" aria-controls="collapseStats"]
+      button.accordion-button[data-bs-toggle="collapse" data-bs-target="#collapseStats" aria-expanded="true" aria-controls="collapseStats"]
         = I18n.t('database_stats.database_stats')
     #collapseStats.accordion-collapse.collapse.show[role="tabpanel" aria-labelledby="headingStats"]
       .accordion-body
