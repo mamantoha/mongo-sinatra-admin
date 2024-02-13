@@ -26,8 +26,7 @@ div#confirmDeletionDocument.modal.fade[tabindex="-1" role="dialog" aria-labelled
     div.modal-content
       div.modal-header
         h5#confirmDeletionDocumentLabel.modal-title = I18n.t('delete_document')
-        button.close[type="button" data-bs-dismiss="modal" aria-label="Close"]
-          span[aria-hidden="true"] &times;
+        button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
       div.modal-body
         p.text-danger
           ' Be careful! You are about to delete document with id '
