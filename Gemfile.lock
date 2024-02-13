@@ -39,7 +39,7 @@ GEM
     minitest (5.22.2)
     mongo (2.19.3)
       bson (>= 4.14.1, < 5.0.0)
-    mustermann (2.0.2)
+    mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
     mutex_m (0.2.0)
     nio4r (2.7.0)
@@ -51,13 +51,19 @@ GEM
     puma (6.4.2)
       nio4r (~> 2.0)
     racc (1.7.3)
-    rack (2.2.8)
+    rack (3.0.9)
     rack-contrib (2.4.0)
       rack (< 4)
-    rack-protection (2.2.4)
-      rack
+    rack-protection (4.0.0)
+      base64 (>= 0.1.0)
+      rack (>= 3.0.0, < 4)
+    rack-session (2.0.0)
+      rack (>= 3.0.0)
     rack-test (2.1.0)
       rack (>= 1.3)
+    rackup (2.1.0)
+      rack (>= 3)
+      webrick (~> 1.8)
     rails-dom-testing (2.2.0)
       activesupport (>= 5.0.0)
       minitest
@@ -80,10 +86,11 @@ GEM
       rspec-support (~> 3.13.0)
     rspec-support (3.13.0)
     ruby2_keywords (0.0.5)
-    sinatra (2.2.4)
-      mustermann (~> 2.0)
-      rack (~> 2.2)
-      rack-protection (= 2.2.4)
+    sinatra (4.0.0)
+      mustermann (~> 3.0)
+      rack (>= 3.0.0, < 4)
+      rack-protection (= 4.0.0)
+      rack-session (>= 2.0.0, < 3)
       tilt (~> 2.0)
     sinatra-flash (0.3.0)
       sinatra (>= 1.0.0)
@@ -94,6 +101,7 @@ GEM
     tilt (2.3.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    webrick (1.8.1)
 
 PLATFORMS
   x86_64-linux
@@ -102,16 +110,17 @@ DEPENDENCIES
   actionview
   hashie
   i18n
-  mongo (~> 2.4)
+  mongo
   pry
   puma
   rack-contrib
   rack-test
+  rackup
   rake
   rspec
-  sinatra (~> 2.2)
+  sinatra
   sinatra-flash
   slim
 
 BUNDLED WITH
-   2.4.10
+   2.5.3

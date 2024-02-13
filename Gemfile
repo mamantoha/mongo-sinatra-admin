@@ -5,16 +5,17 @@ source 'https://rubygems.org'
 gem 'actionview'
 gem 'hashie'
 gem 'i18n'
-gem 'mongo', '~> 2.4'
+gem 'mongo'
 gem 'puma'
 gem 'rack-contrib'
 gem 'rake'
-gem 'sinatra', '~> 2.2'
+gem 'sinatra'
 gem 'sinatra-flash'
 gem 'slim'
 
 group :developmenti, :test do
   gem 'pry'
+  gem 'rackup'
 end
 
 group :test do
