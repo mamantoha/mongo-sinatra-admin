@@ -24,15 +24,15 @@ javascript:
 #confirmDeletionDocument.modal.fade[tabindex="-1" role="dialog" aria-labelledby="confirmDeletionDocumentLabel" aria-hidden="true"]
   .modal-dialog[role="document"]
     .modal-content
-      .modal-header
-        h5#confirmDeletionDocumentLabel.modal-title = I18n.t('delete_document')
+      .modal-header.bg-danger.text-white
+        h5#confirmDeletionDocumentLabel.modal-title = I18n.t('delete_collection')
         button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"
       .modal-body
         p.text-danger
-          ' Be careful! You are about to delete document with id '
+          ' Be careful! You are about to delete collection
           strong
             span#deletion-document-id
-          ' .'
+          ' .
       .modal-footer
         button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
           = I18n.t('close')

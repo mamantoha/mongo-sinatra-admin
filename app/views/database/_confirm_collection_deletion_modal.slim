@@ -38,7 +38,7 @@ javascript:
 #confirmCollectionDeletion.modal.fade[tabindex="-1" role="dialog"]
   .modal-dialog
     .modal-content
-      .modal-header
+      .modal-header.bg-danger.text-white
         h5#confirmCollectionDeletionLabel.modal-title = I18n.t('delete_collection')
         button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"
       .modal-body
@@ -47,7 +47,7 @@ javascript:
         p
           label for="collection-confirmation-input" Type the collection name to proceed.
           br
-          input#collection-confirmation-input type="text" name="collection-confirmation-input" shouldbe="" value=""
+          input.form-control#collection-confirmation-input type="text" name="collection-confirmation-input" shouldbe="" value=""
       .modal-footer
         button.btn.btn-secondary type="button" data-bs-dismiss="modal"
           i.bi.bi-x-lg
