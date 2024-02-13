@@ -15,7 +15,7 @@ nav[aria-label="breadcrumb"]
     li.breadcrumb-item.active aria-current="page"
       = @document_id
 
-div.page-header
+.page-header
   h1 = I18n.t('viewing_document', document: @document_id)
 
 div
@@ -23,7 +23,7 @@ div
     input type="hidden" name="_method" value="put"
     div class="form-group edit-document"
       textarea id="document" name="document" = JSON.pretty_generate(@document)
-    div.form-group
+    .form-group
       button type="submit" class="btn btn-success btn-large pull-right"
         i class="bi bi-pen"
         = I18n.t('save')

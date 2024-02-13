@@ -35,20 +35,20 @@ javascript:
     });
   });
 
-div#confirmCollectionDeletion.modal.fade[tabindex="-1" role="dialog"]
-  div.modal-dialog
-    div.modal-content
-      div.modal-header
+#confirmCollectionDeletion.modal.fade[tabindex="-1" role="dialog"]
+  .modal-dialog
+    .modal-content
+      .modal-header
         h5#confirmCollectionDeletionLabel.modal-title = I18n.t('delete_collection')
         button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-      div.modal-body
+      .modal-body
         p.text-danger
           | Be careful! You are about to delete the whole '<strong><span id="deletion-collection-name"></span></strong>' collection.
         p
           label for="collection-confirmation-input" Type the collection name to proceed.
           br
           input type="text" id="collection-confirmation-input" name="collection-confirmation-input" shouldbe="" value=""
-      div.modal-footer
+      .modal-footer
         button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
           i.bi.bi-x-lg
           = I18n.t('close')

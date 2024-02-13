@@ -16,16 +16,16 @@ nav[aria-label="breadcrumb"]
     li.breadcrumb-item.active aria-current="page"
       = @collection_name
 
-div.page-header
+.page-header
   h1 = I18n.t('viewing_collection', collection: @collection_name)
 
-div.accordion[role="tablist" aria-multiselectable="true"]
-  div.accordion-item
+.accordion[role="tablist" aria-multiselectable="true"]
+  .accordion-item
     h2#headingStats.accordion-header[role="tab"]
       button.accordion-button.collapsed[data-bs-toggle="collapse" data-bs-target="#collapseStats" aria-expanded="false" aria-controls="collapseStats"]
         = I18n.t('collection_stats.collection_stats')
-    div#collapseStats.accordion-collapse.collapse[role="tabpanel" aria-labelledby="headingStats"]
-      div.accordion-body
+    #collapseStats.accordion-collapse.collapse.show[role="tabpanel" aria-labelledby="headingStats"]
+      .accordion-body
         table.table.table-bordered.table-striped
           tbody
             tr
@@ -98,9 +98,9 @@ nav
         span[aria-hidden="true"] &raquo;
 
 - @documents.each_with_index do |document, index|
-  div.row
-    div.col-md-11
-      div.listDocument
+  .row
+    .col-md-11
+      .listDocument
         textarea readonly="readonly" id="doc_#{index}" name="doc_#{index}" = JSON.pretty_generate(document)
       p
         | &nbsp;
@@ -115,7 +115,7 @@ nav
         });
 
 
-    div.col-md-1
+    .col-md-1
       div class="btn-vertical"
         a class="btn btn-primary btn-sm" href="/db/#{@db_name}/#{@collection_name}/#{document['_id']}"
           i class="bi bi-pen"

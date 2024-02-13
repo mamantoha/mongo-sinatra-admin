@@ -8,16 +8,16 @@ nav[aria-label="breadcrumb"]
     li.breadcrumb-item.active aria-current="page"
       = @db_name
 
-div.page-header
+.page-header
   h1 = I18n.t('viewing_database', database: @db_name)
 
-div#accordion.accordion[role="tablist" aria-multiselectable="true"]
-  div.card
-    h2#headingStats.card-header[role="tab"]
+.accordion[role="tablist" aria-multiselectable="true"]
+  .accordion-item
+    h2#headingStats.accordion-header[role="tab"]
       button.accordion-button[collapsed="true" data-bs-toggle="collapse" data-bs-target="#collapseStats" aria-expanded="true" aria-controls="collapseStats"]
         = I18n.t('database_stats.database_stats')
-    div#collapseStats.accordion-collapse.collapse.show[role="tabpanel" aria-labelledby="headingStats"]
-      div.card-body
+    #collapseStats.accordion-collapse.collapse.show[role="tabpanel" aria-labelledby="headingStats"]
+      .accordion-body
         table.table.table-bordered.table-striped
           tbody
             tr

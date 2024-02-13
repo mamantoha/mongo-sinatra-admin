@@ -28,20 +28,20 @@ javascript:
     });
   });
 
-div#confirmCollectionRenaming.modal.fade[tabindex="-1" role="dialog" aria-labelledby="renameCollectionModalLabel" aria-hidden="true"]
-  div.modal-dialog[role="document"]
-    div.modal-content
-      div.modal-header
+#confirmCollectionRenaming.modal.fade[tabindex="-1" role="dialog" aria-labelledby="renameCollectionModalLabel" aria-hidden="true"]
+  .modal-dialog[role="document"]
+    .modal-content
+      .modal-header
         h5#renameCollectionModalLabel.modal-title = I18n.t('rename_collection')
         button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-      div.modal-body
+      .modal-body
         p.text-danger
           ' Be careful! You are about to rename collection
           strong
             span#renaming-collection-name
         p
           | Rename Collection is not compatible with sharded collections.
-      div.modal-footer
+      .modal-footer
         button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
           i.bi.bi-x
           = I18n.t('close')

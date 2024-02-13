@@ -15,14 +15,14 @@ nav[aria-label="breadcrumb"]
     li.breadcrumb-item.active aria-current="page"
       = I18n.t('add_document')
 
-div.page-header
+.page-header
   h1 = I18n.t('add_document')
 
 div
   form method="POST" action="/db/#{@db_name}/#{@collection_name}"
     div class="form-group edit-document"
       textarea id="document" name="document"= "{}"
-    div.form-group
+    .form-group
       button type="submit" class="btn btn-success btn-large pull-right"
         i class="bi bi-file-plus"
         = I18n.t('create')

@@ -21,19 +21,19 @@ javascript:
     });
   });
 
-div#confirmDeletionDocument.modal.fade[tabindex="-1" role="dialog" aria-labelledby="confirmDeletionDocumentLabel" aria-hidden="true"]
-  div.modal-dialog[role="document"]
-    div.modal-content
-      div.modal-header
+#confirmDeletionDocument.modal.fade[tabindex="-1" role="dialog" aria-labelledby="confirmDeletionDocumentLabel" aria-hidden="true"]
+  .modal-dialog[role="document"]
+    .modal-content
+      .modal-header
         h5#confirmDeletionDocumentLabel.modal-title = I18n.t('delete_document')
         button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-      div.modal-body
+      .modal-body
         p.text-danger
           ' Be careful! You are about to delete document with id '
           strong
             span#deletion-document-id
           ' .'
-      div.modal-footer
+      .modal-footer
         button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
           = I18n.t('close')
         button#deleteDocument.btn.btn-danger[type="button"]
