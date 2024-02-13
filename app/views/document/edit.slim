@@ -22,7 +22,7 @@ div
   form method="POST" action="/db/#{@db_name}/#{@collection_name}/#{@document_id}"
     input type="hidden" name="_method" value="put"
     .form-group.edit-document
-      textarea id="document" name="document" = JSON.pretty_generate(@document)
+      textarea#document name="document" = JSON.pretty_generate(@document)
     .form-group
       button.btn.btn-success.btn-large.pull-right type="submit"
         i.bi.bi-pen"
