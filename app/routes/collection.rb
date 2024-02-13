@@ -121,7 +121,9 @@ module MongoAdmin
 
       begin
         collection.drop
-        settings.db.update_collections!(db_name)
+
+        settings.db.update_databases!
+        settings.db.update_collections!(db_name) if settings.db.databases.include?(db_name)
       rescue Mongo::Error::OperationFailure => e
         flash[:danger] = I18n.t('mongodb_error', message: e.message)
 
