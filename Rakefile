@@ -33,7 +33,7 @@ namespace :i18n do
     symbol = "\u221a"
     en_tokens = I18n.backend.send(:translations)[:en].deep_stringify_keys
     en_tokens.deep_stringify_hash!
-    data = { 'en-ZZ' => en_tokens }.to_yaml.gsub(/&&&&&&/, "#{symbol}#{symbol}").gsub(/&&&&/, '').gsub(/&&&/, symbol).gsub(
+    data = { 'en-ZZ' => en_tokens }.to_yaml.gsub('&&&&&&', "#{symbol}#{symbol}").gsub('&&&&', '').gsub('&&&', symbol).gsub(
       %r{(?<=\s)!ruby/symbol }, ':'
     )
 

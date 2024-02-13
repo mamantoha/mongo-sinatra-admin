@@ -36,7 +36,7 @@ module MongoAdmin
       set :method_override, true
       set :locale, I18n.default_locale
 
-      set :config_file, JSON.parse(File.read("config_#{ENV['RACK_ENV']}.json"))
+      set :config_file, JSON.parse(File.read("config_#{ENV.fetch('RACK_ENV', 'develop')}.json"))
       set :db, MongoAdmin::DB.new(config_file)
 
       I18n::Backend::Simple.include I18n::Backend::Fallbacks

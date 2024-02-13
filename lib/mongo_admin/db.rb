@@ -63,7 +63,7 @@ module MongoAdmin
       host = @config.mongodb.host || 'localhost'
       port = @config.mongodb.port || 27_017
 
-      @client = Mongo::Client.new("mongodb://#{host}:#{port}", database: database)
+      @client = Mongo::Client.new("mongodb://#{host}:#{port}", database:)
 
       true
     end
