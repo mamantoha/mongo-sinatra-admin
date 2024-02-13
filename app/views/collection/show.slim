@@ -74,14 +74,14 @@ form#renameCollectionForm.form-inline[method="POST"]
 
 .row.bg-light.p-3
   .col-md-3
-    a.btn.btn-success.btn-block.btn-lg href="/db/#{@db_name}/#{@collection_name}/new"
+    a.btn.btn-success.btn-block href="/db/#{@db_name}/#{@collection_name}/new"
       i.bi.bi-file-plus
       = I18n.t('new_document')
 
   .col-md-3
     form[method="POST" action="/db/#{@db_name}/#{@collection_name}"]
       input[type="hidden" name="_method" value="delete"]
-      button.btn.btn-danger.btn-lg.deleteCollectionButton[type="button" collection-name=@collection_name]
+      button.btn.btn-danger.deleteCollectionButton[type="button" collection-name=@collection_name]
         i.bi.bi-trash
         = I18n.t('delete_collection')
 

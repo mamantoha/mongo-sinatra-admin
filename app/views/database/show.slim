@@ -40,7 +40,7 @@ nav[aria-label="breadcrumb"]
 - unless @db_name == 'admin'
   form.bg-light.p-3[method="POST" action="/db/#{@db_name}"]
     input[type="hidden" name="_method" value="delete"]
-    button.btn.btn-danger.btn-lg.deleteDatabaseButton[type="submit" data-database-name="#{@db_name}"]
+    button.btn.btn-danger.deleteDatabaseButton[type="submit" data-database-name="#{@db_name}"]
       i.bi.bi-trash-fill
       = I18n.t('drop_database')
 
