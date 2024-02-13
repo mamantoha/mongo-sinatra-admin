@@ -5,6 +5,7 @@ html {
 
 body {
   margin-bottom: 60px;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 body > .container {
