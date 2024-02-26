@@ -24,6 +24,8 @@ COPY lib $APP_HOME/lib/
 COPY locales $APP_HOME/locales/
 COPY public $APP_HOME/public/
 
+RUN bundle exec rake i18n:export_pseudo_i18n
+
 # Expose the Sinatra default port
 EXPOSE 9292
 
