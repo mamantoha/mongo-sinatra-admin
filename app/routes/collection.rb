@@ -36,11 +36,11 @@ module MongoAdmin
       stats = client.command(collStats: @collection_name)
       @stats = stats.documents.first
 
-      per_page = (ENV['DOCUMENTS_PER_PAGE']  || 5).to_i
+      per_page = (ENV['DOCUMENTS_PER_PAGE'] || 5).to_i
       @pages = (@stats['count'].to_f / per_page).ceil
 
       # Get all documents in a collection
-      @documents = collection.find.sort({_id: -1}).skip(per_page * (current_page - 1)).limit(per_page)
+      @documents = collection.find.sort({ _id: -1 }).skip(per_page * (current_page - 1)).limit(per_page)
 
       slim :'collection/show'
     end
