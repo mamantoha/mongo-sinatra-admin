@@ -5,8 +5,8 @@ require_relative 'spec_helper'
 describe 'Basic Auth' do
   context 'when useBasicAuth is disabled in config' do
     before do
-      allow(ENV).to receive(:[]) { |key| ENV.fetch(key) }
-      allow(ENV).to receive(:[]).with('USER_BASIC_AUTH').and_return("false")
+      allow(ENV).to receive(:[]).and_call_original
+      allow(ENV).to receive(:[]).with('USER_BASIC_AUTH') { 'false' }
     end
 
     context 'get /' do
