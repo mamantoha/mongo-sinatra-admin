@@ -80,21 +80,24 @@ module MongoAdmin
 
     # Update Document
     put '/db/:database/:collection/:id' do
-      db_name = params['database']
-      collection_name = params['collection']
+      @db_name = params['database']
+      @collection_name = params['collection']
       document_text = params['document'] # from a form
 
-      check_database_exists(settings.db, db_name)
-      check_collection_exists(settings.db, db_name, collection_name)
+      check_database_exists(settings.db, @db_name)
+      check_collection_exists(settings.db, @db_name, @collection_name)
 
       # convert id string to mongodb object id
       begin
-        document_id = BSON::ObjectId.from_string(params[:id])
+        @document_id = BSON::ObjectId.from_string(params[:id])
       rescue StandardError => e
         flash['danger'] = e.message
 
-        redirect "/db/#{db_name}/#{collection_name}"
+        redirect "/db/#{@db_name}/#{@collection_name}"
       end
+
+      client = settings.db.client.use(@db_name)
+      collection = client[@collection_name]
 
       begin
         document_json = JSON.parse(document_text)
@@ -103,28 +106,27 @@ module MongoAdmin
       end
 
       unless document_json
-        flash[:danger] = I18n.t('document_invalid_json')
+        flash.now[:danger] = I18n.t('document_invalid_json')
 
-        redirect "/db/#{db_name}/#{collection_name}/#{document_id}"
+        @document = collection.find(_id: @document_id).first
+
+        return slim :'document/edit'
       end
 
       # IMPORTANT! You can not change Object ID
       document_json.delete('_id')
 
-      client = settings.db.client.use(db_name)
-      collection = client[collection_name]
+      collection_view = collection.find(_id: @document_id)
 
-      document = collection.find(_id: document_id)
-
-      if document.first
-        document.replace_one(document_json)
+      if collection_view.first
+        collection_view.replace_one(document_json)
         flash[:info] = I18n.t('document_updated')
 
-        redirect "/db/#{db_name}/#{collection_name}/#{document_id}"
+        redirect "/db/#{@db_name}/#{@collection_name}/#{@document_id}"
       else
         flash[:danger] = I18n.t('document_not_found')
 
-        redirect "/db/#{db_name}/#{collection_name}"
+        redirect "/db/#{@db_name}/#{@collection_name}"
       end
     end
 
