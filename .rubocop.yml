@@ -7,7 +7,7 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   Enabled: false
 
-Metrics/LineLength:
+Layout/LineLength:
   Enabled: false
 
 Metrics/MethodLength:
