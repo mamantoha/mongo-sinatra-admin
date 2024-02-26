@@ -5,7 +5,7 @@ require_relative 'spec_helper'
 describe 'Basic Auth' do
   context 'when useBasicAuth is disabled in config' do
     before do
-      ENV['USER_BASIC_AUTH'] = false
+      ENV['USER_BASIC_AUTH'] = 'false'
     end
 
     context 'get /' do
