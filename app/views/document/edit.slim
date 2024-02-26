@@ -19,6 +19,9 @@ div
     input type="hidden" name="_method" value="put"
     .form-group.edit-document
       textarea#document name="document" = JSON.pretty_generate(@document)
+    p.float-end.badge.bg-light.text-dark
+      = @document['_id'].generation_time
+      | &nbsp;
     .form-group
       button.btn.btn-success.btn-large.pull-right type="submit"
         i.bi.bi-pen"
