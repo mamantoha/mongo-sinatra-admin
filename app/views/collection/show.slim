@@ -102,7 +102,8 @@ nav
     .col-md-11
       .listDocument
         textarea readonly="readonly" id="doc_#{index}" name="doc_#{index}" = JSON.pretty_generate(document)
-      p
+      p.float-end.badge.bg-light.text-dark
+        = document['_id'].generation_time
         | &nbsp;
 
       javascript:
