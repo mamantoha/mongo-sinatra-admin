@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+ENV['RACK_ENV'] ||= 'development'
+
 require 'dotenv'
-Dotenv.load
+Dotenv.load(".env.#{ENV['RACK_ENV']}")
 
 require 'json'
 require 'logger'
@@ -16,8 +18,6 @@ require 'i18n/backend/fallbacks'
 require 'pry'
 
 require 'action_view'
-
-ENV['RACK_ENV'] ||= 'development'
 
 require 'bundler'
 Bundler.require :default, ENV['RACK_ENV'].to_sym

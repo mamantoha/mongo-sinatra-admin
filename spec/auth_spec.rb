@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'dotenv'
-Dotenv.load
-
 require_relative 'spec_helper'
 
 describe 'Basic Auth' do
