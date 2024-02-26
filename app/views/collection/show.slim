@@ -98,8 +98,8 @@ nav
         span[aria-hidden="true"] &raquo;
 
 - @documents.each_with_index do |document, index|
-  .row
-    .col-md-11
+  .d-flex.justify-content-between
+    .flex-grow-1.me-2
       .listDocument
         textarea readonly="readonly" id="doc_#{index}" name="doc_#{index}" = JSON.pretty_generate(document)
       p.float-end.badge.bg-light.text-dark
@@ -115,8 +115,7 @@ nav
           lineNumbers: true
         });
 
-
-    .col-md-1
+    div
       .btn-vertical
         a.btn.btn-primary.btn-sm href="/db/#{@db_name}/#{@collection_name}/#{document['_id']}"
           i.bi.bi-pen
