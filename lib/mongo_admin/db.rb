@@ -3,16 +3,10 @@
 require 'mongo'
 
 module MongoAdmin
-  class Config < Hashie::Mash # :nodoc:
-    disable_warnings
-  end
-
   class DB # :nodoc:
-    attr_reader :config, :client, :databases, :collections
+    attr_reader :client, :databases, :collections
 
-    def initialize(config)
-      @config = Config.new(config)
-
+    def initialize
       @databases = []
       @collections = {}
 
@@ -60,8 +54,8 @@ module MongoAdmin
     private
 
     def connect!(database = 'admin')
-      host = @config.mongodb.host || 'localhost'
-      port = @config.mongodb.port || 27_017
+      host = ENV['MONGODB_HOST'] || 'localhost'
+      port = ENV['MONGODB_PORT'] || 27_017
 
       @client = Mongo::Client.new("mongodb://#{host}:#{port}", database:)
 

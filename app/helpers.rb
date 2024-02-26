@@ -4,7 +4,7 @@ module MongoAdmin
   class App < Sinatra::Base # :nodoc:
     helpers do
       def protected!
-        return unless settings.config_file['useBasicAuth']
+        return if ENV['USE_BASIC_AUTH'] == 'false'
         return if authorized?
 
         headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
@@ -12,8 +12,8 @@ module MongoAdmin
       end
 
       def authorized?
-        username = settings.config_file['basicAuth']['username']
-        password = settings.config_file['basicAuth']['password']
+        username = ENV['BASIC_AUTH_USERNAME']
+        password = ENV['BASIC_AUTH_PASSWORD']
 
         @auth ||= Rack::Auth::Basic::Request.new(request.env)
         @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == [username, password]

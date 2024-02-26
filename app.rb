@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+ENV['RACK_ENV'] ||= 'development'
+
+require 'dotenv'
+Dotenv.load(".env.#{ENV['RACK_ENV']}")
+
 require 'json'
 require 'logger'
 
@@ -13,8 +18,6 @@ require 'i18n/backend/fallbacks'
 require 'pry'
 
 require 'action_view'
-
-ENV['RACK_ENV'] ||= 'development'
 
 require 'bundler'
 Bundler.require :default, ENV['RACK_ENV'].to_sym
@@ -36,8 +39,7 @@ module MongoAdmin
       set :method_override, true
       set :locale, I18n.default_locale
 
-      set :config_file, JSON.parse(File.read("config_#{ENV.fetch('RACK_ENV', 'develop')}.json"))
-      set :db, MongoAdmin::DB.new(config_file)
+      set :db, MongoAdmin::DB.new
 
       I18n::Backend::Simple.include I18n::Backend::Fallbacks
       I18n.default_locale = :en

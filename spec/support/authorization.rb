@@ -22,10 +22,5 @@ CLIENT = Mongo::Client.new(ADDRESSES, database: TEST_DB)
 module Authorization
   def self.included(context)
     context.let(:client) { CLIENT }
-
-    context.let(:config_file) do
-      { 'mongodb' => { 'server' => 'localhost', 'port' => '27017' }, 'useBasicAuth' => true,
-        'basicAuth' => { 'username' => USERNAME, 'password' => PASSWORD }, 'options' => { 'documentsPerPage' => 2 } }
-    end
   end
 end

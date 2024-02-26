@@ -27,9 +27,7 @@ bundle install
 
 ### To configure
 
-Copy or rename `config.json.example` into a new file. For development environment is `config_development.json`
-
-Fill in your MongoDB connection details, and any other options you want to change.
+Fill in your MongoDB connection details, and any other options you want to change in `.env.*` file.
 
 Create pseudo localization locale and generate `locales/en-ZZ.yml`:
 
@@ -45,7 +43,7 @@ rackup
 
 ### To use
 
-Visit `http://localhost:9292` or whatever URL/port you enterd into you config.
+Visit `http://localhost:9292` or whatever URL/port you entered into you config.
 
 ### Run specs:
 
