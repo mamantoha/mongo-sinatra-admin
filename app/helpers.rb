@@ -4,7 +4,7 @@ module MongoAdmin
   class App < Sinatra::Base # :nodoc:
     helpers do
       def protected!
-        return unless ENV['USE_BASIC_AUTH'] == 'true'
+        return if ENV['USE_BASIC_AUTH'] == 'false'
         return if authorized?
 
         headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
