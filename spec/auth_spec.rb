@@ -6,7 +6,7 @@ describe 'Basic Auth' do
   context 'when useBasicAuth is disabled in config' do
     before do
       allow(ENV).to receive(:[]).and_call_original
-      allow(ENV).to receive(:[]).with('USER_BASIC_AUTH') { 'false' }
+      allow(ENV).to receive(:[]).with('USE_BASIC_AUTH') { 'false' }
     end
 
     context 'get /' do

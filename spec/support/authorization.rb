@@ -22,8 +22,5 @@ CLIENT = Mongo::Client.new(ADDRESSES, database: TEST_DB)
 module Authorization
   def self.included(context)
     context.let(:client) { CLIENT }
-
-    ENV['BASIC_AUTH_USERNAME'] = USERNAME
-    ENV['BASIC_AUTH_PASSWORD'] = PASSWORD
   end
 end
