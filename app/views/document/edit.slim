@@ -1,8 +1,4 @@
-script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"
-link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css"
-script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/javascript/javascript.min.js"
-link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/rubyblue.min.css"
-link rel="stylesheet" href="/codemirror_overwrite.css"
+== slim :'document/_codemirror_assets'
 
 nav[aria-label="breadcrumb"]
   ol.breadcrumb
@@ -28,11 +24,4 @@ div
         i.bi.bi-pen"
         = I18n.t('save')
 
-  javascript:
-    var document = CodeMirror.fromTextArea(document.getElementById('document'), {
-      mode: { name: "javascript", json: true },
-      readOnly: false,
-      indentUnit: 2,
-      theme: "rubyblue",
-      lineNumbers: true
-    });
+  == slim :'document/_codemirror_textarea'

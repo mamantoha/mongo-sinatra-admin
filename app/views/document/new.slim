@@ -1,8 +1,4 @@
-script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/codemirror.min.js"
-link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/codemirror.min.css"
-script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/mode/javascript/javascript.min.js"
-link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/theme/rubyblue.css"
-link rel="stylesheet" href="/codemirror_overwrite.css"
+== slim :'document/_codemirror_assets'
 
 nav[aria-label="breadcrumb"]
   ol.breadcrumb
@@ -21,16 +17,10 @@ nav[aria-label="breadcrumb"]
 div
   form method="POST" action="/db/#{@db_name}/#{@collection_name}"
     .form-group.edit-document
-      textare#document name="document"= "{}"
+      textarea#document name="document"= "{}"
     .form-group
       button.btn.btn-success.btn-large.pull-right type="submit"
         i.bi.bi-file-plus
         = I18n.t('create')
 
-  javascript:
-    var document = CodeMirror.fromTextArea(document.getElementById('document'), {
-      mode: { name: "javascript", json: true },
-      indentUnit: 2,
-      theme: "rubyblue",
-      lineNumbers: true
-    });
+  == slim :'document/_codemirror_textarea'
