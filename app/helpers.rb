@@ -4,7 +4,6 @@ module MongoAdmin
   class App < Sinatra::Base # :nodoc:
     helpers do
       def protected!
-        puts ENV['USE_BASIC_AUTH'].inspect
         return if ENV['USE_BASIC_AUTH'] == 'false'
         return if authorized?
 
