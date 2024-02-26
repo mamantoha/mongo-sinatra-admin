@@ -47,27 +47,30 @@ module MongoAdmin
 
     # Create new Document
     post '/db/:database/:collection' do
-      db_name = params['database']
-      collection_name = params['collection']
+      @db_name = params['database']
+      @collection_name = params['collection']
       document_text = params['document']
 
-      check_database_exists(settings.db, db_name)
-      check_collection_exists(settings.db, db_name, collection_name)
+      check_database_exists(settings.db, @db_name)
+      check_collection_exists(settings.db, @db_name, @collection_name)
 
-      begin
-        document_json = JSON.parse(document_text)
-      rescue JSON::ParserError
-        document_json = nil
-      end
+      document_json =
+        begin
+          JSON.parse(document_text)
+        rescue JSON::ParserError
+          nil
+        end
 
       unless document_json
-        flash[:danger] = I18n.t('document_invalid_json')
+        flash.now[:danger] = I18n.t('document_invalid_json')
 
-        redirect "/db/#{db_name}/#{collection_name}"
+        @document_text = document_text
+
+        return slim :'document/new'
       end
 
-      client = settings.db.client.use(db_name)
-      collection = client[collection_name]
+      client = settings.db.client.use(@db_name)
+      collection = client[@collection_name]
 
       result = collection.insert_one(document_json)
       result.n # => returns 1, because 1 document was inserted
@@ -75,7 +78,7 @@ module MongoAdmin
 
       flash[:info] = I18n.t('document_created')
 
-      redirect "/db/#{db_name}/#{collection_name}/#{document_id}"
+      redirect "/db/#{@db_name}/#{@collection_name}/#{document_id}"
     end
 
     # Update Document

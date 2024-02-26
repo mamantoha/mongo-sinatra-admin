@@ -17,7 +17,8 @@ nav[aria-label="breadcrumb"]
 div
   form method="POST" action="/db/#{@db_name}/#{@collection_name}"
     .form-group.edit-document
-      textarea#document name="document"= "{}"
+      textarea#document name="document"
+        = @document_text || "{}"
     .form-group
       button.btn.btn-success.btn-large.pull-right type="submit"
         i.bi.bi-file-plus
