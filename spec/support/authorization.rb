@@ -23,9 +23,7 @@ module Authorization
   def self.included(context)
     context.let(:client) { CLIENT }
 
-    context.let(:config_file) do
-      { 'mongodb' => { 'server' => 'localhost', 'port' => '27017' }, 'useBasicAuth' => true,
-        'basicAuth' => { 'username' => USERNAME, 'password' => PASSWORD }, 'options' => { 'documentsPerPage' => 2 } }
-    end
+    ENV['BASIC_AUTH_USERNAME'] = USERNAME
+    ENV['BASIC_AUTH_PASSWORD'] = PASSWORD
   end
 end

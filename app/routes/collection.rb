@@ -36,7 +36,7 @@ module MongoAdmin
       stats = client.command(collStats: @collection_name)
       @stats = stats.documents.first
 
-      per_page = settings.config_file['options']['documentsPerPage'] || 5
+      per_page = ENV['DOCUMENTS_PER_PAGE']  || 5
       @pages = (@stats['count'].to_f / per_page).ceil
 
       # Get all documents in a collection

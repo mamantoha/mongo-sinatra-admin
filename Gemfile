@@ -16,6 +16,7 @@ gem 'slim'
 group :developmenti, :test do
   gem 'pry'
   gem 'rackup'
+  gem 'dotenv'
 end
 
 group :test do

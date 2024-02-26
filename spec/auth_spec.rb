@@ -5,8 +5,7 @@ require_relative 'spec_helper'
 describe 'Basic Auth' do
   context 'when useBasicAuth is disabled in config' do
     before do
-      app.config_file = { 'mongodb' => { 'server' => 'localhost', 'port' => '27017' }, 'useBasicAuth' => false,
-                          'options' => { 'documentsPerPage' => 2 } }
+      ENV['USER_BASIC_AUTH'] = false
     end
 
     context 'get /' do
@@ -21,10 +20,6 @@ describe 'Basic Auth' do
   end
 
   context 'when useBasicAuth is enabled in config' do
-    before do
-      app.config_file = config_file
-    end
-
     context 'get / with proper credentials' do
       before do
         authorize USERNAME, PASSWORD

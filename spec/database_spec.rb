@@ -4,7 +4,6 @@ require_relative 'spec_helper'
 
 describe 'Database' do
   before do
-    app.config_file = config_file
     authorize USERNAME, PASSWORD
   end
 
