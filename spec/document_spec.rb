@@ -96,8 +96,8 @@ describe 'Document' do
       it 'is successful' do
         put "/db/#{TEST_DB}/#{TEST_COLLECTION}/#{document['_id']}", document: { name: 'test' }.to_json
 
-        expect(last_response.status).to eq 302
-        expect(last_request.session['flash']).to eq(info: 'Document successfully updated.')
+        expect(last_response.status).to eq 200
+        expect(last_response.body).to include(I18n.t('document_updated'))
       end
     end
 

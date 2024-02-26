@@ -99,16 +99,25 @@ module MongoAdmin
       client = settings.db.client.use(@db_name)
       collection = client[@collection_name]
 
-      begin
-        document_json = JSON.parse(document_text)
-      rescue JSON::ParserError
-        document_json = nil
+      @document = collection.find(_id: @document_id).first
+
+      unless @document
+        flash[:danger] = I18n.t('document_not_found')
+
+        redirect "/db/#{@db_name}/#{@collection_name}"
       end
+
+      document_json =
+        begin
+          JSON.parse(document_text)
+        rescue JSON::ParserError
+          nil
+        end
 
       unless document_json
         flash.now[:danger] = I18n.t('document_invalid_json')
 
-        @document = collection.find(_id: @document_id).first
+        @document_text = document_text
 
         return slim :'document/edit'
       end
@@ -118,16 +127,10 @@ module MongoAdmin
 
       collection_view = collection.find(_id: @document_id)
 
-      if collection_view.first
-        collection_view.replace_one(document_json)
-        flash[:info] = I18n.t('document_updated')
+      collection_view.replace_one(document_json)
+      flash.now[:info] = I18n.t('document_updated')
 
-        redirect "/db/#{@db_name}/#{@collection_name}/#{@document_id}"
-      else
-        flash[:danger] = I18n.t('document_not_found')
-
-        redirect "/db/#{@db_name}/#{@collection_name}"
-      end
+      slim :'document/edit'
     end
 
     # Destroy Document
