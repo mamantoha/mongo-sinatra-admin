@@ -16,7 +16,6 @@ COPY app $APP_HOME/app/
 COPY lib $APP_HOME/lib/
 COPY locales $APP_HOME/locales/
 COPY public $APP_HOME/public/
-COPY spec $APP_HOME/spec/
 
 EXPOSE 9292
 
