@@ -4,6 +4,7 @@ en:
   delete: 'Delete'
   save: 'Save'
   create: 'Create'
+  update: 'Update'
   rename: 'Rename'
   close: 'Close'
   warning: 'Warning'
