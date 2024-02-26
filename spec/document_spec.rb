@@ -114,8 +114,8 @@ describe 'Document' do
       it 'is not successful' do
         put "/db/#{TEST_DB}/#{TEST_COLLECTION}/#{document['_id']}", document: 'invalid json'
 
-        expect(last_response.status).to eq 302
-        expect(last_request.session['flash']).to eq(danger: 'Document is not valid JSON.')
+        expect(last_response.status).to eq 200
+        expect(last_response.body).to include(I18n.t('document_invalid_json'))
       end
     end
 
@@ -123,8 +123,8 @@ describe 'Document' do
       it 'is not successful' do
         put "/db/#{TEST_DB}/#{TEST_COLLECTION}/#{document['_id']}", document: ''
 
-        expect(last_response.status).to eq 302
-        expect(last_request.session['flash']).to eq(danger: 'Document is not valid JSON.')
+        expect(last_response.status).to eq 200
+        expect(last_response.body).to include(I18n.t('document_invalid_json'))
       end
     end
 
