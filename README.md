@@ -41,6 +41,12 @@ bundle exec rake i18n:export_pseudo_i18n
 rackup
 ```
 
+or
+
+```
+docker-compose up --build
+```
+
 ### To use
 
 Visit `http://localhost:9292` or whatever URL/port you entered into you config.
