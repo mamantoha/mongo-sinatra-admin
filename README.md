@@ -9,11 +9,8 @@ Web-based MongoDB admin interface written with Ruby and Sinatra
 
 ### Screenshots
 
-<img src="http://i.imgur.com/WPBBoPl.png" title="Index Page" />
-
-Click here for more screenshots:
-[http://imgur.com/a/OTZHe](http://imgur.com/a/TGAZS)
-
+![Home](/screenshots/home.png)
+![Document](/screenshots/document.png)
 
 ## Usage
 
