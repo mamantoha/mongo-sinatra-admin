@@ -14,9 +14,10 @@ gem 'sinatra-flash'
 gem 'slim'
 
 group :developmenti, :test do
-  gem 'pry'
-  gem 'rackup'
   gem 'dotenv'
+  gem 'pry'
+  gem 'rerun'
+  gem 'rackup'
 end
 
 group :test do
