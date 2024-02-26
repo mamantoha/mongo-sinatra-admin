@@ -131,6 +131,7 @@ module MongoAdmin
       collection_view = collection.find(_id: @document_id)
 
       collection_view.replace_one(document_json)
+      @document = collection.find(_id: @document_id).first
       flash.now[:info] = I18n.t('document_updated')
 
       slim :'document/edit'
