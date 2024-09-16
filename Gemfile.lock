@@ -32,7 +32,7 @@ GEM
     erubi (1.13.0)
     ffi (1.16.3)
     hashie (5.0.0)
-    i18n (1.14.5)
+    i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
