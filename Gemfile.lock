@@ -55,7 +55,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.17.2-x86_64-linux)
       racc (~> 1.4)
-    pry (0.15.0)
+    pry (0.15.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
     puma (6.5.0)
