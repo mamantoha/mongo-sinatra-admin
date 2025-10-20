@@ -22,8 +22,8 @@ nav[aria-label="breadcrumb"]
         textarea#document name="document"
           = @document_text || JSON.pretty_generate(@document)
       p.float-end.badge.bg-light.text-dark
-        - if document['_id'].is_a?(BSON::ObjectId)
-          = document['_id'].generation_time
+        - if @document['_id'].is_a?(BSON::ObjectId)
+          = @document['_id'].generation_time
         | &nbsp;
       button.btn.btn-primary.btn-large.pull-right type="submit"
         i.bi.bi-pen
