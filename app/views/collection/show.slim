@@ -103,7 +103,8 @@ nav
       .listDocument
         textarea readonly="readonly" id="doc_#{index}" name="doc_#{index}" = JSON.pretty_generate(document)
       p.float-end.badge.bg-light.text-dark
-        = document['_id'].generation_time
+        - if document['_id'].is_a?(BSON::ObjectId)
+          = document['_id'].generation_time
         | &nbsp;
 
       javascript:
