@@ -29,7 +29,7 @@ GEM
     connection_pool (2.5.4)
     crass (1.0.6)
     diff-lcs (1.6.2)
-    dotenv (3.1.8)
+    dotenv (3.2.0)
     drb (2.2.3)
     erubi (1.13.1)
     ffi (1.16.3)
